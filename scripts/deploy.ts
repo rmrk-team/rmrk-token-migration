@@ -1,36 +1,16 @@
 import { ethers } from 'hardhat';
-import { BigNumber } from 'ethers';
-import { SimpleEquippable } from '../typechain-types';
-import { InitDataNativePay } from '../typechain-types/contracts/SimpleEquippable';
+import { Migrator, RMRK } from '../typechain-types';
 
-async function main() {
-  await deployContracts();
+export async function deployContracts(
+  legacyRMRK: string,
+): Promise<{ rmrk: RMRK; migrator: Migrator }> {
+  const RMRKFactory = await ethers.getContractFactory('RMRK');
+  const rmrk = await RMRKFactory.deploy();
+  await rmrk.deployed();
+
+  const MigratorFactory = await ethers.getContractFactory('Migrator');
+  const migrator = await MigratorFactory.deploy(legacyRMRK, rmrk.address);
+  await migrator.deployed();
+
+  return { rmrk, migrator };
 }
-
-async function deployContracts(): Promise<void> {
-  console.log('Deploying smart simple equippable contract');
-
-  const contractFactory = await ethers.getContractFactory('SimpleEquippable');
-  const initData: InitDataNativePay.InitDataStruct = {
-    royaltyRecipient: ethers.constants.AddressZero,
-    royaltyPercentageBps: 1000,
-    maxSupply: BigNumber.from(1000),
-    pricePerMint: ethers.utils.parseEther('1.0'),
-  };
-
-  const kanaria: SimpleEquippable = await contractFactory.deploy(
-    'Kanaria',
-    'KAN',
-    'ipfs://collectionMeta',
-    'ipfs://tokenMeta',
-    initData,
-  );
-
-  await kanaria.deployed();
-  console.log(`Sample contracts deployed to ${kanaria.address}.`);
-}
-
-main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
