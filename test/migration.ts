@@ -81,6 +81,72 @@ describe('RMRK Token', async () => {
       await rmrk.connect(holder1).burn(ethers.utils.parseEther('40'));
       expect(await rmrk.balanceOf(holder1.address)).to.equal(ethers.utils.parseEther('60'));
     });
+
+    it('can use permit to give allowance without spending gas', async function () {
+      const allowance = ethers.utils.parseEther('10');
+      // Get current block number
+      const lastBlock = await ethers.provider.getBlockNumber();
+      const block = await ethers.provider.getBlock(lastBlock);
+      const deadline = block.timestamp + 3600;
+
+      // get the current nonce for the deployer address
+      const nonces = await rmrk.nonces(holder1.address);
+
+      // set the domain parameters
+      const domain = {
+        name: await rmrk.name(),
+        version: '1',
+        chainId: 31337,
+        verifyingContract: rmrk.address,
+      };
+
+      // set the Permit type parameters
+      const types = {
+        Permit: [
+          {
+            name: 'owner',
+            type: 'address',
+          },
+          {
+            name: 'spender',
+            type: 'address',
+          },
+          {
+            name: 'value',
+            type: 'uint256',
+          },
+          {
+            name: 'nonce',
+            type: 'uint256',
+          },
+          {
+            name: 'deadline',
+            type: 'uint256',
+          },
+        ],
+      };
+
+      // set the Permit type values
+      const values = {
+        owner: holder1.address,
+        spender: holder2.address,
+        value: allowance,
+        nonce: nonces,
+        deadline: deadline,
+      };
+
+      // sign the Permit type data with the deployer's private key
+      const signature = await holder1._signTypedData(domain, types, values);
+      const { v, r, s } = ethers.utils.splitSignature(signature);
+      await rmrk
+        .connect(holder2)
+        .permit(holder1.address, holder2.address, allowance, deadline, v, r, s);
+      expect(await rmrk.allowance(holder1.address, holder2.address)).to.equal(allowance);
+
+      await rmrk.connect(holder2).transferFrom(holder1.address, holder2.address, allowance);
+      expect(await rmrk.balanceOf(holder1.address)).to.equal(ethers.utils.parseEther('90'));
+      expect(await rmrk.balanceOf(holder2.address)).to.equal(ethers.utils.parseEther('10'));
+    });
   });
 
   describe('Migrator', async () => {
@@ -143,7 +209,9 @@ describe('RMRK Token', async () => {
       const amountHolder1 = ethers.utils.parseUnits('100', 10);
       const amountHolder2 = ethers.utils.parseUnits('200', 10);
 
-      await migrator.connect(deployer).migrate([holder1.address, holder2.address], [amountHolder1, amountHolder2]);
+      await migrator
+        .connect(deployer)
+        .migrate([holder1.address, holder2.address], [amountHolder1, amountHolder2]);
       expect(await rmrk.balanceOf(holder1.address)).to.equal(amountHolder1.mul(10 ** 8));
       expect(await rmrk.balanceOf(holder2.address)).to.equal(amountHolder2.mul(10 ** 8));
     });
@@ -162,7 +230,9 @@ describe('RMRK Token', async () => {
       const amountHolder1 = ethers.utils.parseUnits('100', 10);
       const amountHolder2 = ethers.utils.parseUnits('200', 10);
       await expect(
-        migrator.connect(deployer).migrate([holder1.address, holder2.address], [amountHolder1, amountHolder2]),
+        migrator
+          .connect(deployer)
+          .migrate([holder1.address, holder2.address], [amountHolder1, amountHolder2]),
       ).to.be.revertedWith('Pausable: paused');
     });
 
@@ -181,7 +251,9 @@ describe('RMRK Token', async () => {
       const amountHolder1 = ethers.utils.parseUnits('100', 10);
       const amountHolder2 = ethers.utils.parseUnits('200', 10);
       await expect(
-        migrator.connect(holder1).migrate([holder1.address, holder2.address], [amountHolder1, amountHolder2]),
+        migrator
+          .connect(holder1)
+          .migrate([holder1.address, holder2.address], [amountHolder1, amountHolder2]),
       ).to.be.revertedWith('Ownable: caller is not the owner');
     });
 
