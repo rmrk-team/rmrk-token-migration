@@ -1,12 +1,11 @@
-import { deployContracts } from '../scripts/deploy';
-import { ethers, run } from 'hardhat';
-
+import { deployNewRmrkAndMigrator } from '../scripts/deploy';
+import { run } from 'hardhat';
 
 const LEGACY_RMRK = '0x3Ff3B0361B450E70729006918c14DEb6Da410349'; // Moonbase
 
 async function main() {
   console.log('Deploying RMRK token and Migrator');
-  const { rmrk, migrator } = await deployContracts(LEGACY_RMRK);
+  const { rmrk, migrator } = await deployNewRmrkAndMigrator(LEGACY_RMRK);
 
   console.log(`RMRK deployed to: ${rmrk.address}`);
   console.log(`Migrator deployed to: ${migrator.address}`);

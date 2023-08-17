@@ -3,7 +3,6 @@ pragma solidity ^0.8.21;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "./interfaces/IRMRK.sol";
 
 error ArrayLenghtsDoNotMatch();
@@ -40,5 +39,9 @@ contract Migrator is Ownable, Pausable {
 
     function pause() public onlyOwner {
         _pause();
+    }
+
+    function unpause() public onlyOwner {
+        _unpause();
     }
 }

@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.21;
 
-import {AccessControl} from"@openzeppelin/contracts/access/AccessControl.sol";
-import {ERC20Burnable} from"@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
-import {ERC20Permit} from"@openzeppelin/contracts/token/ERC20/extensions/ERC20Permit.sol";
+import {AccessControl} from "@openzeppelin/contracts/access/AccessControl.sol";
+import {ERC20Burnable} from "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
+import {ERC20Permit} from "@openzeppelin/contracts/token/ERC20/extensions/ERC20Permit.sol";
 import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import {ITokenManager} from "@axelar-network/interchain-token-service/contracts/interfaces/ITokenManager.sol";
 import {ITokenManagerType} from "@axelar-network/interchain-token-service/contracts/interfaces/ITokenManagerType.sol";
@@ -26,7 +26,6 @@ contract RMRK is ERC20, ERC20Burnable, ERC20Permit, AccessControl {
     constructor() ERC20("RMRK", "RMRK") ERC20Permit("RMRK") {
         _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
         creator = msg.sender;
-        deployTokenManager("");
     }
 
     function mint(address to, uint256 amount) public onlyRole(MINTER_ROLE) {
@@ -49,7 +48,9 @@ contract RMRK is ERC20, ERC20Burnable, ERC20Permit, AccessControl {
         }
     }
 
-    function deployTokenManager(bytes32 salt) internal {
+    function deployTokenManager(
+        bytes32 salt
+    ) external onlyRole(DEFAULT_ADMIN_ROLE) {
         bytes memory params = service.getParamsMintBurn(
             msg.sender.toBytes(),
             address(this)
@@ -68,8 +69,11 @@ contract RMRK is ERC20, ERC20Burnable, ERC20Permit, AccessControl {
      * You'll be given a TokenManager which you can set here, allowing the
      * local send methods to function.
      */
-    function setTokenManager(address _tokenManager) public onlyRole(DEFAULT_ADMIN_ROLE) {
+    function setTokenManager(
+        address _tokenManager
+    ) public onlyRole(DEFAULT_ADMIN_ROLE) {
         tokenManager = ITokenManager(_tokenManager);
+        // _grantRole(MINTER_ROLE, address(tokenManager));
     }
 
     /**

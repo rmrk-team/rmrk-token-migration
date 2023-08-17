@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import { BigNumber } from 'ethers';
 import { loadFixture } from '@nomicfoundation/hardhat-network-helpers';
 import { Migrator, RMRK, LegacyRMRK } from '../typechain-types';
-import { deployContracts } from '../scripts/deploy';
+import { deployNewRmrkAndMigrator } from '../scripts/deploy';
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
 
 async function fixture(): Promise<{
@@ -18,7 +18,7 @@ async function fixture(): Promise<{
   const legacyRMRKFactory = await ethers.getContractFactory('LegacyRMRK');
   const legacyRMRK = await legacyRMRKFactory.deploy();
 
-  const { rmrk, migrator } = await deployContracts(legacyRMRK.address);
+  const { rmrk, migrator } = await deployNewRmrkAndMigrator(legacyRMRK.address);
 
   return { legacyRMRK, rmrk, migrator, deployer, allowedMinter, signers };
 }
@@ -33,9 +33,7 @@ describe('RMRK Token', async () => {
 
   beforeEach(async function () {
     ({ legacyRMRK, rmrk, migrator, deployer, allowedMinter, signers } = await loadFixture(fixture));
-    const minterRole = await rmrk.MINTER_ROLE();
-    await rmrk.grantRole(minterRole, allowedMinter.address);
-    await rmrk.grantRole(minterRole, migrator.address);
+    await rmrk.grantRole(ethers.utils.id('MINTER_ROLE'), allowedMinter.address);
   });
 
   it('cannot mint without minter role', async function () {
@@ -257,8 +255,18 @@ describe('RMRK Token', async () => {
       ).to.be.revertedWith('Ownable: caller is not the owner');
     });
 
-    it('cannot pause if not owner', async function () {
+    it('can pause/unpause if owner', async function () {
+      await migrator.connect(deployer).pause();
+      expect(await migrator.paused()).to.equal(true);
+      await migrator.connect(deployer).unpause();
+      expect(await migrator.paused()).to.equal(false);
+    });
+
+    it('cannot pause/unpause if not owner', async function () {
       await expect(migrator.connect(holder1).pause()).to.be.revertedWith(
+        'Ownable: caller is not the owner',
+      );
+      await expect(migrator.connect(holder1).unpause()).to.be.revertedWith(
         'Ownable: caller is not the owner',
       );
     });

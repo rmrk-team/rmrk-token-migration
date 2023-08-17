@@ -1,7 +1,7 @@
 import { ethers } from 'hardhat';
-import { Migrator, RMRK } from '../typechain-types';
+import { Migrator, MoonriverMigrator, RMRK } from '../typechain-types';
 
-export async function deployContracts(
+async function deployNewRmrkAndMigrator(
   legacyRMRK: string,
 ): Promise<{ rmrk: RMRK; migrator: Migrator }> {
   const RMRKFactory = await ethers.getContractFactory('RMRK');
@@ -16,3 +16,13 @@ export async function deployContracts(
 
   return { rmrk, migrator };
 }
+
+async function deployMooriverMigrator(legacyRMRK: string): Promise<MoonriverMigrator> {
+  const MoonriverMigratorFactory = await ethers.getContractFactory('MoonriverMigrator');
+  const moonriverMigrator = await MoonriverMigratorFactory.deploy(legacyRMRK);
+  await moonriverMigrator.deployed();
+
+  return moonriverMigrator;
+}
+
+export { deployNewRmrkAndMigrator, deployMooriverMigrator };
