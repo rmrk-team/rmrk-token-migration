@@ -12,5 +12,7 @@ export async function deployContracts(
   const migrator = await MigratorFactory.deploy(legacyRMRK, rmrk.address);
   await migrator.deployed();
 
+  await rmrk.grantRole(ethers.utils.id('MINTER_ROLE'), migrator.address);
+
   return { rmrk, migrator };
 }
