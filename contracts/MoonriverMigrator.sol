@@ -24,6 +24,7 @@ contract MoonriverMigrator is Ownable, Pausable {
 
     IRMRK public immutable legacyRmrk;
     uint256 public currentBatch;
+    uint256 public maxHoldersPerBatch;
     mapping(uint256 batch => State state) public batchState;
     mapping(uint256 batch => mapping(address holder => uint256 balance))
         public balancePerHolderAndBatch;
@@ -39,9 +40,16 @@ contract MoonriverMigrator is Ownable, Pausable {
 
     constructor(address legacyRmrk_) {
         legacyRmrk = IRMRK(legacyRmrk_);
+        maxHoldersPerBatch = 100;
     }
 
     function migrate(uint256 amount) public whenNotPaused onlyActiveBatch {
+        if (
+            _holdersPerBatch[currentBatch].length == maxHoldersPerBatch &&
+            balancePerHolderAndBatch[currentBatch][msg.sender] == 0
+        ) {
+            _startNextBatch();
+        }
         legacyRmrk.transferFrom(msg.sender, address(this), amount);
         balancePerBatch[currentBatch] += amount;
         balancePerHolderAndBatch[currentBatch][msg.sender] += amount;
@@ -53,9 +61,6 @@ contract MoonriverMigrator is Ownable, Pausable {
             ] = _holdersPerBatch[currentBatch].length; // Index starts at 1 so we can check if it exists. It is ok since indexes are actually not used, we are simply simulating a set here
         }
         emit Migrated(currentBatch, msg.sender, amount);
-        if (_holdersPerBatch[currentBatch].length == 100) {
-            _startNextBatch();
-        }
     }
 
     function pause() public onlyOwner {
@@ -87,6 +92,12 @@ contract MoonriverMigrator is Ownable, Pausable {
         legacyRmrk.burn(balancePerBatch[batch]);
         batchState[batch] = State.Finished;
         emit BatchFinished(batch, balancePerBatch[batch]);
+    }
+
+    function setMaxHoldersPerBatch(
+        uint256 maxHoldersPerBatch_
+    ) public onlyOwner {
+        maxHoldersPerBatch = maxHoldersPerBatch_;
     }
 
     function getHoldersPerBatch(

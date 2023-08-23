@@ -4,6 +4,7 @@ import { loadFixture } from '@nomicfoundation/hardhat-network-helpers';
 import { MoonriverMigrator, RMRK, LegacyRMRK } from '../typechain-types';
 import { deployMooriverMigrator } from '../scripts/deploy';
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
+import { BigNumber } from 'ethers';
 
 enum State {
   NotStarted,
@@ -98,6 +99,34 @@ describe('Moonriver Migrator', async () => {
     expect(await migrator.batchState(currentBatch)).to.equal(State.Finished);
   });
 
+  it('starts a new batch if max holders per batch is reached', async () => {
+    const currentBatch = 1;
+    const nextBatch = 2;
+    await migrator.startNextBatch();
+    await migrator.connect(deployer).setMaxHoldersPerBatch(2);
+
+    await legacyRMRK
+      .connect(holders[0])
+      .approve(migrator.address, ethers.utils.parseUnits('100', 10));
+    await legacyRMRK
+      .connect(holders[1])
+      .approve(migrator.address, ethers.utils.parseUnits('50', 10));
+    await legacyRMRK
+      .connect(holders[2])
+      .approve(migrator.address, ethers.utils.parseUnits('15', 10));
+
+    await migrator.connect(holders[0]).migrate(ethers.utils.parseUnits('80', 10));
+    await migrator.connect(holders[1]).migrate(ethers.utils.parseUnits('40', 10));
+    // Not started yet, since current holders in batch could add more
+    expect(await migrator.currentBatch()).to.equal(currentBatch);
+    await migrator.connect(holders[1]).migrate(ethers.utils.parseUnits('10', 10));
+    expect(await migrator.currentBatch()).to.equal(currentBatch);
+
+    // This will trigger new batch to start since it's the 3rd holder
+    await migrator.connect(holders[2]).migrate(ethers.utils.parseUnits('15', 10));
+    expect(await migrator.currentBatch()).to.equal(nextBatch);
+  });
+
   it('cannot migrate if paused', async () => {
     await migrator.connect(deployer).pause();
     await expect(
@@ -134,11 +163,22 @@ describe('Moonriver Migrator', async () => {
     expect(await migrator.paused()).to.equal(false);
   });
 
+  it('can set max holders per batch if owner', async function () {
+    await migrator.connect(deployer).setMaxHoldersPerBatch(5);
+    expect(await migrator.maxHoldersPerBatch()).to.eql(BigNumber.from(5));
+  });
+
   it('cannot pause/unpause if not owner', async function () {
     await expect(migrator.connect(holders[0]).pause()).to.be.revertedWith(
       'Ownable: caller is not the owner',
     );
     await expect(migrator.connect(holders[0]).unpause()).to.be.revertedWith(
+      'Ownable: caller is not the owner',
+    );
+  });
+
+  it('cannot set max holders per batch if not owner', async function () {
+    await expect(migrator.connect(holders[0]).setMaxHoldersPerBatch(5)).to.be.revertedWith(
       'Ownable: caller is not the owner',
     );
   });
