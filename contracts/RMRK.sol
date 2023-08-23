@@ -64,18 +64,6 @@ contract RMRK is ERC20, ERC20Burnable, ERC20Permit, AccessControl {
         _grantRole(MINTER_ROLE, address(tokenManager));
     }
 
-    /*
-     * Deploy this token, then register it with the Interchain Token Service
-     * You'll be given a TokenManager which you can set here, allowing the
-     * local send methods to function.
-     */
-    function setTokenManager(
-        address _tokenManager
-    ) public onlyRole(DEFAULT_ADMIN_ROLE) {
-        tokenManager = ITokenManager(_tokenManager);
-        // _grantRole(MINTER_ROLE, address(tokenManager));
-    }
-
     /**
      * @notice Implementation of the interchainTransfer method
      * @dev We chose to either pass `metadata` as raw data on a remote contract call, or, if no data is passed, just do a transfer.
