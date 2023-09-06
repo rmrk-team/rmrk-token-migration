@@ -1,7 +1,7 @@
 import { ethers } from 'hardhat';
 import { expect } from 'chai';
 import { loadFixture } from '@nomicfoundation/hardhat-network-helpers';
-import { MoonriverMigrator, RMRK, LegacyRMRK, Swapper } from '../typechain-types';
+import { MoonriverMigrator, RMRK, LegacyRMRK, Swapper, SwapperMinter } from '../typechain-types';
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
 
 enum State {
@@ -15,6 +15,7 @@ async function fixture(): Promise<{
   legacyRMRK: LegacyRMRK;
   rmrk: RMRK;
   swapper: Swapper;
+  swapperMinter: SwapperMinter;
   deployer: SignerWithAddress;
   allowedMinter: SignerWithAddress;
   signers: SignerWithAddress[];
@@ -27,20 +28,24 @@ async function fixture(): Promise<{
   const rmrk = await RMRKFactory.deploy();
   await rmrk.deployed();
 
-  const SwapperFactory = await ethers.getContractFactory('Swapper');
-  const swapper = await SwapperFactory.deploy(legacyRMRK.address, rmrk.address);
+  const swapperFactory = await ethers.getContractFactory('Swapper');
+  const swapper = await swapperFactory.deploy(legacyRMRK.address, rmrk.address);
   await swapper.deployed();
 
-  await rmrk.grantRole(ethers.utils.id('MINTER_ROLE'), allowedMinter.address);
+  const swapperMinterFactory = await ethers.getContractFactory('SwapperMinter');
+  const swapperMinter = await swapperMinterFactory.deploy(legacyRMRK.address, rmrk.address);
+  await swapperMinter.deployed();
 
-  return { legacyRMRK, rmrk, swapper, deployer, allowedMinter, signers };
+  await rmrk.grantRole(ethers.utils.id('MINTER_ROLE'), allowedMinter.address);
+  await rmrk.grantRole(ethers.utils.id('MINTER_ROLE'), swapperMinter.address);
+
+  return { legacyRMRK, rmrk, swapper, swapperMinter, deployer, allowedMinter, signers };
 }
 
 describe('Swapper', async () => {
   let legacyRMRK: LegacyRMRK;
   let rmrk: RMRK;
   let swapper: Swapper;
-  let migrator: MoonriverMigrator;
   let deployer: SignerWithAddress;
   let allowedMinter: SignerWithAddress;
   let holders: SignerWithAddress[];
@@ -154,6 +159,76 @@ describe('Swapper', async () => {
       'Ownable: caller is not the owner',
     );
     await expect(swapper.connect(holders[0]).unpause()).to.be.revertedWith(
+      'Ownable: caller is not the owner',
+    );
+  });
+});
+
+describe('SwapperMinter', async () => {
+  let legacyRMRK: LegacyRMRK;
+  let rmrk: RMRK;
+  let swapperMinter: SwapperMinter;
+  let deployer: SignerWithAddress;
+  let holders: SignerWithAddress[];
+
+  beforeEach(async function () {
+    ({ legacyRMRK, rmrk, swapperMinter, deployer, signers: holders } = await loadFixture(fixture));
+
+    await legacyRMRK.mint(holders[0].address, ethers.utils.parseUnits('100', 10));
+    await legacyRMRK.mint(holders[1].address, ethers.utils.parseUnits('50', 10));
+  });
+
+  it('can swap tokens if there is new RMRK balance', async () => {
+    await legacyRMRK
+      .connect(holders[0])
+      .approve(swapperMinter.address, ethers.utils.parseUnits('100', 10));
+    await legacyRMRK
+      .connect(holders[1])
+      .approve(swapperMinter.address, ethers.utils.parseUnits('40', 10));
+
+    await swapperMinter
+      .connect(holders[0])
+      .swapLegacyRMRK(ethers.utils.parseUnits('80', 10), holders[0].address);
+    await swapperMinter
+      .connect(holders[1])
+      .swapLegacyRMRK(ethers.utils.parseUnits('40', 10), holders[2].address); // Transferred to another address
+
+    expect(await rmrk.balanceOf(holders[0].address)).to.equal(ethers.utils.parseUnits('80', 18));
+    expect(await rmrk.balanceOf(holders[2].address)).to.equal(ethers.utils.parseUnits('40', 18));
+
+    expect(await legacyRMRK.balanceOf(holders[0].address)).to.equal(
+      ethers.utils.parseUnits('20', 10),
+    );
+    expect(await legacyRMRK.balanceOf(holders[1].address)).to.equal(
+      ethers.utils.parseUnits('10', 10),
+    );
+
+    expect(await legacyRMRK.balanceOf(swapperMinter.address)).to.equal(
+      ethers.utils.parseUnits('0', 10),
+    );
+  });
+
+  it('cannot swap if paused', async () => {
+    await swapperMinter.connect(deployer).pause();
+    await expect(
+      swapperMinter
+        .connect(holders[0])
+        .swapLegacyRMRK(ethers.utils.parseUnits('100', 10), holders[0].address),
+    ).to.be.revertedWith('Pausable: paused');
+  });
+
+  it('can pause/unpause if owner', async function () {
+    await swapperMinter.connect(deployer).pause();
+    expect(await swapperMinter.paused()).to.equal(true);
+    await swapperMinter.connect(deployer).unpause();
+    expect(await swapperMinter.paused()).to.equal(false);
+  });
+
+  it('cannot pause/unpause if not owner', async function () {
+    await expect(swapperMinter.connect(holders[0]).pause()).to.be.revertedWith(
+      'Ownable: caller is not the owner',
+    );
+    await expect(swapperMinter.connect(holders[0]).unpause()).to.be.revertedWith(
       'Ownable: caller is not the owner',
     );
   });

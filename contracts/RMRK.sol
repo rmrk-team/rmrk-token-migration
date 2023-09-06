@@ -6,21 +6,12 @@ import {ERC20Burnable} from "@openzeppelin/contracts/token/ERC20/extensions/ERC2
 import {ERC20Permit} from "@openzeppelin/contracts/token/ERC20/extensions/ERC20Permit.sol";
 import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import {ITokenManager} from "@axelar-network/interchain-token-service/contracts/interfaces/ITokenManager.sol";
-import {ITokenManagerType} from "@axelar-network/interchain-token-service/contracts/interfaces/ITokenManagerType.sol";
-import {IInterchainToken} from "@axelar-network/interchain-token-service/contracts/interfaces/IInterchainToken.sol";
-import {IInterchainTokenService} from "@axelar-network/interchain-token-service/contracts/interfaces/IInterchainTokenService.sol";
-import {AddressBytesUtils} from "@axelar-network/interchain-token-service/contracts/libraries/AddressBytesUtils.sol";
 
 error MaxSupplyExceeded();
 
 contract RMRK is ERC20, ERC20Burnable, ERC20Permit, AccessControl {
-    using AddressBytesUtils for address;
-
-    bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
     ITokenManager public tokenManager;
-    IInterchainTokenService public service =
-        IInterchainTokenService(0xF786e21509A9D50a9aFD033B5940A2b7D872C208);
-
+    bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
     address public creator;
 
     constructor() ERC20("RMRK", "RMRK") ERC20Permit("RMRK") {
@@ -36,6 +27,12 @@ contract RMRK is ERC20, ERC20Burnable, ERC20Permit, AccessControl {
         return 10_000_000 * (10 ** 18); // 10M
     }
 
+    function setTokenManager(
+        address tokenManager_
+    ) public onlyRole(DEFAULT_ADMIN_ROLE) {
+        tokenManager = ITokenManager(tokenManager_);
+    }
+
     function _beforeTokenTransfer(
         address from,
         address,
@@ -46,22 +43,6 @@ contract RMRK is ERC20, ERC20Burnable, ERC20Permit, AccessControl {
             if (totalSupply() + amount > maxSupply())
                 revert MaxSupplyExceeded();
         }
-    }
-
-    function deployTokenManager(
-        bytes32 salt
-    ) external onlyRole(DEFAULT_ADMIN_ROLE) {
-        bytes memory params = service.getParamsMintBurn(
-            msg.sender.toBytes(),
-            address(this)
-        );
-        bytes32 tokenId = service.deployCustomTokenManager(
-            salt,
-            ITokenManagerType.TokenManagerType.MINT_BURN,
-            params
-        );
-        tokenManager = ITokenManager(service.getTokenManagerAddress(tokenId));
-        _grantRole(MINTER_ROLE, address(tokenManager));
     }
 
     /**

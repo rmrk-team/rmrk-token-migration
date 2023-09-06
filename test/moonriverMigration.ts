@@ -2,7 +2,7 @@ import { ethers } from 'hardhat';
 import { expect } from 'chai';
 import { loadFixture } from '@nomicfoundation/hardhat-network-helpers';
 import { MoonriverMigrator, RMRK, LegacyRMRK } from '../typechain-types';
-import { deployMooriverMigrator } from '../scripts/deploy';
+import { deployMoonriverMigrator } from '../scripts/deploy';
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
 import { BigNumber } from 'ethers';
 
@@ -23,7 +23,7 @@ async function fixture(): Promise<{
   const legacyRMRKFactory = await ethers.getContractFactory('LegacyRMRK');
   const legacyRMRK = await legacyRMRKFactory.deploy();
 
-  const migrator = await deployMooriverMigrator(legacyRMRK.address);
+  const migrator = await deployMoonriverMigrator(legacyRMRK.address);
 
   return { legacyRMRK, migrator, deployer, holders };
 }

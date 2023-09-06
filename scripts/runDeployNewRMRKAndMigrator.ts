@@ -1,14 +1,16 @@
-import { deployNewRmrkAndMigrator } from '../scripts/deploy';
+import { deployNewRmrkAndMigrator } from './deploy';
 import { run } from 'hardhat';
-
-const LEGACY_RMRK = '0x3Ff3B0361B450E70729006918c14DEb6Da410349'; // Moonbase
+import { delay } from '@nomiclabs/hardhat-etherscan/dist/src/etherscan/EtherscanService';
+import { getLegacyRMRKAddress } from './utils';
 
 async function main() {
   console.log('Deploying RMRK token and Migrator');
-  const { rmrk, migrator } = await deployNewRmrkAndMigrator(LEGACY_RMRK);
+  const legacyRMRKAddress = '0xBF41e5Ff98186E6d66864a25124b99abC7dE331F'; // await getLegacyRMRKAddress();
+  const { rmrk, migrator } = await deployNewRmrkAndMigrator(legacyRMRKAddress);
 
   console.log(`RMRK deployed to: ${rmrk.address}`);
   console.log(`Migrator deployed to: ${migrator.address}`);
+  delay(5000);
 
   await run('verify:verify', {
     address: rmrk.address,
@@ -16,7 +18,7 @@ async function main() {
   });
   await run('verify:verify', {
     address: migrator.address,
-    constructorArguments: [LEGACY_RMRK, rmrk.address],
+    constructorArguments: [legacyRMRKAddress, rmrk.address],
   });
 }
 
