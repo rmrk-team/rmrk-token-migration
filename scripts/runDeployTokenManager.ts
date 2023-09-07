@@ -25,6 +25,8 @@ async function main() {
   await tx.wait();
   const tokenManagerAddress = await its.getTokenManagerAddress(tokenId);
 
+  await rmrk.setTokenManager(tokenManagerAddress);
+
   console.log('Deployed Token Manager to ', tokenManagerAddress);
 
   await rmrk.grantRole(ethers.utils.id('MINTER_ROLE'), tokenManagerAddress);
