@@ -11,12 +11,10 @@ async function main() {
   const deployer = (await ethers.getSigners())[0];
   const salt = ethers.constants.HashZero;
   const tokenId = await its.getCustomTokenId(deployer.address, salt);
-  const addressAsBytes = ethers.utils.defaultAbiCoder.encode(['address'], [deployer.address]);
   const params = ethers.utils.defaultAbiCoder.encode(
     ['bytes', 'address'],
-    [addressAsBytes, RMRKAddress],
+    [ethers.constants.HashZero, RMRKAddress],
   );
-
   const tokenManagerProxyFactory = await ethers.getContractFactory('TokenManagerProxy');
   const tokenManagerProxy = await tokenManagerProxyFactory.deploy(
     its.address,

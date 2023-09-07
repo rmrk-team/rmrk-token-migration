@@ -19,10 +19,9 @@ async function main() {
 
   const salt = ethers.constants.HashZero;
   const tokenId = await its.getCustomTokenId(deployer.address, salt);
-  const addressAsBytes = ethers.utils.defaultAbiCoder.encode(['address'], [deployer.address]);
   const params = ethers.utils.defaultAbiCoder.encode(
     ['bytes', 'address'],
-    [addressAsBytes, RMRKAddress],
+    [deployer.address, RMRKAddress],
   );
 
   let tx = await tokenManagerDeployer.deployTokenManager(

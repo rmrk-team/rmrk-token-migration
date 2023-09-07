@@ -13,28 +13,29 @@ async function main() {
   const deployer = (await ethers.getSigners())[0];
   console.log('Deploying Remote Token Manager with the account:', deployer.address);
 
-  const salt = ethers.constants.HashZero;
-  const addressAsBytes = ethers.utils.defaultAbiCoder.encode(['address'], [deployer.address]);
-  const params = await its.getParamsMintBurn(addressAsBytes, rmrk.address);
-
+  const salt = ethers.utils.id('RMRK');
+  const params = ethers.utils.defaultAbiCoder.encode(
+    ['bytes', 'address'],
+    [deployer.address, rmrk.address],
+  );
   const tokenId = await its.getCustomTokenId(deployer.address, salt);
   console.log('Token ID', tokenId);
 
   const gasValue = ethers.utils.parseEther('1');
-  await its.deployRemoteCustomTokenManager(
+  let tx = await its.deployRemoteCustomTokenManager(
     salt,
-    'polygon',
+    'Polygon',
     TokenManagerType_MINT_BURN,
     params,
     gasValue,
     { value: gasValue },
   );
+  await tx.wait();
   const tokenManagerAddress = await its.getTokenManagerAddress(tokenId);
-
   console.log('Deployed Remote Token Manager to', tokenManagerAddress);
 
   await rmrk.grantRole(ethers.utils.id('MINTER_ROLE'), tokenManagerAddress);
-  console.log('Granted MINTER_ROLE to', tokenManagerAddress);
+  console.log('Granted MINTER_ROLE to ', tokenManagerAddress);
 }
 
 main().catch((error) => {

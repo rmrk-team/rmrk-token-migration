@@ -8,21 +8,21 @@ async function main() {
   const its = <MockITS>itsFactory.attach('0xF786e21509A9D50a9aFD033B5940A2b7D872C208');
 
   const RMRKFactory = await ethers.getContractFactory('RMRK');
-  const rmrk = <RMRK>RMRKFactory.attach('0x87948a68f7A8add2411C3A958BA3Db8D18378e5B');
+  const rmrk = <RMRK>RMRKFactory.attach('0xCAa7Ba4F267d7CB5Caf6A762dAc5ad9A9ce3Ea3F');
 
   const deployer = (await ethers.getSigners())[0];
   console.log('Deploying Token Manager with the account:', deployer.address);
 
+  // const tokenId = await its.getCanonicalTokenId(rmrk.address);
+
   const salt = ethers.utils.id('RMRK');
   const tokenId = await its.getCustomTokenId(deployer.address, salt);
   console.log('Token ID', tokenId);
-  const params = ethers.utils.defaultAbiCoder.encode(
-    ['bytes', 'address'],
-    [deployer.address, rmrk.address],
-  );
 
-  let tx = await its.deployCustomTokenManager(salt, TokenManagerType_MINT_BURN, params);
+  let tx = await its.registerCanonicalToken(rmrk.address);
   await tx.wait();
+  console.log('Registered RMRK contract');
+
   const tokenManagerAddress = await its.getTokenManagerAddress(tokenId);
 
   console.log('Deployed Token Manager to ', tokenManagerAddress);
