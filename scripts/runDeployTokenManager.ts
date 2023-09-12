@@ -1,5 +1,5 @@
 import { ethers } from 'hardhat';
-import { MockITS, RMRK } from '../typechain-types';
+import { MockITS, RMRK, TokenManagerMintBurn } from '../typechain-types';
 
 const TokenManagerType_MINT_BURN = 1;
 
@@ -8,7 +8,7 @@ async function main() {
   const its = <MockITS>itsFactory.attach('0xF786e21509A9D50a9aFD033B5940A2b7D872C208');
 
   const RMRKFactory = await ethers.getContractFactory('RMRK');
-  const rmrk = <RMRK>RMRKFactory.attach('0x87948a68f7A8add2411C3A958BA3Db8D18378e5B');
+  const rmrk = <RMRK>RMRKFactory.attach('0xbB59657c3B088358Ad50Cf4b644441142E383708');
 
   const deployer = (await ethers.getSigners())[0];
   console.log('Deploying Token Manager with the account:', deployer.address);
