@@ -12,15 +12,16 @@ async function fixture(): Promise<{
   migrator: Migrator;
   deployer: SignerWithAddress;
   allowedMinter: SignerWithAddress;
+  allowedBurner: SignerWithAddress;
   signers: SignerWithAddress[];
 }> {
-  const [deployer, allowedMinter, ...signers] = await ethers.getSigners();
+  const [deployer, allowedMinter, allowedBurner, ...signers] = await ethers.getSigners();
   const legacyRMRKFactory = await ethers.getContractFactory('LegacyRMRK');
   const legacyRMRK = await legacyRMRKFactory.deploy();
 
   const { rmrk, migrator } = await deployNewRmrkAndMigrator(legacyRMRK.address);
 
-  return { legacyRMRK, rmrk, migrator, deployer, allowedMinter, signers };
+  return { legacyRMRK, rmrk, migrator, deployer, allowedMinter, allowedBurner, signers };
 }
 
 describe('RMRK Token', async () => {
@@ -29,11 +30,13 @@ describe('RMRK Token', async () => {
   let migrator: Migrator;
   let deployer: SignerWithAddress;
   let allowedMinter: SignerWithAddress;
+  let allowedBurner: SignerWithAddress;
   let signers: SignerWithAddress[];
 
   beforeEach(async function () {
-    ({ legacyRMRK, rmrk, migrator, deployer, allowedMinter, signers } = await loadFixture(fixture));
+    ({ legacyRMRK, rmrk, migrator, deployer, allowedMinter, allowedBurner, signers } = await loadFixture(fixture));
     await rmrk.grantRole(ethers.utils.id('MINTER_ROLE'), allowedMinter.address);
+    await rmrk.grantRole(ethers.utils.id('BURNER_ROLE'), allowedBurner.address);
   });
 
   it('cannot mint without minter role', async function () {
@@ -50,9 +53,32 @@ describe('RMRK Token', async () => {
     );
   });
 
+  it('cannot burn from other address without burner role', async function () {
+    const account = signers[0].address;
+    await rmrk.connect(allowedMinter).mint(account, ethers.utils.parseEther('100'));
+    await expect(
+      rmrk.connect(signers[0])['burn(address,uint256)'](account, ethers.utils.parseEther('100')),
+    ).to.be.revertedWith(
+      `AccessControl: account ${account.toLowerCase()} is missing role ${await rmrk.BURNER_ROLE()}`,
+    );
+    // Deployer does not get minter role by default
+    await expect(
+      rmrk.connect(deployer)['burn(address,uint256)'](deployer.address, ethers.utils.parseEther('100')),
+    ).to.be.revertedWith(
+      `AccessControl: account ${deployer.address.toLowerCase()} is missing role ${await rmrk.BURNER_ROLE()}`,
+    );
+  });
+
   it('can mint with minter role', async function () {
     await rmrk.connect(allowedMinter).mint(signers[0].address, ethers.utils.parseEther('100'));
     expect(await rmrk.balanceOf(signers[0].address)).to.equal(ethers.utils.parseEther('100'));
+  });
+
+  it('can burn with burner role', async function () {
+    const account = signers[0].address;
+    await rmrk.connect(allowedMinter).mint(account, ethers.utils.parseEther('100'));
+    await rmrk.connect(allowedBurner)['burn(address,uint256)'](account, ethers.utils.parseEther('100'));
+    expect(await rmrk.balanceOf(account)).to.equal(ethers.utils.parseEther('0'));
   });
 
   it('cannot mint over max supply', async function () {
@@ -76,7 +102,7 @@ describe('RMRK Token', async () => {
     });
 
     it('can burn tokens', async function () {
-      await rmrk.connect(holder1).burn(ethers.utils.parseEther('40'));
+      await rmrk.connect(holder1)['burn(uint256)'](ethers.utils.parseEther('40'));
       expect(await rmrk.balanceOf(holder1.address)).to.equal(ethers.utils.parseEther('60'));
     });
 

@@ -1,5 +1,5 @@
 import { ethers } from 'hardhat';
-import { MockITS, RMRK, TokenManagerMintBurn } from '../typechain-types';
+import { MockITS, RMRK } from '../typechain-types';
 
 const TokenManagerType_MINT_BURN = 1;
 
@@ -29,8 +29,11 @@ async function main() {
 
   console.log('Deployed Token Manager to ', tokenManagerAddress);
 
-  await rmrk.grantRole(ethers.utils.id('MINTER_ROLE'), tokenManagerAddress);
-  console.log('Granted MINTER_ROLE to ', tokenManagerAddress);
+  tx = await rmrk.grantRole(ethers.utils.id('MINTER_ROLE'), tokenManagerAddress);
+  await tx.wait();
+  tx = await rmrk.grantRole(ethers.utils.id('BURNER_ROLE'), tokenManagerAddress);
+  await tx.wait();
+  console.log('Granted MINTER_ROLE and BURNER_ROLE to ', tokenManagerAddress);
 }
 
 main().catch((error) => {

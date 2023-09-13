@@ -16,7 +16,7 @@ async function deployNewRmrkAndMigrator(
   await rmrk.deployed();
 
   const MigratorFactory = await ethers.getContractFactory('Migrator');
-  const migrator = await MigratorFactory.deploy(legacyRMRK, rmrk.address);
+  const migrator = await MigratorFactory.deploy(legacyRMRK, rmrk.address, PAUSE_DELAY);
   await migrator.deployed();
 
   await rmrk.grantRole(ethers.utils.id('MINTER_ROLE'), migrator.address);
@@ -58,7 +58,7 @@ async function deploySwapper(legacyRMRK: string, newRMRK: string): Promise<Swapp
 
 async function deploySwapperMinter(legacyRMRK: string, newRMRK: string): Promise<SwapperMinter> {
   const swapperMinterFactory = await ethers.getContractFactory('SwapperMinter');
-  const swapperMinter = await swapperMinterFactory.deploy(legacyRMRK, newRMRK);
+  const swapperMinter = await swapperMinterFactory.deploy(legacyRMRK, newRMRK, PAUSE_DELAY);
   await swapperMinter.deployed();
 
   return swapperMinter;
@@ -72,6 +72,8 @@ const ADMINS = [
   '0xe02CA5cAD1A5B1595F9E0c6c8F1E5cD4E87DB54D', //JT
 ];
 
+const PAUSE_DELAY = 3600 * 24 * 7; // A week
+
 export {
   deployNewRmrkAndMigrator,
   deployMoonriverMigrator,
@@ -80,4 +82,5 @@ export {
   deploySwapper,
   deploySwapperMinter,
   ADMINS,
+  PAUSE_DELAY,
 };

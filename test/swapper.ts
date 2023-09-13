@@ -33,7 +33,7 @@ async function fixture(): Promise<{
   await swapper.deployed();
 
   const swapperMinterFactory = await ethers.getContractFactory('SwapperMinter');
-  const swapperMinter = await swapperMinterFactory.deploy(legacyRMRK.address, rmrk.address);
+  const swapperMinter = await swapperMinterFactory.deploy(legacyRMRK.address, rmrk.address, 3600);
   await swapperMinter.deployed();
 
   await rmrk.grantRole(ethers.utils.id('MINTER_ROLE'), allowedMinter.address);

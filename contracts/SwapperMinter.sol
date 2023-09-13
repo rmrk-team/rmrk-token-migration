@@ -2,33 +2,42 @@
 pragma solidity ^0.8.21;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/security/Pausable.sol";
+import "./PausableWithDelay.sol";
 import "./interfaces/IRMRK.sol";
 
 error NotEnoughBalance();
 
-contract SwapperMinter is Ownable, Pausable {
+contract SwapperMinter is Ownable, PausableWithDelay {
     IRMRK public immutable legacyRmrk;
     IRMRK public immutable newRmrk;
     uint256 public constant MULTIPLIER = 10 ** 8; // To go from 10 decimals to 18 decimals
 
-    constructor(address legacyRmrk_, address newRmrk_) {
+    constructor(address legacyRmrk_, address newRmrk_, uint256 delay)
+        PausableWithDelay(delay) {
         legacyRmrk = IRMRK(legacyRmrk_);
         newRmrk = IRMRK(newRmrk_);
     }
 
-    function swapLegacyRMRK(uint256 amount, address to) public whenNotPaused {
+    function swapLegacyRMRK(uint256 amount, address to) external whenNotPaused {
         legacyRmrk.transferFrom(msg.sender, address(this), amount);
         uint256 newRMRKAmount = amount * MULTIPLIER;
         newRmrk.mint(to, newRMRKAmount);
         legacyRmrk.burn(amount);
     }
 
-    function pause() public onlyOwner {
+    function pause() external onlyOwner {
         _pause();
     }
 
-    function unpause() public onlyOwner {
+    function pauseWithDelay() external onlyOwner {
+        _pauseWithDelay();
+    }
+
+    function unpause() external onlyOwner {
         _unpause();
+    }
+
+    function setDelay(uint256 newDelay) external onlyOwner {
+        _setDelay(newDelay);
     }
 }
