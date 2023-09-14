@@ -23,7 +23,7 @@ contract RMRK is ERC20, ERC20Burnable, ERC20Permit, AccessControl {
         creator = msg.sender;
     }
 
-    function mint(address to, uint256 amount) public onlyRole(MINTER_ROLE) { 
+    function mint(address to, uint256 amount) public onlyRole(MINTER_ROLE) {
         _mint(to, amount);
     }
 

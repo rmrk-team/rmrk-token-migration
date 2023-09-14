@@ -34,7 +34,8 @@ describe('RMRK Token', async () => {
   let signers: SignerWithAddress[];
 
   beforeEach(async function () {
-    ({ legacyRMRK, rmrk, migrator, deployer, allowedMinter, allowedBurner, signers } = await loadFixture(fixture));
+    ({ legacyRMRK, rmrk, migrator, deployer, allowedMinter, allowedBurner, signers } =
+      await loadFixture(fixture));
     await rmrk.grantRole(ethers.utils.id('MINTER_ROLE'), allowedMinter.address);
     await rmrk.grantRole(ethers.utils.id('BURNER_ROLE'), allowedBurner.address);
   });
@@ -63,7 +64,9 @@ describe('RMRK Token', async () => {
     );
     // Deployer does not get minter role by default
     await expect(
-      rmrk.connect(deployer)['burn(address,uint256)'](deployer.address, ethers.utils.parseEther('100')),
+      rmrk
+        .connect(deployer)
+        ['burn(address,uint256)'](deployer.address, ethers.utils.parseEther('100')),
     ).to.be.revertedWith(
       `AccessControl: account ${deployer.address.toLowerCase()} is missing role ${await rmrk.BURNER_ROLE()}`,
     );
@@ -77,7 +80,9 @@ describe('RMRK Token', async () => {
   it('can burn with burner role', async function () {
     const account = signers[0].address;
     await rmrk.connect(allowedMinter).mint(account, ethers.utils.parseEther('100'));
-    await rmrk.connect(allowedBurner)['burn(address,uint256)'](account, ethers.utils.parseEther('100'));
+    await rmrk
+      .connect(allowedBurner)
+      ['burn(address,uint256)'](account, ethers.utils.parseEther('100'));
     expect(await rmrk.balanceOf(account)).to.equal(ethers.utils.parseEther('0'));
   });
 
@@ -289,8 +294,9 @@ describe('RMRK Token', async () => {
     });
 
     it('cannot pause/unpause if not owner', async function () {
-      await expect(migrator.connect(holder1).pause()).to.be.revertedWith(
-        'Ownable: caller is not the owner',
+      await expect(migrator.connect(holder1).pause()).to.be.revertedWithCustomError(
+        migrator,
+        'Unauthorized',
       );
       await expect(migrator.connect(holder1).unpause()).to.be.revertedWith(
         'Ownable: caller is not the owner',

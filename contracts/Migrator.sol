@@ -1,19 +1,21 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.21;
 
-import "@openzeppelin/contracts/access/Ownable.sol";
 import "./PausableWithDelay.sol";
 import "./interfaces/IRMRK.sol";
 
 error ArrayLenghtsDoNotMatch();
 
-contract Migrator is Ownable, PausableWithDelay {
+contract Migrator is PausableWithDelay {
     IRMRK public immutable legacyRmrk;
     IRMRK public immutable newRmrk;
     uint256 public constant MULTIPLIER = 10 ** 8; // To go from 10 decimals to 18 decimals
 
-    constructor(address legacyRmrk_, address newRmrk_, uint256 delay)
-        PausableWithDelay(delay) {
+    constructor(
+        address legacyRmrk_,
+        address newRmrk_,
+        uint256 delay
+    ) PausableWithDelay(delay) {
         legacyRmrk = IRMRK(legacyRmrk_);
         newRmrk = IRMRK(newRmrk_);
     }
@@ -36,21 +38,5 @@ contract Migrator is Ownable, PausableWithDelay {
         legacyRmrk.transferFrom(msg.sender, address(this), amount);
         legacyRmrk.burn(amount);
         newRmrk.mint(to, amount * MULTIPLIER);
-    }
-
-    function pause() external onlyOwner {
-        _pause();
-    }
-
-    function pauseWithDelay() external onlyOwner {
-        _pauseWithDelay();
-    }
-
-    function unpause() external onlyOwner {
-        _unpause();
-    }
-
-    function setDelay(uint256 newDelay) external onlyOwner {
-        _setDelay(newDelay);
     }
 }

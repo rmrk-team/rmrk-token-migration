@@ -1,4 +1,4 @@
-import { deployNewRmrkAndMigrator } from './deploy';
+import { ADMINS, deployNewRmrkAndMigrator } from './deploy';
 import { run } from 'hardhat';
 import { delay } from '@nomiclabs/hardhat-etherscan/dist/src/etherscan/EtherscanService';
 import { getLegacyRMRKAddress } from './utils';
@@ -10,7 +10,15 @@ async function main() {
 
   console.log(`RMRK deployed to: ${rmrk.address}`);
   console.log(`Migrator deployed to: ${migrator.address}`);
-  delay(5000);
+
+  for (const admin of ADMINS) {
+    let tx = await migrator.setCanPause(admin, true);
+    await tx.wait();
+  }
+  console.log('Added admins as valid pausers');
+
+  console.log('Waiting 10 seconds before verifying...');
+  delay(10000);
 
   await run('verify:verify', {
     address: rmrk.address,

@@ -1,17 +1,25 @@
-import { deployNewRMRK, deploySwapperMinter } from './deploy';
+import { ADMINS, deployNewRMRK, deploySwapperMinter } from './deploy';
 import { run } from 'hardhat';
 import { delay } from '@nomiclabs/hardhat-etherscan/dist/src/etherscan/EtherscanService';
 import { getLegacyRMRKAddress } from './utils';
 
 async function main() {
-  console.log('Deploying New RMRK');
+  console.log('Deploying New RMRK and SwapperMinter');
   const legacyRMRKAddress = await getLegacyRMRKAddress();
   const rmrk = await deployNewRMRK();
   const swapperMinter = await deploySwapperMinter(legacyRMRKAddress, rmrk.address);
+
   console.log(`RMRK deployed to: ${rmrk.address}`);
   console.log(`SwapperMinter deployed to: ${swapperMinter.address}`);
 
-  delay(5000);
+  for (const admin of ADMINS) {
+    let tx = await swapperMinter.setCanPause(admin, true);
+    await tx.wait();
+  }
+  console.log('Added admins as valid pausers');
+
+  console.log('Waiting 10 seconds before verifying...');
+  delay(10000);
 
   await run('verify:verify', {
     address: rmrk.address,

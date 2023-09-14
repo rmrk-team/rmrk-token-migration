@@ -1,19 +1,19 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.21;
 
-import "@openzeppelin/contracts/access/Ownable.sol";
 import "./PausableWithDelay.sol";
 import "./interfaces/IRMRK.sol";
 
-error NotEnoughBalance();
-
-contract SwapperMinter is Ownable, PausableWithDelay {
+contract SwapperMinter is PausableWithDelay {
     IRMRK public immutable legacyRmrk;
     IRMRK public immutable newRmrk;
     uint256 public constant MULTIPLIER = 10 ** 8; // To go from 10 decimals to 18 decimals
 
-    constructor(address legacyRmrk_, address newRmrk_, uint256 delay)
-        PausableWithDelay(delay) {
+    constructor(
+        address legacyRmrk_,
+        address newRmrk_,
+        uint256 delay
+    ) PausableWithDelay(delay) {
         legacyRmrk = IRMRK(legacyRmrk_);
         newRmrk = IRMRK(newRmrk_);
     }
@@ -23,21 +23,5 @@ contract SwapperMinter is Ownable, PausableWithDelay {
         uint256 newRMRKAmount = amount * MULTIPLIER;
         newRmrk.mint(to, newRMRKAmount);
         legacyRmrk.burn(amount);
-    }
-
-    function pause() external onlyOwner {
-        _pause();
-    }
-
-    function pauseWithDelay() external onlyOwner {
-        _pauseWithDelay();
-    }
-
-    function unpause() external onlyOwner {
-        _unpause();
-    }
-
-    function setDelay(uint256 newDelay) external onlyOwner {
-        _setDelay(newDelay);
     }
 }
