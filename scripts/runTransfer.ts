@@ -7,7 +7,9 @@ async function main() {
   const rmrk = <RMRK>RMRKFactory.attach('0xFA92887AE658B7F9648cc68A191a6878BFfBce98');
 
   const tokenManagerFactory = await ethers.getContractFactory('TokenManagerMintBurn');
-  const tokenManager = <TokenManagerMintBurn>tokenManagerFactory.attach('0x08b5bdCF996b8EaE87fAC01553434e9f5e93a8ff');
+  const tokenManager = <TokenManagerMintBurn>(
+    tokenManagerFactory.attach('0x08b5bdCF996b8EaE87fAC01553434e9f5e93a8ff')
+  );
 
   const deployer = (await ethers.getSigners())[0];
   const destinationChain = 'Polygon';
@@ -19,16 +21,12 @@ async function main() {
   );
 
   if (SEND_FROM_TOKEN) {
-    let tx = await rmrk.interchainTransfer(
-      destinationChain,
-      destinationAddress,
-      valueToSend,
-      { value: gas },
-    );
+    let tx = await rmrk.interchainTransfer(destinationChain, destinationAddress, valueToSend, ethers.constants.HashZero {
+      value: gas,
+    });
     await tx.wait();
   } else {
-
-    let tx = await tokenManager.sendToken(
+    let tx = await tokenManager.interchainTransfer(
       destinationChain,
       destinationAddress, // Address as 'bytes'. Encoding not needed, will actually break it.
       valueToSend,
@@ -36,9 +34,7 @@ async function main() {
       { value: gas },
     );
     await tx.wait();
-
   }
-
 }
 
 main().catch((error) => {

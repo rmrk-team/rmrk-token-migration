@@ -1,7 +1,7 @@
 import { ethers } from 'hardhat';
 import { MockITS, RMRK } from '../typechain-types';
 
-const TokenManagerType_MINT_BURN = 1;
+const TokenManagerType_MINT_BURN = 0;
 
 async function main() {
   const itsFactory = await ethers.getContractFactory('MockITS');
@@ -14,16 +14,16 @@ async function main() {
   console.log('Deploying Token Manager with the account:', deployer.address);
 
   const salt = ethers.utils.id('RMRK');
-  const tokenId = await its.getCustomTokenId(deployer.address, salt);
+  const tokenId = await its.interchainTokenId(deployer.address, salt);
   console.log('Token ID', tokenId);
   const params = ethers.utils.defaultAbiCoder.encode(
     ['bytes', 'address'],
     [deployer.address, rmrk.address],
   );
 
-  let tx = await its.deployCustomTokenManager(salt, TokenManagerType_MINT_BURN, params);
+  let tx = await its.deployTokenManager(salt, '', TokenManagerType_MINT_BURN, params, 0);
   await tx.wait();
-  const tokenManagerAddress = await its.getTokenManagerAddress(tokenId);
+  const tokenManagerAddress = await its.tokenManagerAddress(tokenId);
 
   await rmrk.setTokenManager(tokenManagerAddress);
 

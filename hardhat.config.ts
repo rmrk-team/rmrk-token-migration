@@ -20,7 +20,8 @@ const config: HardhatUserConfig = {
       url: 'https://rpc.testnet.moonbeam.network',
       chainId: 1287, // (hex: 0x507)
       accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
-      gasPrice: 1000000000,
+      // gas: 6000000, // Use around 4836635 in total.
+      gasPrice: 25000000000, // Check standard gas price at https://gasstation-mumbai.matic.today/
     },
     moonriver: {
       url: 'https://rpc.api.moonriver.moonbeam.network',
