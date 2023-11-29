@@ -5,7 +5,7 @@ import { getLegacyRMRKAddress } from './utils';
 
 async function main() {
   console.log('Deploying Moonriver Migrator');
-  const legacyRMRKAddress = '0x6f5BCEE387da9D44d6E16E46095D50F9c6006e80'; // await getLegacyRMRKAddress();
+  const legacyRMRKAddress = '0xa1fA85570E97CB050b9F5379adc878df8d87BB5C'; // await getLegacyRMRKAddress();
   const moonriverMigrator = await deployMoonriverMigrator(legacyRMRKAddress);
 
   console.log(`Moonriver Migrator to: ${moonriverMigrator.address}`);

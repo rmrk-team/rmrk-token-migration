@@ -14,10 +14,10 @@
   resolved "https://registry.yarnpkg.com/@axelar-network/axelar-gmp-sdk-solidity/-/axelar-gmp-sdk-solidity-5.6.2.tgz#9a48a5ef7f00490898d8d33e0756b35416069fd2"
   integrity sha512-lJT1Sily/to5jZHkE3rGtkb8qnurNTFnlz4HwbQec+MtqVgPkY3/SsiPTw7967hmZavAw02eiE1jFSW7XKksZQ==
 
-"@axelar-network/interchain-token-service@^1.0.0-beta.2":
-  version "1.0.0-beta.2"
-  resolved "https://registry.yarnpkg.com/@axelar-network/interchain-token-service/-/interchain-token-service-1.0.0-beta.2.tgz#f01b22a95eaf71b20f0aeaa455d84274395e88bb"
-  integrity sha512-dMvwvoJuRBrU6HfmyshSP2PhHxKgQPbDJRYYpoYbfpKeeFxuh1FT/OeYkHRlxaN+619B8mzgLQZkbtIy3QwHLw==
+"@axelar-network/interchain-token-service@^1.0.0-beta.3":
+  version "1.0.0-beta.3"
+  resolved "https://registry.yarnpkg.com/@axelar-network/interchain-token-service/-/interchain-token-service-1.0.0-beta.3.tgz#84791c769ed8c6589620a82e7224e1b7ab808017"
+  integrity sha512-yoW1sxDg5LB25w9fSgtPcu/8vbOo4MzxlpJvHLnMrHmXAKwDJMaNDt0X1JgME8bH8aiyHh/ciB6ajBnN7oFkgw==
   dependencies:
     "@axelar-network/axelar-cgp-solidity" "6.1.2"
     "@axelar-network/axelar-gmp-sdk-solidity" "5.6.2"

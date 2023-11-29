@@ -3,6 +3,7 @@ pragma solidity ^0.8.21;
 
 import {ITokenManagerType} from "@axelar-network/interchain-token-service/contracts/interfaces/ITokenManagerType.sol";
 import {TokenManagerMintBurn} from "@axelar-network/interchain-token-service/contracts/token-manager/TokenManagerMintBurn.sol";
+import {InterchainTokenService} from "@axelar-network/interchain-token-service/contracts/InterchainTokenService.sol";
 
 contract MockITS {
     /**
@@ -45,5 +46,18 @@ contract MockITS {
         bytes32 salt
     ) external view returns (bytes32 tokenId) {
         return bytes32(0);
+    }
+
+    function tokenManagerImplementation(
+        uint256 tokenManagerType
+    ) external view returns (address) {
+        return address(0);
+    }
+
+    function params(
+        bytes memory operator_,
+        address tokenAddress_
+    ) external pure returns (bytes memory params_) {
+        params_ = abi.encode(operator_, tokenAddress_);
     }
 }

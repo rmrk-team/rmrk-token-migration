@@ -1,4 +1,4 @@
-import { ADMINS, deployNewRMRK, deploySwapperMinter } from './deploy';
+import { ADMINS, PAUSE_DELAY, deployNewRMRK, deploySwapperMinter } from './deploy';
 import { run } from 'hardhat';
 import { delay } from '@nomiclabs/hardhat-etherscan/dist/src/etherscan/EtherscanService';
 import { getLegacyRMRKAddress } from './utils';
@@ -28,7 +28,7 @@ async function main() {
 
   await run('verify:verify', {
     address: swapperMinter.address,
-    constructorArguments: [legacyRMRKAddress, rmrk.address],
+    constructorArguments: [legacyRMRKAddress, rmrk.address, PAUSE_DELAY],
   });
 }
 
