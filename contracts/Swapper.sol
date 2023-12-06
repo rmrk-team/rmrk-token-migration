@@ -2,7 +2,7 @@
 pragma solidity ^0.8.21;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/security/Pausable.sol";
+import "@openzeppelin/contracts/utils/Pausable.sol";
 import "./interfaces/IRMRK.sol";
 
 error NotEnoughBalance();
@@ -12,7 +12,7 @@ contract Swapper is Ownable, Pausable {
     IRMRK public immutable newRmrk;
     uint256 public constant MULTIPLIER = 10 ** 8; // To go from 10 decimals to 18 decimals
 
-    constructor(address legacyRmrk_, address newRmrk_) {
+    constructor(address legacyRmrk_, address newRmrk_) Ownable(msg.sender) {
         legacyRmrk = IRMRK(legacyRmrk_);
         newRmrk = IRMRK(newRmrk_);
     }

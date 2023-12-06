@@ -7,21 +7,22 @@ import {ERC20Burnable} from "@openzeppelin/contracts/token/ERC20/extensions/ERC2
 import {ERC20Permit} from "@openzeppelin/contracts/token/ERC20/extensions/ERC20Permit.sol";
 
 import {AddressBytes} from "@axelar-network/axelar-gmp-sdk-solidity/contracts/libs/AddressBytes.sol";
-import {ITokenManager} from "@axelar-network/interchain-token-service/contracts/interfaces/ITokenManager.sol";
+import {IInterchainTokenService} from "@axelar-network/interchain-token-service/contracts/interfaces/IInterchainTokenService.sol";
 
 error MaxSupplyExceeded();
 
 contract RMRK is ERC20, ERC20Burnable, ERC20Permit, AccessControl {
     using AddressBytes for address;
 
-    ITokenManager public tokenManager;
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
     bytes32 public constant BURNER_ROLE = keccak256("BURNER_ROLE");
     address public creator;
+    address private _its;
+    bytes32 private _tokenId;
 
-    constructor() ERC20("RMRK", "RMRK") ERC20Permit("RMRK") {
-        _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
-        creator = msg.sender;
+    constructor(address creator_) ERC20("RMRK", "RMRK") ERC20Permit("RMRK") {
+        _grantRole(DEFAULT_ADMIN_ROLE, creator_);
+        creator = creator_;
     }
 
     function mint(address to, uint256 amount) public onlyRole(MINTER_ROLE) {
@@ -36,22 +37,52 @@ contract RMRK is ERC20, ERC20Burnable, ERC20Permit, AccessControl {
         return 10_000_000 * (10 ** 18); // 10M
     }
 
-    function setTokenManager(
-        address tokenManager_
-    ) public onlyRole(DEFAULT_ADMIN_ROLE) {
-        tokenManager = ITokenManager(tokenManager_);
+    /**
+     * @notice Getter for the tokenId used for this token.
+     * @dev Needs to be overwritten.
+     * @return tokenId_ The tokenId that this token is registerred under.
+     */
+    function interchainTokenId()
+        public
+        view
+        virtual
+        returns (bytes32 tokenId_)
+    {
+        tokenId_ = _tokenId;
     }
 
-    function _beforeTokenTransfer(
+    /**
+     * @notice Getter for the interchain token service.
+     * @dev Needs to be overwritten.
+     * @return service The address of the interchain token service.
+     */
+    function interchainTokenService()
+        public
+        view
+        virtual
+        returns (address service)
+    {
+        service = _its;
+    }
+
+    function setTokenIdAndIts(
+        bytes32 tokenId_,
+        address its_
+    ) public onlyRole(DEFAULT_ADMIN_ROLE) {
+        _tokenId = tokenId_;
+        _its = its_;
+    }
+
+    function _update(
         address from,
-        address,
-        uint256 amount
+        address to,
+        uint256 value
     ) internal override {
         if (from == address(0)) {
             // When minting tokens
-            if (totalSupply() + amount > maxSupply())
-                revert MaxSupplyExceeded();
+            if (totalSupply() + value > maxSupply()) revert MaxSupplyExceeded();
         }
+        super._update(from, to, value);
     }
 
     /**
@@ -69,13 +100,9 @@ contract RMRK is ERC20, ERC20Burnable, ERC20Permit, AccessControl {
         uint256 amount,
         bytes calldata metadata
     ) external payable {
-        tokenManager.transmitInterchainTransfer{value: msg.value}(
-            msg.sender,
-            destinationChain,
-            recipient,
-            amount,
-            metadata
-        );
+        IInterchainTokenService(_its).transmitInterchainTransfer{
+            value: msg.value
+        }(_tokenId, msg.sender, destinationChain, recipient, amount, metadata);
     }
 
     /**
@@ -95,18 +122,10 @@ contract RMRK is ERC20, ERC20Burnable, ERC20Permit, AccessControl {
         uint256 amount,
         bytes calldata metadata
     ) external payable {
-        uint256 _allowance = allowance(sender, msg.sender);
+        _spendAllowance(sender, msg.sender, amount);
 
-        if (_allowance != type(uint256).max) {
-            _approve(sender, msg.sender, _allowance - amount);
-        }
-
-        tokenManager.transmitInterchainTransfer{value: msg.value}(
-            sender,
-            destinationChain,
-            recipient,
-            amount,
-            metadata
-        );
+        IInterchainTokenService(_its).transmitInterchainTransfer{
+            value: msg.value
+        }(_tokenId, sender, destinationChain, recipient, amount, metadata);
     }
 }

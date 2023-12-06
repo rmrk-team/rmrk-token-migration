@@ -43,15 +43,11 @@ describe('RMRK Token', async () => {
   it('cannot mint without minter role', async function () {
     await expect(
       rmrk.connect(signers[0]).mint(signers[0].address, ethers.utils.parseEther('100')),
-    ).to.be.revertedWith(
-      `AccessControl: account ${signers[0].address.toLowerCase()} is missing role ${await rmrk.MINTER_ROLE()}`,
-    );
+    ).to.be.revertedWithCustomError(rmrk, 'AccessControlUnauthorizedAccount');
     // Deployer does not get minter role by default
     await expect(
       rmrk.connect(deployer).mint(deployer.address, ethers.utils.parseEther('100')),
-    ).to.be.revertedWith(
-      `AccessControl: account ${deployer.address.toLowerCase()} is missing role ${await rmrk.MINTER_ROLE()}`,
-    );
+    ).to.be.revertedWithCustomError(rmrk, 'AccessControlUnauthorizedAccount');
   });
 
   it('cannot burn from other address without burner role', async function () {
@@ -59,17 +55,13 @@ describe('RMRK Token', async () => {
     await rmrk.connect(allowedMinter).mint(account, ethers.utils.parseEther('100'));
     await expect(
       rmrk.connect(signers[0])['burn(address,uint256)'](account, ethers.utils.parseEther('100')),
-    ).to.be.revertedWith(
-      `AccessControl: account ${account.toLowerCase()} is missing role ${await rmrk.BURNER_ROLE()}`,
-    );
+    ).to.be.revertedWithCustomError(rmrk, 'AccessControlUnauthorizedAccount');
     // Deployer does not get minter role by default
     await expect(
       rmrk
         .connect(deployer)
         ['burn(address,uint256)'](deployer.address, ethers.utils.parseEther('100')),
-    ).to.be.revertedWith(
-      `AccessControl: account ${deployer.address.toLowerCase()} is missing role ${await rmrk.BURNER_ROLE()}`,
-    );
+    ).to.be.revertedWithCustomError(rmrk, 'AccessControlUnauthorizedAccount');
   });
 
   it('can mint with minter role', async function () {
@@ -251,7 +243,7 @@ describe('RMRK Token', async () => {
       await legacyRMRK.connect(holder1).approve(migrator.address, swapAmount);
       await expect(
         migrator.connect(holder1).swapLegacyRMRK(swapAmount, holder1.address),
-      ).to.be.revertedWith('Pausable: paused');
+      ).to.be.revertedWithCustomError(migrator, 'EnforcedPause');
     });
 
     it('cannot migrate tokens when paused', async function () {
@@ -262,7 +254,7 @@ describe('RMRK Token', async () => {
         migrator
           .connect(deployer)
           .migrate([holder1.address, holder2.address], [amountHolder1, amountHolder2]),
-      ).to.be.revertedWith('Pausable: paused');
+      ).to.be.revertedWithCustomError(migrator, 'EnforcedPause');
     });
 
     it('cannot migrate tokens if lenght of amounts and tos do not match', async function () {
@@ -283,7 +275,7 @@ describe('RMRK Token', async () => {
         migrator
           .connect(holder1)
           .migrate([holder1.address, holder2.address], [amountHolder1, amountHolder2]),
-      ).to.be.revertedWith('Ownable: caller is not the owner');
+      ).to.be.revertedWithCustomError(migrator, 'OwnableUnauthorizedAccount');
     });
 
     it('can pause/unpause if owner', async function () {
@@ -298,8 +290,9 @@ describe('RMRK Token', async () => {
         migrator,
         'Unauthorized',
       );
-      await expect(migrator.connect(holder1).unpause()).to.be.revertedWith(
-        'Ownable: caller is not the owner',
+      await expect(migrator.connect(holder1).unpause()).to.be.revertedWithCustomError(
+        migrator,
+        'OwnableUnauthorizedAccount',
       );
     });
   });

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.21;
 
-import "@openzeppelin/contracts/security/Pausable.sol";
+import "@openzeppelin/contracts/utils/Pausable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract PausableWithDelay is Pausable, Ownable {
@@ -17,7 +17,7 @@ contract PausableWithDelay is Pausable, Ownable {
         _;
     }
 
-    constructor(uint256 delay_) {
+    constructor(uint256 delay_) Ownable(msg.sender) {
         _setDelay(delay);
     }
 

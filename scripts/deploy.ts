@@ -11,8 +11,9 @@ import {
 async function deployNewRmrkAndMigrator(
   legacyRMRK: string,
 ): Promise<{ rmrk: RMRK; migrator: Migrator }> {
+  const [deployer] = await ethers.getSigners();
   const RMRKFactory = await ethers.getContractFactory('RMRK');
-  const rmrk = await RMRKFactory.deploy();
+  const rmrk = await RMRKFactory.deploy(deployer.address);
   await rmrk.deployed();
 
   const MigratorFactory = await ethers.getContractFactory('Migrator');
@@ -33,8 +34,9 @@ async function deployMoonriverMigrator(legacyRMRK: string): Promise<MoonriverMig
 }
 
 async function deployNewRMRK(): Promise<RMRK> {
+  const [deployer] = await ethers.getSigners();
   const RMRKFactory = await ethers.getContractFactory('RMRK');
-  const rmrk = await RMRKFactory.deploy();
+  const rmrk = await RMRKFactory.deploy(deployer.address);
   await rmrk.deployed();
 
   return rmrk;
