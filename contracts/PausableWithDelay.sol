@@ -11,7 +11,7 @@ contract PausableWithDelay is Pausable, Ownable {
     // The timestamp after which the contract can be unpaused.
     uint256 public unpausableAt;
     // The accounts that can pause the contract.
-    mapping(address => bool) public canPause;
+    mapping(address account => bool canPause) public canPause;
 
     // The contract is cannot be unpaused yet.
     error CannotUnpauseYet(uint256 unpausableAt);
@@ -41,7 +41,7 @@ contract PausableWithDelay is Pausable, Ownable {
      * @param account The account to set.
      * @param canPause_ Whether the account can pause the contract.
      */
-    function setCanPause(address account, bool canPause_) internal virtual {
+    function setCanPause(address account, bool canPause_) external virtual {
         canPause[account] = canPause_;
     }
 

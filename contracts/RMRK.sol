@@ -52,7 +52,7 @@ contract RMRK is ERC20, ERC20Burnable, ERC20Permit, AccessControl {
      * @return maxSupply_ The maximum supply of this token.
      */
     function maxSupply() public pure returns (uint256 maxSupply_) {
-        return 10_000_000 * (10 ** 18); // 10M
+        maxSupply_ = 10_000_000 * (10 ** 18); // 10M
     }
 
     /**
