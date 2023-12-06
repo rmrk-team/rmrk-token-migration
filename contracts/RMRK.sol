@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.21;
+pragma solidity 0.8.21;
 
 import {AccessControl} from "@openzeppelin/contracts/access/AccessControl.sol";
 import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
@@ -11,39 +11,56 @@ import {IInterchainTokenService} from "@axelar-network/interchain-token-service/
 
 error MaxSupplyExceeded();
 
+// RMRK is the ERC20 token used by the RMRK protocol.
 contract RMRK is ERC20, ERC20Burnable, ERC20Permit, AccessControl {
     using AddressBytes for address;
 
+    // Roles
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
     bytes32 public constant BURNER_ROLE = keccak256("BURNER_ROLE");
-    address public creator;
+    // Interchain token service address
     address private _its;
+    // Token ID, from ITS
     bytes32 private _tokenId;
 
-    constructor(address creator_) ERC20("RMRK", "RMRK") ERC20Permit("RMRK") {
-        _grantRole(DEFAULT_ADMIN_ROLE, creator_);
-        creator = creator_;
+    constructor(address admin) ERC20("RMRK", "RMRK") ERC20Permit("RMRK") {
+        _grantRole(DEFAULT_ADMIN_ROLE, admin);
     }
 
-    function mint(address to, uint256 amount) public onlyRole(MINTER_ROLE) {
+    /**
+     * @notice Mint new tokens.
+     * @dev Can only be called by a minter.
+     * @param to The address of the recipient.
+     * @param amount The amount of tokens to mint.
+     */
+    function mint(address to, uint256 amount) external onlyRole(MINTER_ROLE) {
         _mint(to, amount);
     }
 
-    function burn(address from, uint256 amount) public onlyRole(BURNER_ROLE) {
+    /**
+     * @notice Burn tokens.
+     * @dev Can only be called by a burner.
+     * @param from The address of the owner.
+     * @param amount The amount of tokens to burn.
+     */
+    function burn(address from, uint256 amount) external onlyRole(BURNER_ROLE) {
         _burn(from, amount);
     }
 
-    function maxSupply() public pure returns (uint256) {
+    /**
+     * @notice Getter for the max supply of this token.
+     * @return maxSupply_ The maximum supply of this token.
+     */
+    function maxSupply() public pure returns (uint256 maxSupply_) {
         return 10_000_000 * (10 ** 18); // 10M
     }
 
     /**
      * @notice Getter for the tokenId used for this token.
-     * @dev Needs to be overwritten.
      * @return tokenId_ The tokenId that this token is registerred under.
      */
     function interchainTokenId()
-        public
+        external
         view
         virtual
         returns (bytes32 tokenId_)
@@ -53,11 +70,10 @@ contract RMRK is ERC20, ERC20Burnable, ERC20Permit, AccessControl {
 
     /**
      * @notice Getter for the interchain token service.
-     * @dev Needs to be overwritten.
      * @return service The address of the interchain token service.
      */
     function interchainTokenService()
-        public
+        external
         view
         virtual
         returns (address service)
@@ -65,14 +81,23 @@ contract RMRK is ERC20, ERC20Burnable, ERC20Permit, AccessControl {
         service = _its;
     }
 
+    /**
+     * @notice Setter for the interchain token service and tokenId.
+     * @param tokenId_ The tokenId that this token is registerred under.
+     * @param its_ The address of the interchain token service.
+     */
     function setTokenIdAndIts(
         bytes32 tokenId_,
         address its_
-    ) public onlyRole(DEFAULT_ADMIN_ROLE) {
+    ) external onlyRole(DEFAULT_ADMIN_ROLE) {
         _tokenId = tokenId_;
         _its = its_;
     }
 
+    /**
+     * @inheritdoc ERC20
+     * @dev We override this function to add a check for the max supply.
+     */
     function _update(
         address from,
         address to,
@@ -102,7 +127,14 @@ contract RMRK is ERC20, ERC20Burnable, ERC20Permit, AccessControl {
     ) external payable {
         IInterchainTokenService(_its).transmitInterchainTransfer{
             value: msg.value
-        }(_tokenId, msg.sender, destinationChain, recipient, amount, metadata);
+        }(
+            _tokenId,
+            _msgSender(),
+            destinationChain,
+            recipient,
+            amount,
+            metadata
+        );
     }
 
     /**
@@ -122,7 +154,7 @@ contract RMRK is ERC20, ERC20Burnable, ERC20Permit, AccessControl {
         uint256 amount,
         bytes calldata metadata
     ) external payable {
-        _spendAllowance(sender, msg.sender, amount);
+        _spendAllowance(sender, _msgSender(), amount);
 
         IInterchainTokenService(_its).transmitInterchainTransfer{
             value: msg.value

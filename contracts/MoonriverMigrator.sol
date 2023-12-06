@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.21;
+pragma solidity 0.8.21;
 
-import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/utils/Pausable.sol";
-import "./interfaces/IRMRK.sol";
+import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
+import {Pausable} from "@openzeppelin/contracts/utils/Pausable.sol";
+import {IMintableBurnableERC20} from "./interfaces/IMintableBurnableERC20.sol";
 
 error BatchNotStarted();
 error BatchNotMigrating();
@@ -25,7 +25,7 @@ contract MoonriverMigrator is Ownable, Pausable {
         uint256 amount
     );
 
-    IRMRK public immutable legacyRmrk;
+    IMintableBurnableERC20 public immutable LEGACY_RMRK;
     uint256 public currentBatch;
     uint256 public maxHoldersPerBatch;
     mapping(uint256 batch => State state) public batchState;
@@ -41,40 +41,40 @@ contract MoonriverMigrator is Ownable, Pausable {
         _;
     }
 
-    constructor(address legacyRmrk_) Ownable(msg.sender) {
-        legacyRmrk = IRMRK(legacyRmrk_);
+    constructor(address legacyRmrk_) Ownable(_msgSender()) {
+        LEGACY_RMRK = IMintableBurnableERC20(legacyRmrk_);
         maxHoldersPerBatch = 100;
     }
 
-    function migrate(uint256 amount) public whenNotPaused onlyActiveBatch {
+    function migrate(uint256 amount) external whenNotPaused onlyActiveBatch {
         if (
             _holdersPerBatch[currentBatch].length == maxHoldersPerBatch &&
-            balancePerHolderAndBatch[currentBatch][msg.sender] == 0
+            balancePerHolderAndBatch[currentBatch][_msgSender()] == 0
         ) {
             _startNextBatch();
         }
-        legacyRmrk.transferFrom(msg.sender, address(this), amount);
+        LEGACY_RMRK.transferFrom(_msgSender(), address(this), amount);
         balancePerBatch[currentBatch] += amount;
-        balancePerHolderAndBatch[currentBatch][msg.sender] += amount;
-        if (_indexPerHolderAndBatch[currentBatch][msg.sender] == 0) {
-            _holdersPerBatch[currentBatch].push(msg.sender);
+        balancePerHolderAndBatch[currentBatch][_msgSender()] += amount;
+        if (_indexPerHolderAndBatch[currentBatch][_msgSender()] == 0) {
+            _holdersPerBatch[currentBatch].push(_msgSender());
 
             _indexPerHolderAndBatch[currentBatch][
-                msg.sender
+                _msgSender()
             ] = _holdersPerBatch[currentBatch].length; // Index starts at 1 so we can check if it exists. It is ok since indexes are actually not used, we are simply simulating a set here
         }
-        emit Migrated(currentBatch, msg.sender, amount);
+        emit Migrated(currentBatch, _msgSender(), amount);
     }
 
-    function pause() public onlyOwner {
+    function pause() external onlyOwner {
         _pause();
     }
 
-    function unpause() public onlyOwner {
+    function unpause() external onlyOwner {
         _unpause();
     }
 
-    function startNextBatch() public onlyOwner {
+    function startNextBatch() external onlyOwner {
         _startNextBatch();
     }
 
@@ -84,7 +84,7 @@ contract MoonriverMigrator is Ownable, Pausable {
         emit BatchStarted(currentBatch);
     }
 
-    function startMigratingBatch(uint256 batch) public onlyOwner {
+    function startMigratingBatch(uint256 batch) external onlyOwner {
         if (batchState[batch] != State.Started) {
             revert BatchNotStarted();
         }
@@ -92,30 +92,34 @@ contract MoonriverMigrator is Ownable, Pausable {
         emit BatchMigrating(batch, balancePerBatch[batch]);
     }
 
-    function finishBatch(uint256 batch) public onlyOwner {
+    function finishBatch(uint256 batch) external onlyOwner {
         if (batchState[batch] != State.Migrating) {
             revert BatchNotMigrating();
         }
-        legacyRmrk.burn(balancePerBatch[batch]);
+        LEGACY_RMRK.burn(balancePerBatch[batch]);
         batchState[batch] = State.Finished;
         emit BatchFinished(batch, balancePerBatch[batch]);
     }
 
     function setMaxHoldersPerBatch(
         uint256 maxHoldersPerBatch_
-    ) public onlyOwner {
+    ) external onlyOwner {
         maxHoldersPerBatch = maxHoldersPerBatch_;
     }
 
     function getHoldersPerBatch(
         uint256 batch
-    ) public view returns (address[] memory holders) {
+    ) external view returns (address[] memory holders) {
         holders = _holdersPerBatch[batch];
     }
 
     function getMigrationsForBatch(
         uint256 batch
-    ) public view returns (address[] memory holders, uint256[] memory amounts) {
+    )
+        external
+        view
+        returns (address[] memory holders, uint256[] memory amounts)
+    {
         uint256 length = _holdersPerBatch[batch].length;
         holders = new address[](length);
         amounts = new uint256[](length);
