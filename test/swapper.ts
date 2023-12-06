@@ -25,7 +25,7 @@ async function fixture(): Promise<{
   const legacyRMRK = await legacyRMRKFactory.deploy();
 
   const RMRKFactory = await ethers.getContractFactory('RMRK');
-  const rmrk = await RMRKFactory.deploy();
+  const rmrk = await RMRKFactory.deploy(deployer.address);
   await rmrk.deployed();
 
   const swapperFactory = await ethers.getContractFactory('Swapper');
@@ -118,7 +118,7 @@ describe('Swapper', async () => {
       swapper
         .connect(holders[0])
         .swapLegacyRMRK(ethers.utils.parseUnits('100', 10), holders[0].address),
-    ).to.be.revertedWith('Pausable: paused');
+    ).to.be.revertedWithCustomError(swapper, 'EnforcedPause');
   });
 
   it('can pause/unpause if owner', async function () {
@@ -150,16 +150,18 @@ describe('Swapper', async () => {
     it('cannot burn legacy rmrk if not owner', async function () {
       await expect(
         swapper.connect(holders[0]).burnLegacyRMRK(ethers.utils.parseUnits('50', 10)),
-      ).to.be.revertedWith('Ownable: caller is not the owner');
+      ).to.be.revertedWithCustomError(swapper, 'OwnableUnauthorizedAccount');
     });
   });
 
   it('cannot pause/unpause if not owner', async function () {
-    await expect(swapper.connect(holders[0]).pause()).to.be.revertedWith(
-      'Ownable: caller is not the owner',
+    await expect(swapper.connect(holders[0]).pause()).to.be.revertedWithCustomError(
+      swapper,
+      'OwnableUnauthorizedAccount',
     );
-    await expect(swapper.connect(holders[0]).unpause()).to.be.revertedWith(
-      'Ownable: caller is not the owner',
+    await expect(swapper.connect(holders[0]).unpause()).to.be.revertedWithCustomError(
+      swapper,
+      'OwnableUnauthorizedAccount',
     );
   });
 });
@@ -214,7 +216,7 @@ describe('SwapperMinter', async () => {
       swapperMinter
         .connect(holders[0])
         .swapLegacyRMRK(ethers.utils.parseUnits('100', 10), holders[0].address),
-    ).to.be.revertedWith('Pausable: paused');
+    ).to.be.revertedWithCustomError(swapperMinter, 'EnforcedPause');
   });
 
   it('can pause/unpause if owner', async function () {
@@ -229,8 +231,9 @@ describe('SwapperMinter', async () => {
       swapperMinter,
       'Unauthorized',
     );
-    await expect(swapperMinter.connect(holders[0]).unpause()).to.be.revertedWith(
-      'Ownable: caller is not the owner',
+    await expect(swapperMinter.connect(holders[0]).unpause()).to.be.revertedWithCustomError(
+      swapperMinter,
+      'OwnableUnauthorizedAccount',
     );
   });
 });

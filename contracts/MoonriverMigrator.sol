@@ -2,8 +2,11 @@
 pragma solidity ^0.8.21;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/security/Pausable.sol";
+import "@openzeppelin/contracts/utils/Pausable.sol";
 import "./interfaces/IRMRK.sol";
+
+error BatchNotStarted();
+error BatchNotMigrating();
 
 contract MoonriverMigrator is Ownable, Pausable {
     enum State {
@@ -38,7 +41,7 @@ contract MoonriverMigrator is Ownable, Pausable {
         _;
     }
 
-    constructor(address legacyRmrk_) {
+    constructor(address legacyRmrk_) Ownable(msg.sender) {
         legacyRmrk = IRMRK(legacyRmrk_);
         maxHoldersPerBatch = 100;
     }
@@ -82,13 +85,17 @@ contract MoonriverMigrator is Ownable, Pausable {
     }
 
     function startMigratingBatch(uint256 batch) public onlyOwner {
-        require(batchState[batch] == State.Started, "Batch not started");
+        if (batchState[batch] != State.Started) {
+            revert BatchNotStarted();
+        }
         batchState[batch] = State.Migrating;
         emit BatchMigrating(batch, balancePerBatch[batch]);
     }
 
     function finishBatch(uint256 batch) public onlyOwner {
-        require(batchState[batch] == State.Migrating, "Batch not migrating");
+        if (batchState[batch] != State.Migrating) {
+            revert BatchNotMigrating();
+        }
         legacyRmrk.burn(balancePerBatch[batch]);
         batchState[batch] = State.Finished;
         emit BatchFinished(batch, balancePerBatch[batch]);
@@ -122,6 +129,8 @@ contract MoonriverMigrator is Ownable, Pausable {
     }
 
     function _checkActiveBatch() internal view {
-        require(batchState[currentBatch] == State.Started, "Batch not started");
+        if (batchState[currentBatch] != State.Started) {
+            revert BatchNotStarted();
+        }
     }
 }

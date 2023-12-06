@@ -11,8 +11,8 @@
   "author": "@rmrk-team",
   "license": "Apache-2.0",
   "dependencies": {
-    "@axelar-network/interchain-token-service": "^1.0.0-beta.3",
-    "@openzeppelin/contracts": "^4.9.3"
+    "@axelar-network/interchain-token-service": "^1.0.0-beta.4",
+    "@openzeppelin/contracts": "^5.0.0"
   },
   "devDependencies": {
     "@ethersproject/abi": "^5.4.7",

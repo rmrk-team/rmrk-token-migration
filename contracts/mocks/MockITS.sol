@@ -2,7 +2,6 @@
 pragma solidity ^0.8.21;
 
 import {ITokenManagerType} from "@axelar-network/interchain-token-service/contracts/interfaces/ITokenManagerType.sol";
-import {TokenManagerMintBurn} from "@axelar-network/interchain-token-service/contracts/token-manager/TokenManagerMintBurn.sol";
 import {InterchainTokenService} from "@axelar-network/interchain-token-service/contracts/InterchainTokenService.sol";
 
 contract MockITS {
@@ -11,14 +10,14 @@ contract MockITS {
      * @param salt The salt used for token manager deployment.
      * @param destinationChain The name of the destination chain.
      * @param tokenManagerType The type of token manager.
-     * @param params The deployment parameters.
+     * @param params_ The deployment parameters.
      * @param gasValue The gas value for deployment.
      */
     function deployTokenManager(
         bytes32 salt,
         string calldata destinationChain,
         ITokenManagerType.TokenManagerType tokenManagerType,
-        bytes calldata params,
+        bytes calldata params_,
         uint256 gasValue
     ) external payable returns (bytes32 tokenId) {
         return bytes32(0);

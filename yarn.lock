@@ -2,25 +2,30 @@
 # yarn lockfile v1
 
 
-"@axelar-network/axelar-cgp-solidity@6.1.2":
-  version "6.1.2"
-  resolved "https://registry.yarnpkg.com/@axelar-network/axelar-cgp-solidity/-/axelar-cgp-solidity-6.1.2.tgz#58cb23d5b7088b765a785a9a475010a4d59d5f5a"
-  integrity sha512-KOv3Z0u/Xg1HsvTFJzpf0LewT4/HW8yBGb5AfVacFRoL/zor5Q1SwBb5SN12CDpxFebeUPC/MdGAddC2ZfNg8Q==
+"@axelar-network/axelar-cgp-solidity@6.2.0":
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/@axelar-network/axelar-cgp-solidity/-/axelar-cgp-solidity-6.2.0.tgz#c78fad1de9bc09abf50d14b854e3099da9703236"
+  integrity sha512-/X1RBFu5dzbffPEKK5wXTF66tpHtQwaz+oRpeLJOUVhvIHNkEslkUCOdj7FmePFlvTpvlwViziA4bny+nIcmrQ==
   dependencies:
-    "@axelar-network/axelar-gmp-sdk-solidity" "^5.3.3"
+    "@axelar-network/axelar-gmp-sdk-solidity" "5.5.2"
 
-"@axelar-network/axelar-gmp-sdk-solidity@5.6.2", "@axelar-network/axelar-gmp-sdk-solidity@^5.3.3":
-  version "5.6.2"
-  resolved "https://registry.yarnpkg.com/@axelar-network/axelar-gmp-sdk-solidity/-/axelar-gmp-sdk-solidity-5.6.2.tgz#9a48a5ef7f00490898d8d33e0756b35416069fd2"
-  integrity sha512-lJT1Sily/to5jZHkE3rGtkb8qnurNTFnlz4HwbQec+MtqVgPkY3/SsiPTw7967hmZavAw02eiE1jFSW7XKksZQ==
+"@axelar-network/axelar-gmp-sdk-solidity@5.5.2":
+  version "5.5.2"
+  resolved "https://registry.yarnpkg.com/@axelar-network/axelar-gmp-sdk-solidity/-/axelar-gmp-sdk-solidity-5.5.2.tgz#438fa8be34b8d4516533f5ce9de10e11c2cbe793"
+  integrity sha512-M7XTLE1Db40VjMYA37ZZyycU+75MygoUST5sAi/8QYweqQqkaLK3xpyzX24zbGaEpgHsdEk4L7CJiyG9WBqVCA==
 
-"@axelar-network/interchain-token-service@^1.0.0-beta.3":
-  version "1.0.0-beta.3"
-  resolved "https://registry.yarnpkg.com/@axelar-network/interchain-token-service/-/interchain-token-service-1.0.0-beta.3.tgz#84791c769ed8c6589620a82e7224e1b7ab808017"
-  integrity sha512-yoW1sxDg5LB25w9fSgtPcu/8vbOo4MzxlpJvHLnMrHmXAKwDJMaNDt0X1JgME8bH8aiyHh/ciB6ajBnN7oFkgw==
+"@axelar-network/axelar-gmp-sdk-solidity@5.6.3":
+  version "5.6.3"
+  resolved "https://registry.yarnpkg.com/@axelar-network/axelar-gmp-sdk-solidity/-/axelar-gmp-sdk-solidity-5.6.3.tgz#09a992c6252ace3d1599ac7c7d69f1929e8eb952"
+  integrity sha512-w6Sp88H0nb0GFJMq73eUuymEcUdfX6evMObwfUVu+lZLA3Y5IyBfwbQftkLUMp8MFR6MStLjiTkMXRmz8xV9yg==
+
+"@axelar-network/interchain-token-service@^1.0.0-beta.4":
+  version "1.0.0-beta.4"
+  resolved "https://registry.yarnpkg.com/@axelar-network/interchain-token-service/-/interchain-token-service-1.0.0-beta.4.tgz#96da2c64e10624e2665087c19de6d7303148fcd0"
+  integrity sha512-X/sW4/q2IDtgn5mWDx0RqSKizxHOTVbFez6ChWeP1+ASPBsP7bKBNQiGO+b+8qmQgd4tJ0/lV1I1T6k3Hm43rA==
   dependencies:
-    "@axelar-network/axelar-cgp-solidity" "6.1.2"
-    "@axelar-network/axelar-gmp-sdk-solidity" "5.6.2"
+    "@axelar-network/axelar-cgp-solidity" "6.2.0"
+    "@axelar-network/axelar-gmp-sdk-solidity" "5.6.3"
 
 "@babel/code-frame@^7.0.0":
   version "7.21.4"
@@ -888,10 +893,10 @@
     find-up "^4.1.0"
     fs-extra "^8.1.0"
 
-"@openzeppelin/contracts@^4.9.3":
-  version "4.9.3"
-  resolved "https://registry.yarnpkg.com/@openzeppelin/contracts/-/contracts-4.9.3.tgz#00d7a8cf35a475b160b3f0293a6403c511099364"
-  integrity sha512-He3LieZ1pP2TNt5JbkPA4PNT9WC3gOTOlDcFGJW4Le4QKqwmiNJCRt44APfxMxvq7OugU/cqYuPcSBzOw38DAg==
+"@openzeppelin/contracts@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@openzeppelin/contracts/-/contracts-5.0.0.tgz#ee0e4b4564f101a5c4ee398cd4d73c0bd92b289c"
+  integrity sha512-bv2sdS6LKqVVMLI5+zqnNrNU/CA+6z6CmwFXm/MzmOPBRSO5reEJN7z0Gbzvs0/bv/MZZXNklubpwy3v2+azsw==
 
 "@openzeppelin/test-helpers@^0.5.16":
   version "0.5.16"

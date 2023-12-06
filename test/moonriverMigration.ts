@@ -131,28 +131,31 @@ describe('Moonriver Migrator', async () => {
     await migrator.connect(deployer).pause();
     await expect(
       migrator.connect(holders[0]).migrate(ethers.utils.parseUnits('100', 10)),
-    ).to.be.revertedWith('Pausable: paused');
+    ).to.be.revertedWithCustomError(migrator, 'EnforcedPause');
   });
 
   it('cannot migrate current batch not started', async () => {
     await expect(
       migrator.connect(holders[0]).migrate(ethers.utils.parseUnits('100', 10)),
-    ).to.be.revertedWith('Batch not started');
+    ).to.be.revertedWithCustomError(migrator, 'BatchNotStarted');
   });
 
   it('cannot start migrating on non started batch', async () => {
-    await expect(migrator.connect(deployer).startMigratingBatch(1)).to.be.revertedWith(
-      'Batch not started',
+    await expect(migrator.connect(deployer).startMigratingBatch(1)).to.be.revertedWithCustomError(
+      migrator,
+      'BatchNotStarted',
     );
   });
 
   it('cannot finish migration on non migrating batch', async () => {
-    await expect(migrator.connect(deployer).finishBatch(1)).to.be.revertedWith(
-      'Batch not migrating',
+    await expect(migrator.connect(deployer).finishBatch(1)).to.be.revertedWithCustomError(
+      migrator,
+      'BatchNotMigrating',
     );
     await migrator.connect(deployer).startNextBatch();
-    await expect(migrator.connect(deployer).finishBatch(1)).to.be.revertedWith(
-      'Batch not migrating',
+    await expect(migrator.connect(deployer).finishBatch(1)).to.be.revertedWithCustomError(
+      migrator,
+      'BatchNotMigrating',
     );
   });
 
@@ -169,29 +172,34 @@ describe('Moonriver Migrator', async () => {
   });
 
   it('cannot pause/unpause if not owner', async function () {
-    await expect(migrator.connect(holders[0]).pause()).to.be.revertedWith(
-      'Ownable: caller is not the owner',
+    await expect(migrator.connect(holders[0]).pause()).to.be.revertedWithCustomError(
+      migrator,
+      'OwnableUnauthorizedAccount',
     );
-    await expect(migrator.connect(holders[0]).unpause()).to.be.revertedWith(
-      'Ownable: caller is not the owner',
+    await expect(migrator.connect(holders[0]).unpause()).to.be.revertedWithCustomError(
+      migrator,
+      'OwnableUnauthorizedAccount',
     );
   });
 
   it('cannot set max holders per batch if not owner', async function () {
-    await expect(migrator.connect(holders[0]).setMaxHoldersPerBatch(5)).to.be.revertedWith(
-      'Ownable: caller is not the owner',
-    );
+    await expect(
+      migrator.connect(holders[0]).setMaxHoldersPerBatch(5),
+    ).to.be.revertedWithCustomError(migrator, 'OwnableUnauthorizedAccount');
   });
 
   it('cannot change batch states if not owner', async function () {
-    await expect(migrator.connect(holders[0]).startNextBatch()).to.be.revertedWith(
-      'Ownable: caller is not the owner',
+    await expect(migrator.connect(holders[0]).startNextBatch()).to.be.revertedWithCustomError(
+      migrator,
+      'OwnableUnauthorizedAccount',
     );
-    await expect(migrator.connect(holders[0]).startMigratingBatch(1)).to.be.revertedWith(
-      'Ownable: caller is not the owner',
+    await expect(migrator.connect(holders[0]).startMigratingBatch(1)).to.be.revertedWithCustomError(
+      migrator,
+      'OwnableUnauthorizedAccount',
     );
-    await expect(migrator.connect(holders[0]).finishBatch(1)).to.be.revertedWith(
-      'Ownable: caller is not the owner',
+    await expect(migrator.connect(holders[0]).finishBatch(1)).to.be.revertedWithCustomError(
+      migrator,
+      'OwnableUnauthorizedAccount',
     );
   });
 });
