@@ -21,7 +21,7 @@ contract LegacyRMRK is ERC20, ERC20Burnable {
      * @notice Number of decimals for this token.
      * @return decimals_ The number of decimals.
      */
-    function decimals() external pure override returns (uint8 decimals_) {
+    function decimals() public pure override returns (uint8 decimals_) {
         decimals_ = 10;
     }
 }
