@@ -288,7 +288,7 @@ describe('RMRK Token', async () => {
     it('cannot pause/unpause if not owner', async function () {
       await expect(migrator.connect(holder1).pause()).to.be.revertedWithCustomError(
         migrator,
-        'Unauthorized',
+        'UnauthorizedPause',
       );
       await expect(migrator.connect(holder1).unpause()).to.be.revertedWithCustomError(
         migrator,

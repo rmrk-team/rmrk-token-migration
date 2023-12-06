@@ -229,7 +229,7 @@ describe('SwapperMinter', async () => {
   it('cannot pause/unpause if not owner', async function () {
     await expect(swapperMinter.connect(holders[0]).pause()).to.be.revertedWithCustomError(
       swapperMinter,
-      'Unauthorized',
+      'UnauthorizedPause',
     );
     await expect(swapperMinter.connect(holders[0]).unpause()).to.be.revertedWithCustomError(
       swapperMinter,

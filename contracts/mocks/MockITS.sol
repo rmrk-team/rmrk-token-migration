@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.21;
+pragma solidity 0.8.21;
 
 import {ITokenManagerType} from "@axelar-network/interchain-token-service/contracts/interfaces/ITokenManagerType.sol";
 import {InterchainTokenService} from "@axelar-network/interchain-token-service/contracts/InterchainTokenService.sol";
@@ -49,7 +49,7 @@ contract MockITS {
 
     function tokenManagerImplementation(
         uint256 tokenManagerType
-    ) external view returns (address) {
+    ) external view returns (address tokenManager) {
         return address(0);
     }
 
