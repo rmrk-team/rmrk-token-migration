@@ -34,14 +34,14 @@ async function main() {
   const tokenManagerAddress = await its.tokenManagerAddress(tokenId);
   console.log('Deployed Token Manager to ', tokenManagerAddress);
 
-  await rmrk.setTokenManager(tokenManagerAddress);
+  await rmrk.setTokenIdAndIts(tokenId, its.address);
   console.log('Set Token Manager to ', tokenManagerAddress);
 
-  tx = await rmrk.grantRole(ethers.utils.id('MINTER_ROLE'), tokenManagerAddress);
+  tx = await rmrk.grantRole(ethers.utils.id('MINTER_ROLE'), its.address);
   await tx.wait();
-  tx = await rmrk.grantRole(ethers.utils.id('BURNER_ROLE'), tokenManagerAddress);
+  tx = await rmrk.grantRole(ethers.utils.id('BURNER_ROLE'), its.address);
   await tx.wait();
-  console.log('Granted MINTER_ROLE and BURNER_ROLE to ', tokenManagerAddress);
+  console.log('Granted MINTER_ROLE and BURNER_ROLE to ', its.address);
 }
 
 main().catch((error) => {

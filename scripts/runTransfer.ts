@@ -1,16 +1,11 @@
 import { ethers } from 'hardhat';
-import { RMRK, TokenManagerMintBurn } from '../typechain-types';
+import { RMRK, InterchainTokenService } from '../typechain-types';
 
 async function main() {
   const SEND_FROM_TOKEN = true; // Otherwise from token manager
   const RMRKFactory = await ethers.getContractFactory('RMRK');
   const rmrk = <RMRK>RMRKFactory.attach('0x760Ac3956f7253156aBF8BcdCb4d4e5b0e106eb1'); // Base Goerli
   // const rmrk = <RMRK>RMRKFactory.attach('0x8f9d2a39AeB09A8e079442DF1a16044F0A3a14B5'); // Polygon Mumbai
-
-  const tokenManagerFactory = await ethers.getContractFactory('TokenManagerMintBurn');
-  const tokenManager = <TokenManagerMintBurn>(
-    tokenManagerFactory.attach('0x898D70faCF0dddb7DeCB4351c006988CC7d5E1b4')
-  );
 
   const deployer = (await ethers.getSigners())[0];
   const destinationChain = 'Polygon';
@@ -33,11 +28,19 @@ async function main() {
     );
     await tx.wait();
   } else {
-    let tx = await tokenManager.interchainTransfer(
+    const tokenId = await rmrk.interchainTokenId();
+    const itsAddress = await rmrk.interchainTokenService();
+
+    const itsFactory = await ethers.getContractFactory('InterchainTokenService');
+    const its = <InterchainTokenService>itsFactory.attach(itsAddress);
+
+    let tx = await its.interchainTransfer(
+      tokenId,
       destinationChain,
       destinationAddress, // Address as 'bytes'. Encoding not needed, will actually break it.
       valueToSend,
       [], // Empty metadata
+      gas,
       { value: gas },
     );
     await tx.wait();

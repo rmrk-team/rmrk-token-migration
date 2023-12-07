@@ -6,20 +6,23 @@ import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import {ERC20Burnable} from "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 import {ERC20Permit} from "@openzeppelin/contracts/token/ERC20/extensions/ERC20Permit.sol";
 
-import {AddressBytes} from "@axelar-network/axelar-gmp-sdk-solidity/contracts/libs/AddressBytes.sol";
-import {IInterchainTokenService} from "@axelar-network/interchain-token-service/contracts/interfaces/IInterchainTokenService.sol";
+import {InterchainTokenStandard} from "@axelar-network/interchain-token-service/contracts/interchain-token/InterchainTokenStandard.sol";
 
 error MaxSupplyExceeded();
 
 // RMRK is the ERC20 token used by the RMRK protocol.
-contract RMRK is ERC20, ERC20Burnable, ERC20Permit, AccessControl {
-    using AddressBytes for address;
-
+contract RMRK is
+    InterchainTokenStandard,
+    ERC20,
+    ERC20Burnable,
+    ERC20Permit,
+    AccessControl
+{
     // Roles
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
     bytes32 public constant BURNER_ROLE = keccak256("BURNER_ROLE");
     // Interchain token service address
-    address private _its;
+    address private _interchainTokenService;
     // Token ID, from ITS
     bytes32 private _tokenId;
 
@@ -56,29 +59,27 @@ contract RMRK is ERC20, ERC20Burnable, ERC20Permit, AccessControl {
     }
 
     /**
-     * @notice Getter for the tokenId used for this token.
-     * @return tokenId_ The tokenId that this token is registerred under.
+     * @inheritdoc InterchainTokenStandard
      */
     function interchainTokenId()
-        external
+        public
         view
-        virtual
+        override
         returns (bytes32 tokenId_)
     {
         tokenId_ = _tokenId;
     }
 
     /**
-     * @notice Getter for the interchain token service.
-     * @return service The address of the interchain token service.
+     * @inheritdoc InterchainTokenStandard
      */
     function interchainTokenService()
-        external
+        public
         view
-        virtual
+        override
         returns (address service)
     {
-        service = _its;
+        service = _interchainTokenService;
     }
 
     /**
@@ -91,7 +92,7 @@ contract RMRK is ERC20, ERC20Burnable, ERC20Permit, AccessControl {
         address its_
     ) external onlyRole(DEFAULT_ADMIN_ROLE) {
         _tokenId = tokenId_;
-        _its = its_;
+        _interchainTokenService = its_;
     }
 
     /**
@@ -111,53 +112,13 @@ contract RMRK is ERC20, ERC20Burnable, ERC20Permit, AccessControl {
     }
 
     /**
-     * @notice Implementation of the interchainTransfer method
-     * @dev We chose to either pass `metadata` as raw data on a remote contract call, or, if no data is passed, just do a transfer.
-     * A different implementation could have `metadata` that tells this function which function to use or that it is used for anything else as well.
-     * @param destinationChain The destination chain identifier.
-     * @param recipient The bytes representation of the address of the recipient.
-     * @param amount The amount of token to be transferred.
-     * @param metadata Either empty, to just facilitate an interchain transfer, or the data can be passed for an interchain contract call with transfer as per semantics defined by the token service.
+     * @inheritdoc ERC20
      */
-    function interchainTransfer(
-        string calldata destinationChain,
-        bytes calldata recipient,
-        uint256 amount,
-        bytes calldata metadata
-    ) external payable {
-        IInterchainTokenService(_its).transmitInterchainTransfer{
-            value: msg.value
-        }(
-            _tokenId,
-            _msgSender(),
-            destinationChain,
-            recipient,
-            amount,
-            metadata
-        );
-    }
-
-    /**
-     * @notice Implementation of the interchainTransferFrom method
-     * @dev We chose to either pass `metadata` as raw data on a remote contract call, or, if no data is passed, just do a transfer.
-     * A different implementation could have `metadata` that tells this function which function to use or that it is used for anything else as well.
-     * @param sender the sender of the tokens. They need to have approved `msg.sender` before this is called.
-     * @param destinationChain the string representation of the destination chain.
-     * @param recipient the bytes representation of the address of the recipient.
-     * @param amount the amount of token to be transferred.
-     * @param metadata either empty, to just facilitate a cross-chain transfer, or the data to be passed to a cross-chain contract call and transfer.
-     */
-    function interchainTransferFrom(
+    function _spendAllowance(
         address sender,
-        string calldata destinationChain,
-        bytes calldata recipient,
-        uint256 amount,
-        bytes calldata metadata
-    ) external payable {
-        _spendAllowance(sender, _msgSender(), amount);
-
-        IInterchainTokenService(_its).transmitInterchainTransfer{
-            value: msg.value
-        }(_tokenId, sender, destinationChain, recipient, amount, metadata);
+        address spender,
+        uint256 amount
+    ) internal override(ERC20, InterchainTokenStandard) {
+        ERC20._spendAllowance(sender, spender, amount);
     }
 }
