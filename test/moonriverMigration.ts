@@ -1,8 +1,8 @@
 import { ethers } from 'hardhat';
 import { expect } from 'chai';
 import { loadFixture } from '@nomicfoundation/hardhat-network-helpers';
-import { MoonriverMigrator, RMRK, LegacyRMRK } from '../typechain-types';
-import { deployMoonriverMigrator } from '../scripts/deploy';
+import { MoonriverMigrator, LegacyRMRK } from '../typechain-types';
+import { deployLegacyRMRK, deployMoonriverMigrator } from '../scripts/deploy';
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
 import { BigNumber } from 'ethers';
 
@@ -20,9 +20,7 @@ async function fixture(): Promise<{
   holders: SignerWithAddress[];
 }> {
   const [deployer, ...holders] = await ethers.getSigners();
-  const legacyRMRKFactory = await ethers.getContractFactory('LegacyRMRK');
-  const legacyRMRK = await legacyRMRKFactory.deploy();
-
+  const legacyRMRK = await deployLegacyRMRK();
   const migrator = await deployMoonriverMigrator(legacyRMRK.address);
 
   return { legacyRMRK, migrator, deployer, holders };

@@ -1,8 +1,14 @@
-import { ethers } from 'hardhat';
+import { ethers, network } from 'hardhat';
 import { expect } from 'chai';
 import { loadFixture } from '@nomicfoundation/hardhat-network-helpers';
 import { MoonriverMigrator, RMRK, LegacyRMRK, Swapper, SwapperMinter } from '../typechain-types';
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
+import {
+  deployLegacyRMRK,
+  deployNewRMRK,
+  deploySwapper,
+  deploySwapperMinter,
+} from '../scripts/deploy';
 
 enum State {
   NotStarted,
@@ -20,21 +26,14 @@ async function fixture(): Promise<{
   allowedMinter: SignerWithAddress;
   signers: SignerWithAddress[];
 }> {
+  await network.provider.send('hardhat_reset');
+
   const [deployer, allowedMinter, ...signers] = await ethers.getSigners();
-  const legacyRMRKFactory = await ethers.getContractFactory('LegacyRMRK');
-  const legacyRMRK = await legacyRMRKFactory.deploy();
 
-  const RMRKFactory = await ethers.getContractFactory('RMRK');
-  const rmrk = await RMRKFactory.deploy(deployer.address);
-  await rmrk.deployed();
-
-  const swapperFactory = await ethers.getContractFactory('Swapper');
-  const swapper = await swapperFactory.deploy(legacyRMRK.address, rmrk.address);
-  await swapper.deployed();
-
-  const swapperMinterFactory = await ethers.getContractFactory('SwapperMinter');
-  const swapperMinter = await swapperMinterFactory.deploy(legacyRMRK.address, rmrk.address, 3600);
-  await swapperMinter.deployed();
+  const legacyRMRK = await deployLegacyRMRK();
+  const rmrk = await deployNewRMRK();
+  const swapper = await deploySwapper(legacyRMRK.address, rmrk.address);
+  const swapperMinter = await deploySwapperMinter(legacyRMRK.address, rmrk.address);
 
   await rmrk.grantRole(ethers.utils.id('MINTER_ROLE'), allowedMinter.address);
   await rmrk.grantRole(ethers.utils.id('MINTER_ROLE'), swapperMinter.address);

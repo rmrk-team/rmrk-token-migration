@@ -2,16 +2,16 @@ import { ethers } from 'hardhat';
 import { RMRK, InterchainTokenService } from '../typechain-types';
 
 async function main() {
-  const SEND_FROM_TOKEN = true; // Otherwise from token manager
+  const SEND_FROM_TOKEN = false; // Otherwise from ITS
   const RMRKFactory = await ethers.getContractFactory('RMRK');
-  const rmrk = <RMRK>RMRKFactory.attach('0x760Ac3956f7253156aBF8BcdCb4d4e5b0e106eb1'); // Base Goerli
-  // const rmrk = <RMRK>RMRKFactory.attach('0x8f9d2a39AeB09A8e079442DF1a16044F0A3a14B5'); // Polygon Mumbai
+  const rmrk = <RMRK>RMRKFactory.attach('0x50320c6b3E971cEb0f6E756E5577b2514bb43E9D'); // Moonbase
+  // const rmrk = <RMRK>RMRKFactory.attach('0xa65C304E56F5f97c8A4B3Ae79D721B9C1085F199'); // Polygon Mumbai
 
   const deployer = (await ethers.getSigners())[0];
   const destinationChain = 'Polygon';
   const destinationAddress = deployer.address;
   const valueToSend = ethers.utils.parseEther('5');
-  const gas = ethers.utils.parseEther('0.01');
+  const gas = ethers.utils.parseEther('0.51');
   console.log(
     `Sending ${ethers.utils.formatEther(valueToSend)} RMRK from ${deployer.address} to Polygon`,
   );

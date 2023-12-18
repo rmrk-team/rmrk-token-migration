@@ -1,12 +1,21 @@
 import * as dotenv from 'dotenv';
+import { ethers } from 'ethers';
+
 import { HardhatUserConfig } from 'hardhat/config';
 import '@nomicfoundation/hardhat-toolbox';
 import '@typechain/hardhat';
 import 'hardhat-gas-reporter';
 import 'solidity-coverage';
 import 'hardhat-contract-sizer';
+// import './tasks/calculateSalt'; // Needs to be commented for first compile
 
 dotenv.config();
+
+const accounts = process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [];
+const randomAccounts = [...Array(5)].map(() => ({
+  privateKey: ethers.Wallet.createRandom().privateKey,
+  balance: '10000000000000000000000',
+}));
 
 const config: HardhatUserConfig = {
   solidity: {
@@ -20,73 +29,82 @@ const config: HardhatUserConfig = {
     },
   },
   networks: {
+    hardhat: {
+      accounts: [
+        {
+          // We need the first account to be the deployer
+          privateKey: accounts[0],
+          balance: '10000000000000000000000',
+        },
+      ].concat(randomAccounts),
+    },
     moonbaseAlpha: {
       url: process.env.MOONBASE_URL || 'https://rpc.testnet.moonbeam.network',
       chainId: 1287,
-      accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      accounts: accounts,
       gasPrice: 1100000000,
     },
     sepolia: {
       url: process.env.SEPOLIA_URL || 'https://rpc.sepolia.dev',
       chainId: 11155111,
-      accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      accounts: accounts,
     },
     polygonMumbai: {
       url: process.env.MUMBAI_URL || 'https://rpc-mumbai.maticvigil.com',
       chainId: 80001,
-      accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      accounts: accounts,
       gasPrice: 2500000000,
     },
     baseGoerli: {
       chainId: 84531,
       url: process.env.BASE_GOERLI_URL || 'https://goerli.base.org',
-      accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      accounts: accounts,
       gasPrice: 2000000000,
     },
     shibuya: {
       chainId: 81,
       url: process.env.SHIBUYA_URL || 'https://evm.shibuya.astar.network',
-      accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      accounts: accounts,
       // gasPrice: 2000000000,
     },
     zkatana: {
       chainId: 1261120,
       url: process.env.ZKATANA_URL || 'https://rpc.startale.com/zkatana',
-      accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      accounts: accounts,
       gasPrice: 650000000,
     },
     moonriver: {
       url: process.env.MOONRIVER_URL || 'https://rpc.api.moonriver.moonbeam.network',
       chainId: 1285,
-      accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      accounts: accounts,
     },
     moonbeam: {
       url: process.env.MOONBEAM_URL || 'https://rpc.api.moonbeam.network',
       chainId: 1284,
-      accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      accounts: accounts,
     },
     mainnet: {
       url: process.env.ETHEREUM_URL || 'https://eth.drpc.org',
       chainId: 1,
-      accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      accounts: accounts,
       gasPrice: 12000000000,
     },
     polygon: {
       url: process.env.POLYGON_URL || 'https://polygon.drpc.org',
       chainId: 137,
-      accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      accounts: accounts,
       gasPrice: 120000000000,
     },
     base: {
       chainId: 8453,
       url: process.env.BASE_URL || 'https://developer-access-mainnet.base.org',
-      accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      accounts: accounts,
       gasPrice: 500000,
     },
     astar: {
       url: process.env.ASTAR_URL || 'https://evm.astar.network',
       chainId: 592,
-      accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      accounts: accounts,
     },
   },
   etherscan: {

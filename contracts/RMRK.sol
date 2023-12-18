@@ -26,8 +26,11 @@ contract RMRK is
     // Token ID, from ITS
     bytes32 private _tokenId;
 
-    constructor(address admin) ERC20("RMRK", "RMRK") ERC20Permit("RMRK") {
-        _grantRole(DEFAULT_ADMIN_ROLE, admin);
+    constructor() ERC20("RMRK", "RMRK") ERC20Permit("RMRK") {
+        _grantRole(
+            DEFAULT_ADMIN_ROLE,
+            0xCD7A0D098E3A750126b0fec54BE401476812cfc0
+        );
     }
 
     /**

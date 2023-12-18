@@ -1,9 +1,12 @@
 import { ADMINS, PAUSE_DELAY, deployNewRMRK, deploySwapperMinter } from './deploy';
-import { run } from 'hardhat';
+import { ethers, run } from 'hardhat';
 import { delay } from '@nomiclabs/hardhat-etherscan/dist/src/etherscan/EtherscanService';
 import { getLegacyRMRKAddress } from './utils';
 
 async function main() {
+  const [deployer] = await ethers.getSigners();
+  console.log('Deployer address: ', deployer.address);
+
   console.log('Deploying New RMRK and SwapperMinter');
   const legacyRMRKAddress = await getLegacyRMRKAddress();
   const rmrk = await deployNewRMRK();
@@ -23,7 +26,7 @@ async function main() {
 
   await run('verify:verify', {
     address: rmrk.address,
-    constructorArguments: [],
+    constructorArguments: [deployer.address],
   });
 
   await run('verify:verify', {

@@ -1,11 +1,14 @@
 import { ADMINS, PAUSE_DELAY, deployNewRmrkAndMigrator } from './deploy';
-import { run } from 'hardhat';
+import { ethers, run } from 'hardhat';
 import { delay } from '@nomiclabs/hardhat-etherscan/dist/src/etherscan/EtherscanService';
 import { getLegacyRMRKAddress } from './utils';
 
 async function main() {
+  const [deployer] = await ethers.getSigners();
+  console.log('Deployer address: ', deployer.address);
+
   console.log('Deploying RMRK token and Migrator');
-  const legacyRMRKAddress = '0x44950583ed6e313f2A13c73211D8039226f82429'; // await getLegacyRMRKAddress();
+  const legacyRMRKAddress = await getLegacyRMRKAddress();
   const { rmrk, migrator } = await deployNewRmrkAndMigrator(legacyRMRKAddress);
 
   console.log(`RMRK deployed to: ${rmrk.address}`);
@@ -22,7 +25,7 @@ async function main() {
 
   await run('verify:verify', {
     address: rmrk.address,
-    constructorArguments: [],
+    constructorArguments: [deployer.address],
   });
   await run('verify:verify', {
     address: migrator.address,

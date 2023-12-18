@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import { BigNumber } from 'ethers';
 import { loadFixture } from '@nomicfoundation/hardhat-network-helpers';
 import { Migrator, RMRK, LegacyRMRK } from '../typechain-types';
-import { deployNewRmrkAndMigrator } from '../scripts/deploy';
+import { deployLegacyRMRK, deployNewRmrkAndMigrator } from '../scripts/deploy';
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
 
 async function fixture(): Promise<{
@@ -16,9 +16,7 @@ async function fixture(): Promise<{
   signers: SignerWithAddress[];
 }> {
   const [deployer, allowedMinter, allowedBurner, ...signers] = await ethers.getSigners();
-  const legacyRMRKFactory = await ethers.getContractFactory('LegacyRMRK');
-  const legacyRMRK = await legacyRMRKFactory.deploy();
-
+  const legacyRMRK = await deployLegacyRMRK();
   const { rmrk, migrator } = await deployNewRmrkAndMigrator(legacyRMRK.address);
 
   return { legacyRMRK, rmrk, migrator, deployer, allowedMinter, allowedBurner, signers };
