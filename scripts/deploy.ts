@@ -40,7 +40,7 @@ async function deployNewRMRK(): Promise<RMRK> {
   const [deployer] = await ethers.getSigners();
   const deployProxy = await deployDeployProxy();
 
-  const saltHex = ethers.utils.id('52685'); // From calculate salt
+  const saltHex = ethers.utils.id('52685'); // From calculate salt // TODO. Replace for prod one
 
   const rmrkDeploy = await deployProxy.connect(deployer).deployContract(bytecode, saltHex);
   const transactionReceipt = await rmrkDeploy.wait();
@@ -52,8 +52,6 @@ async function deployNewRMRK(): Promise<RMRK> {
   }
   const parsed = deployProxy.interface.parseLog(event);
   const rmrkAddress = parsed.args[0];
-
-  console.log(`RMRK deployed to: ${rmrkAddress}`);
 
   const RMRKFactory = await ethers.getContractFactory('RMRK');
   const rmrk = RMRKFactory.attach(rmrkAddress);
@@ -117,6 +115,7 @@ async function deployDeployProxy(): Promise<DeployProxy> {
   if (code !== '0x') {
     // DeployerProxy is already deployed
     deployProxy = deployProxyFactory.attach(deployerProxyAddress);
+    console.log(`DeployProxy already deployed to: ${deployProxy.address}`);
   } else {
     const transactionCount = await proxyDeployer.getTransactionCount();
     if (transactionCount > 0) {

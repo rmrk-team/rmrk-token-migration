@@ -11,8 +11,7 @@ async function main() {
   const its = <InterchainTokenService>(
     itsFactory.attach('0xB5FB4BE02232B1bBA4dC8f81dc24C26980dE9e3C')
   );
-  const rmrk = <RMRK>RMRKFactory.attach('0xa65C304E56F5f97c8A4B3Ae79D721B9C1085F199'); // Mumbai
-  // const rmrk = <RMRK>RMRKFactory.attach('0x50320c6b3E971cEb0f6E756E5577b2514bb43E9D'); // Moonbase
+  const rmrk = <RMRK>RMRKFactory.attach('0x7e5738bDabc8ADb3670b07eA0e7D4b0B94282E4f'); // TODO: Replace with right one
 
   const deployer = (await ethers.getSigners())[0];
   console.log('Deploying Token Manager with the account:', deployer.address);
@@ -23,7 +22,7 @@ async function main() {
   console.log('Token Manager Implementation', tokenManagerImplementationAddress);
   const tokenManagerImplementation = tokenManagerFactory.attach(tokenManagerImplementationAddress);
 
-  const salt = ethers.utils.id('RMRK1');
+  const salt = ethers.utils.id('mockRMRK');
   const tokenId = await its.interchainTokenId(deployer.address, salt);
   const params = await tokenManagerImplementation.params(deployer.address, rmrk.address);
   console.log('Token ID', tokenId);
@@ -33,7 +32,8 @@ async function main() {
   await tx.wait();
   const tokenManagerAddress = await its.tokenManagerAddress(tokenId);
   console.log('Deployed Token Manager to ', tokenManagerAddress);
-  await rmrk.setTokenIdAndIts(tokenId, its.address);
+  tx = await rmrk.setTokenIdAndIts(tokenId, its.address);
+  await tx.wait();
   console.log('Set TokenId and ITs on RMRK token');
 
   tx = await rmrk.grantRole(ethers.utils.id('MINTER_ROLE'), its.address);

@@ -25,7 +25,7 @@ async function main() {
 
   await run('verify:verify', {
     address: rmrk.address,
-    constructorArguments: [deployer.address],
+    constructorArguments: [],
   });
   await run('verify:verify', {
     address: migrator.address,

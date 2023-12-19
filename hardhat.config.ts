@@ -93,7 +93,7 @@ const config: HardhatUserConfig = {
       url: process.env.POLYGON_URL || 'https://polygon.drpc.org',
       chainId: 137,
       accounts: accounts,
-      gasPrice: 120000000000,
+      gasPrice: 600000000000,
     },
     base: {
       chainId: 8453,

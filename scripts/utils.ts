@@ -7,10 +7,10 @@ async function getLegacyRMRKAddress() {
     return '0x3Ff3B0361B450E70729006918c14DEb6Da410349';
   else if (chainId === 1285)
     // Moonriver
-    return '0xffffffFF893264794d9d57E1E0E21E0042aF5A0A';
+    return '0x0cF0bc4dD026F3b7FEc0339812D99D11829c0DF4'; //'0xffffffFF893264794d9d57E1E0E21E0042aF5A0A';
   else if (chainId === 1284)
     // Moonbeam
-    return '0xECf2ADafF1De8A512f6e8bfe67a2C836EDb25Da3';
+    return '0x0cF0bc4dD026F3b7FEc0339812D99D11829c0DF4'; //'0xECf2ADafF1De8A512f6e8bfe67a2C836EDb25Da3';
   else if (chainId === 11155111)
     // Sepolia
     return '0x487E83179fF7472edE739DE640D8Df7DeB43Ee08';
@@ -25,7 +25,10 @@ async function getLegacyRMRKAddress() {
     return '0x471ea49dd8e60e697f4cac262b5fafcc307506e4';
   else if (chainId === 137)
     // Polygon
-    return '0xd225eAD1Ce2554F6CB519894Fc98cFB882566339';
+    return '0x252Ef85E1e66d34A8F3DF2bC8d52518174A49585'; //'0xd225eAD1Ce2554F6CB519894Fc98cFB882566339';
+  else if (chainId === 592)
+    // Astar
+    return '0x0cF0bc4dD026F3b7FEc0339812D99D11829c0DF4';
   else if (chainId === 8453)
     // Base
     return '';
