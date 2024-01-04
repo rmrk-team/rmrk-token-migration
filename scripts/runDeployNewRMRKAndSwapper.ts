@@ -15,6 +15,9 @@ async function main() {
   console.log(`RMRK deployed to: ${rmrk.address}`);
   console.log(`SwapperMinter deployed to: ${swapperMinter.address}`);
 
+  let tx = await rmrk.grantRole(ethers.utils.id('MINTER_ROLE'), swapperMinter.address);
+  await tx.wait();
+
   for (const admin of ADMINS) {
     let tx = await swapperMinter.setCanPause(admin, true);
     await tx.wait();
