@@ -1,5 +1,6 @@
 import { ethers } from 'hardhat';
 import { InterchainTokenService, RMRK } from '../typechain-types';
+import { NEW_RMRK_ADDRESS, ITS_ADDRESS } from './utils';
 
 const TokenManagerType_MINT_BURN = 0;
 
@@ -8,10 +9,8 @@ async function main() {
   const tokenManagerFactory = await ethers.getContractFactory('TokenManager');
   const RMRKFactory = await ethers.getContractFactory('RMRK');
 
-  const its = <InterchainTokenService>(
-    itsFactory.attach('0xB5FB4BE02232B1bBA4dC8f81dc24C26980dE9e3C')
-  );
-  const rmrk = <RMRK>RMRKFactory.attach('0x524d524B4c9366be706D3A90dcf70076ca037aE3');
+  const its = <InterchainTokenService>itsFactory.attach(ITS_ADDRESS);
+  const rmrk = <RMRK>RMRKFactory.attach(NEW_RMRK_ADDRESS);
 
   const deployer = (await ethers.getSigners())[0];
   console.log('Deploying Token Manager with the account:', deployer.address);

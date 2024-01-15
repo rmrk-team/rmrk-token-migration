@@ -35,4 +35,45 @@ async function getLegacyRMRKAddress() {
   else throw new Error('Unexpected network!');
 }
 
-export { getLegacyRMRKAddress };
+async function getMultiSigAddress() {
+  const chainId = await ethers.provider.getNetwork().then((network) => network.chainId);
+  if (chainId === 1287 || chainId === 31337)
+    // Moonbase Alpha or Hardhat
+    return '0xCD7A0D098E3A750126b0fec54BE401476812cfc0';
+  else if (chainId === 1285)
+    // Moonriver
+    return '0xCD7A0D098E3A750126b0fec54BE401476812cfc0';
+  else if (chainId === 1284)
+    // Moonbeam
+    return '0x85Ab410A50A3D85f1a26d9e4eFCaa520a39B9CD6';
+  else if (chainId === 1)
+    // Ethereum
+    return '0xCa03d97879031aB5EDF81921Ef5AD3383B3Cc760';
+  else if (chainId === 137)
+    // Polygon
+    return '0x0fF3ecf4E7C5534D4d236276D7D9F394293E6375';
+  else if (chainId === 592)
+    // Astar
+    return '0x6Beef2f0ecA275D47B70f0c900fF68f97C1e3d24';
+  else if (chainId === 8453)
+    // Base
+    return '0xA01984b6e00586CA61269eb966E588466c112F5b';
+  else if (chainId === 56)
+    // BSC
+    return '0x25864456507954bE6020eA12d0Bde3617901935b';
+  else throw new Error('Unexpected network!');
+}
+
+const NEW_RMRK_ADDRESS = '0x7e5738bDabc8ADb3670b07eA0e7D4b0B94282E4f'; // TODO: update to 0x524d524B4c9366be706D3A90dcf70076ca037aE3
+const MOONRIVER_MIGRATOR_ADDRESS = '0xB75B0654F312d6905a075E6cDdE5501560781518'; // TODO: update to 0x923C768AC53B24a188333f3709b71cB343DB20b2
+const MOONBEAM_MIGRATOR_ADDRESS = '0xbcdeFe4BeF75cf2AC1a7BBDC88bB153F1B19DB65'; // TODO: update to new one (not deployed yet)
+const ITS_ADDRESS = '0xB5FB4BE02232B1bBA4dC8f81dc24C26980dE9e3C';
+
+export {
+  getLegacyRMRKAddress,
+  getMultiSigAddress,
+  NEW_RMRK_ADDRESS,
+  MOONRIVER_MIGRATOR_ADDRESS,
+  MOONBEAM_MIGRATOR_ADDRESS,
+  ITS_ADDRESS,
+};

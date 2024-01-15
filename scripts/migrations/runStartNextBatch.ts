@@ -1,8 +1,9 @@
 import { ethers } from 'hardhat';
 import { MoonriverMigrator } from '../../typechain-types';
+import { MOONRIVER_MIGRATOR_ADDRESS } from '../utils';
 
 async function main() {
-  const migratorAddress = '0xB75B0654F312d6905a075E6cDdE5501560781518';
+  const migratorAddress = MOONRIVER_MIGRATOR_ADDRESS;
   const migratorFactory = await ethers.getContractFactory('MoonriverMigrator');
   const migrator = migratorFactory.attach(migratorAddress) as MoonriverMigrator;
 

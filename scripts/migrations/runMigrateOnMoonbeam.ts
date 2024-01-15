@@ -1,10 +1,11 @@
 import { ethers } from 'hardhat';
+import { MOONBEAM_MIGRATOR_ADDRESS } from '../utils';
 
 async function main() {
   const currentBatch = 4; // TODO: make this a parameter
 
   const MigratorFactory = await ethers.getContractFactory('Migrator');
-  const migrator = MigratorFactory.attach('0x2C79B64d30aB121f24B98cc44E2393A7cBb201f6'); // TODO: Change this to the correct address
+  const migrator = MigratorFactory.attach(MOONBEAM_MIGRATOR_ADDRESS);
   const dataPath = `./migrations/${currentBatch}.json`;
 
   const fs = require('fs');

@@ -1,5 +1,4 @@
-import { ethers, network, run } from 'hardhat';
-import { delay } from '@nomiclabs/hardhat-etherscan/dist/src/etherscan/EtherscanService';
+import { ethers, network } from 'hardhat';
 import {
   DeployProxy,
   LegacyRMRK,
@@ -149,10 +148,6 @@ async function sendGasFromFunder(
   const totalGasPrice = gasEstimation.mul(gasPrice).mul(105).div(100);
   const deployerBalance = await deployer.getBalance();
   const funderBalance = await funder.getBalance();
-  // console.log(`Gas Estimation: ${gasEstimation.toString()}`);
-  // console.log(`Gas Price Needed: ${totalGasPrice.toString()}`);
-  // console.log(`Deployer Balance: ${deployerBalance}`);
-  // console.log(`Funder Balance: ${funderBalance}`);
 
   if (deployerBalance.lt(totalGasPrice)) {
     const missingGas = totalGasPrice.sub(deployerBalance);

@@ -1,11 +1,14 @@
 import { ethers } from 'hardhat';
+import { NEW_RMRK_ADDRESS } from '../utils';
 
 async function main() {
   const rmrkFactory = await ethers.getContractFactory('RMRK');
-  const rmrk = rmrkFactory.attach('0x7e5738bDabc8ADb3670b07eA0e7D4b0B94282E4f'); // TODO: Change this to the correct migrator address
+  const rmrk = rmrkFactory.attach(NEW_RMRK_ADDRESS);
   const role = await rmrk.MINTER_ROLE();
-  let tx = await rmrk.revokeRole(role, '0x2C79B64d30aB121f24B98cc44E2393A7cBb201f6'); // TODO: Change this to the correct migrator address
+  const revokeFor = '0x43A87C2e6617cAae6a483AC369DbaFc7c8a2433E'; // Initial Moonbeam migrator address
+  let tx = await rmrk.revokeRole(role, revokeFor);
   await tx.wait();
+  console.log(`Minter role revoked from: ${revokeFor}`);
 }
 
 main().catch((error) => {
