@@ -10,9 +10,9 @@ async function main() {
   console.log('Deploying New RMRK and SwapperMinter');
   const legacyRMRKAddress = await getLegacyRMRKAddress();
   const rmrk = await deployNewRMRK();
-  const swapperMinter = await deploySwapperMinter(legacyRMRKAddress, rmrk.address);
-
   console.log(`RMRK deployed to: ${rmrk.address}`);
+
+  const swapperMinter = await deploySwapperMinter(legacyRMRKAddress, rmrk.address);
   console.log(`SwapperMinter deployed to: ${swapperMinter.address}`);
 
   let tx = await rmrk.grantRole(ethers.utils.id('MINTER_ROLE'), swapperMinter.address);
@@ -25,11 +25,11 @@ async function main() {
   console.log('Added admins as valid pausers');
 
   console.log('Waiting 10 seconds before verifying...');
-  delay(10000);
+  await delay(10000);
 
   await run('verify:verify', {
     address: rmrk.address,
-    constructorArguments: [deployer.address],
+    constructorArguments: [],
   });
 
   await run('verify:verify', {

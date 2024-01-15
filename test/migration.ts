@@ -230,7 +230,7 @@ describe('RMRK Token', async () => {
 
       await migrator
         .connect(deployer)
-        .migrate([holder1.address, holder2.address], [amountHolder1, amountHolder2]);
+        .migrate(1, [holder1.address, holder2.address], [amountHolder1, amountHolder2]);
       expect(await rmrk.balanceOf(holder1.address)).to.equal(amountHolder1.mul(10 ** 8));
       expect(await rmrk.balanceOf(holder2.address)).to.equal(amountHolder2.mul(10 ** 8));
     });
@@ -251,18 +251,59 @@ describe('RMRK Token', async () => {
       await expect(
         migrator
           .connect(deployer)
-          .migrate([holder1.address, holder2.address], [amountHolder1, amountHolder2]),
+          .migrate(1, [holder1.address, holder2.address], [amountHolder1, amountHolder2]),
       ).to.be.revertedWithCustomError(migrator, 'EnforcedPause');
+    });
+
+    it('cannot migrate tokens for the same batch and account twice', async function () {
+      const amountHolder1 = ethers.utils.parseUnits('100', 10);
+      const amountHolder2 = ethers.utils.parseUnits('200', 10);
+      await migrator
+        .connect(deployer)
+        .migrate(1, [holder1.address, holder2.address], [amountHolder1, amountHolder2]);
+      await expect(
+        migrator
+          .connect(deployer)
+          .migrate(1, [holder1.address, holder2.address], [amountHolder1, amountHolder2]),
+      ).to.be.revertedWithCustomError(migrator, 'MigrationFoundForBatchAndAccount');
+    });
+
+    it('can migrate tokens for different batch and same account', async function () {
+      const amountHolder1 = ethers.utils.parseUnits('100', 10);
+      const amountHolder2 = ethers.utils.parseUnits('200', 10);
+      await migrator
+        .connect(deployer)
+        .migrate(1, [holder1.address, holder2.address], [amountHolder1, amountHolder2]);
+      await migrator
+        .connect(deployer)
+        .migrate(2, [holder1.address, holder2.address], [amountHolder1, amountHolder2]);
+      expect(await rmrk.balanceOf(holder1.address)).to.equal(amountHolder1.mul(10 ** 8).mul(2));
+      expect(await rmrk.balanceOf(holder2.address)).to.equal(amountHolder2.mul(10 ** 8).mul(2));
+      expect(await migrator.migratedAmount(1, holder1.address)).to.equal(
+        amountHolder1.mul(10 ** 8),
+      );
+      expect(await migrator.migratedAmount(2, holder1.address)).to.equal(
+        amountHolder1.mul(10 ** 8),
+      );
+    });
+
+    it('can migrate tokens for same batch and different account', async function () {
+      const amountHolder1 = ethers.utils.parseUnits('100', 10);
+      const amountHolder2 = ethers.utils.parseUnits('200', 10);
+      await migrator.connect(deployer).migrate(1, [holder1.address], [amountHolder1]);
+      await migrator.connect(deployer).migrate(2, [holder2.address], [amountHolder2]);
+      expect(await rmrk.balanceOf(holder1.address)).to.equal(amountHolder1.mul(10 ** 8));
+      expect(await rmrk.balanceOf(holder2.address)).to.equal(amountHolder2.mul(10 ** 8));
     });
 
     it('cannot migrate tokens if lenght of amounts and tos do not match', async function () {
       const amountHolder1 = ethers.utils.parseUnits('100', 10);
       const amountHolder2 = ethers.utils.parseUnits('200', 10);
       await expect(
-        migrator.connect(deployer).migrate([holder1.address], [amountHolder1, amountHolder2]),
+        migrator.connect(deployer).migrate(1, [holder1.address], [amountHolder1, amountHolder2]),
       ).to.be.revertedWithCustomError(migrator, 'ArrayLenghtsDoNotMatch');
       await expect(
-        migrator.connect(deployer).migrate([holder1.address, holder2.address], [amountHolder1]),
+        migrator.connect(deployer).migrate(1, [holder1.address, holder2.address], [amountHolder1]),
       ).to.be.revertedWithCustomError(migrator, 'ArrayLenghtsDoNotMatch');
     });
 
@@ -272,7 +313,7 @@ describe('RMRK Token', async () => {
       await expect(
         migrator
           .connect(holder1)
-          .migrate([holder1.address, holder2.address], [amountHolder1, amountHolder2]),
+          .migrate(1, [holder1.address, holder2.address], [amountHolder1, amountHolder2]),
       ).to.be.revertedWithCustomError(migrator, 'OwnableUnauthorizedAccount');
     });
 

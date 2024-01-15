@@ -10,7 +10,7 @@ async function main() {
 
   console.log(`Moonriver Migrator to: ${moonriverMigrator.address}`);
 
-  delay(10000);
+  await delay(10000);
 
   await run('verify:verify', {
     address: moonriverMigrator.address,

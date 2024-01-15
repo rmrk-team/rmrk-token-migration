@@ -1,5 +1,5 @@
 import { ethers } from 'hardhat';
-import { MoonriverMigrator } from '../typechain-types';
+import { MoonriverMigrator } from '../../typechain-types';
 
 async function main() {
   const migratorAddress = '0xB75B0654F312d6905a075E6cDdE5501560781518';

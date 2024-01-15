@@ -40,7 +40,7 @@ async function deployNewRMRK(): Promise<RMRK> {
   const [deployer] = await ethers.getSigners();
   const deployProxy = await deployDeployProxy();
 
-  const saltHex = ethers.utils.id('52685'); // From calculate salt // TODO. Replace for prod one
+  const saltHex = ethers.utils.id('231255408'); // From calculate salt
 
   const rmrkDeploy = await deployProxy.connect(deployer).deployContract(bytecode, saltHex);
   const transactionReceipt = await rmrkDeploy.wait();

@@ -11,7 +11,7 @@ async function main() {
   const its = <InterchainTokenService>(
     itsFactory.attach('0xB5FB4BE02232B1bBA4dC8f81dc24C26980dE9e3C')
   );
-  const rmrk = <RMRK>RMRKFactory.attach('0x7e5738bDabc8ADb3670b07eA0e7D4b0B94282E4f'); // TODO: Replace with right one
+  const rmrk = <RMRK>RMRKFactory.attach('0x524d524B4c9366be706D3A90dcf70076ca037aE3');
 
   const deployer = (await ethers.getSigners())[0];
   console.log('Deploying Token Manager with the account:', deployer.address);
@@ -22,7 +22,7 @@ async function main() {
   console.log('Token Manager Implementation', tokenManagerImplementationAddress);
   const tokenManagerImplementation = tokenManagerFactory.attach(tokenManagerImplementationAddress);
 
-  const salt = ethers.utils.id('mockRMRK');
+  const salt = ethers.utils.id('RMRK');
   const tokenId = await its.interchainTokenId(deployer.address, salt);
   const params = await tokenManagerImplementation.params(deployer.address, rmrk.address);
   console.log('Token ID', tokenId);

@@ -8,7 +8,8 @@ async function main() {
   console.log('Deployer address: ', deployer.address);
 
   console.log('Deploying RMRK token and Migrator');
-  const legacyRMRKAddress = await getLegacyRMRKAddress();
+  // const legacyRMRKAddress = await getLegacyRMRKAddress();
+  const legacyRMRKAddress = '0x0cF0bc4dD026F3b7FEc0339812D99D11829c0DF4';
   const { rmrk, migrator } = await deployNewRmrkAndMigrator(legacyRMRKAddress);
 
   console.log(`RMRK deployed to: ${rmrk.address}`);
@@ -21,12 +22,12 @@ async function main() {
   console.log('Added admins as valid pausers');
 
   console.log('Waiting 10 seconds before verifying...');
-  delay(10000);
+  await delay(10000);
 
-  await run('verify:verify', {
-    address: rmrk.address,
-    constructorArguments: [],
-  });
+  // await run('verify:verify', {
+  //   address: rmrk.address,
+  //   constructorArguments: [],
+  // });
   await run('verify:verify', {
     address: migrator.address,
     constructorArguments: [legacyRMRKAddress, rmrk.address, PAUSE_DELAY],

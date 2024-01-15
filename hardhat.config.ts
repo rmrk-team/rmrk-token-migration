@@ -7,7 +7,7 @@ import '@typechain/hardhat';
 import 'hardhat-gas-reporter';
 import 'solidity-coverage';
 import 'hardhat-contract-sizer';
-// import './tasks/calculateSalt'; // Needs to be commented for first compile
+import './tasks/calculateSalt'; // Needs to be commented for first compile
 
 dotenv.config();
 
@@ -87,7 +87,7 @@ const config: HardhatUserConfig = {
       url: process.env.ETHEREUM_URL || 'https://eth.drpc.org',
       chainId: 1,
       accounts: accounts,
-      gasPrice: 12000000000,
+      gasPrice: 26000000000,
     },
     polygon: {
       url: process.env.POLYGON_URL || 'https://polygon.drpc.org',
@@ -99,12 +99,18 @@ const config: HardhatUserConfig = {
       chainId: 8453,
       url: process.env.BASE_URL || 'https://developer-access-mainnet.base.org',
       accounts: accounts,
-      gasPrice: 500000,
+      // gasPrice: 500000,
     },
     astar: {
       url: process.env.ASTAR_URL || 'https://evm.astar.network',
       chainId: 592,
       accounts: accounts,
+    },
+    bsc: {
+      url: process.env.BSC_URL || 'https://bsc-dataseed.bnbchain.org',
+      chainId: 56,
+      accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      gasPrice: 3000000000,
     },
   },
   etherscan: {
@@ -121,6 +127,7 @@ const config: HardhatUserConfig = {
       polygon: process.env.POLYGONSCAN_API_KEY || '', // Polygon Etherscan API Key
       base: process.env.BASESCAN_API_KEY || '', // Base Etherscan API Key
       astar: process.env.ASTAR_BLOCKSCOUT_API_KEY || '', // Astar blockscout API Key
+      bsc: process.env.BSCSCAN_API_KEY || '', // BSC Etherscan API Key
     },
     customChains: [
       {

@@ -4,7 +4,7 @@ import { RMRK, InterchainTokenService } from '../typechain-types';
 async function main() {
   const SEND_FROM_TOKEN = false; // Otherwise from ITS
   const RMRKFactory = await ethers.getContractFactory('RMRK');
-  const rmrk = <RMRK>RMRKFactory.attach('0x7e5738bDabc8ADb3670b07eA0e7D4b0B94282E4f'); // TODO: Replace with right one
+  const rmrk = <RMRK>RMRKFactory.attach('0x524d524B4c9366be706D3A90dcf70076ca037aE3');
   const user = (await ethers.getSigners())[0];
   const destinationChain = 'Moonbeam';
   const destinationAddress = user.address;
