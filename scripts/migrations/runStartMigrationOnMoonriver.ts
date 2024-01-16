@@ -52,7 +52,12 @@ async function main() {
   };
 
   const fs = require('fs');
-  const dataPath = `./migrations/${currentBatch}.json`;
+  // Create migration scripts folder if it doesn't exist
+  const migrationsDir = './migrations';
+  if (!fs.existsSync(migrationsDir)) {
+    fs.mkdirSync(migrationsDir);
+  }
+  const dataPath = `${migrationsDir}/${currentBatch}.json`;
   fs.writeFileSync(dataPath, JSON.stringify(output));
   console.log(`Wrote migration data to ${dataPath}`);
 }
