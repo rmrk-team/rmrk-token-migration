@@ -1,4 +1,4 @@
-import { ethers } from 'hardhat';
+import { ethers, network } from 'hardhat';
 import { getMultiSigAddress, NEW_RMRK_ADDRESS } from '../utils';
 
 async function main() {
@@ -6,9 +6,14 @@ async function main() {
   const rmrk = rmrkFactory.attach(NEW_RMRK_ADDRESS);
   const role = await rmrk.DEFAULT_ADMIN_ROLE();
 
-  const tx = await rmrk.grantRole(role, getMultiSigAddress());
+  const multisigAddress = await getMultiSigAddress();
+  console.log(
+    `Granting admin of RMRK on ${network.name} at ${rmrk.address} to multisig at ${multisigAddress}`,
+  );
+
+  const tx = await rmrk.grantRole(role, multisigAddress);
   await tx.wait();
-  console.log('Granted admin to multisig, use multisig to revoke admin to rmrk-minter account.');
+  console.log('Admin granted, use multisig to revoke admin to rmrk-minter account.');
 }
 
 main().catch((error) => {

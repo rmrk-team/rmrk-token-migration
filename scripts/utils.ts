@@ -42,7 +42,7 @@ async function getMultiSigAddress() {
     return '0xCD7A0D098E3A750126b0fec54BE401476812cfc0';
   else if (chainId === 1285)
     // Moonriver
-    return '0xCD7A0D098E3A750126b0fec54BE401476812cfc0';
+    return '0x7E8421B873429EE58A06055E89CD0DBEF51784F0';
   else if (chainId === 1284)
     // Moonbeam
     return '0x85Ab410A50A3D85f1a26d9e4eFCaa520a39B9CD6';
@@ -64,6 +64,17 @@ async function getMultiSigAddress() {
   else throw new Error('Unexpected network!');
 }
 
+async function getSwapperAddress() {
+  const chainId = await ethers.provider.getNetwork().then((network) => network.chainId);
+  if (chainId === 1)
+    // Ethereum
+    return '0xB75B0654F312d6905a075E6cDdE5501560781518';
+  else if (chainId === 137)
+    // Polygon
+    return '0x45888288D054DBE4E3b0cc2577BE51F38E63F5E2';
+  else throw new Error('Unexpected network!');
+}
+
 const NEW_RMRK_ADDRESS = '0x524d524B4c9366be706D3A90dcf70076ca037aE3';
 const MOONRIVER_MIGRATOR_ADDRESS = '0x923C768AC53B24a188333f3709b71cB343DB20b2';
 const MOONBEAM_MIGRATOR_ADDRESS = '0xf4B6FE71B6aa6f904864B4C95ECDBcc06CBec5d9';
@@ -72,6 +83,7 @@ const ITS_ADDRESS = '0xB5FB4BE02232B1bBA4dC8f81dc24C26980dE9e3C';
 export {
   getLegacyRMRKAddress,
   getMultiSigAddress,
+  getSwapperAddress,
   NEW_RMRK_ADDRESS,
   MOONRIVER_MIGRATOR_ADDRESS,
   MOONBEAM_MIGRATOR_ADDRESS,
