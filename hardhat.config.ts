@@ -9,6 +9,7 @@ import 'solidity-coverage';
 import 'hardhat-contract-sizer';
 // import './tasks/calculateSalt'; // Needs to be commented for first compile
 import './tasks/getMigrationForBatch';
+import './tasks/getTxToStartMoonriverMigration';
 
 dotenv.config();
 
