@@ -29,8 +29,12 @@ contract SwapperMinter is PausableWithDelay {
      * @dev The msg.sender needs to approve the contract to transfer the legacy RMRK tokens.
      */
     function swapLegacyRMRK(uint256 amount, address to) external whenNotPaused {
-        LEGACY_RMRK.transferFrom(_msgSender(), address(this), amount);
-        LEGACY_RMRK.burn(amount);
+        // Legacy RMRK does not allow for burning, so we send to dead.
+        LEGACY_RMRK.transferFrom(
+            _msgSender(),
+            0x000000000000000000000000000000000000dEaD,
+            amount
+        );
         NEW_RMRK.mint(to, amount * MULTIPLIER);
         emit Swapped(_msgSender(), to, amount);
     }
