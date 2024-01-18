@@ -16,7 +16,7 @@ export default async function storeMigrationsForBatch(migrator: MoonriverMigrato
     },
     transactions: [
       {
-        to: '0xbcdeFe4BeF75cf2AC1a7BBDC88bB153F1B19DB65',
+        to: '0xf4B6FE71B6aa6f904864B4C95ECDBcc06CBec5d9',
         value: '0',
         data: null,
         contractMethod: {
