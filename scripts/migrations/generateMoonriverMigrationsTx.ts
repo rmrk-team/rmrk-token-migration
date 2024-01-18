@@ -1,7 +1,7 @@
 import { MoonriverMigrator } from '../../typechain-types';
 
 export default async function generateMoonriverMigrationsTx(migrator: MoonriverMigrator) {
-  const currentBatch = await migrator.currentBatch();
+  const currentBatch = (await migrator.currentBatch()).toNumber();
   console.log(`Generating tx to start migration for batch ${currentBatch}`);
   const output = {
     version: '1.0',
@@ -22,10 +22,21 @@ export default async function generateMoonriverMigrationsTx(migrator: MoonriverM
         data: null,
         contractMethod: {
           inputs: [{ internalType: 'uint256', name: 'batch', type: 'uint256' }],
+          name: 'finishBatch',
+          payable: false,
+        },
+        contractInputsValues: { batch: currentBatch - 1 },
+      },
+      {
+        to: '0x923C768AC53B24a188333f3709b71cB343DB20b2',
+        value: '0',
+        data: null,
+        contractMethod: {
+          inputs: [{ internalType: 'uint256', name: 'batch', type: 'uint256' }],
           name: 'startMigratingBatch',
           payable: false,
         },
-        contractInputsValues: { batch: currentBatch.toNumber() },
+        contractInputsValues: { batch: currentBatch },
       },
       {
         to: '0x923C768AC53B24a188333f3709b71cB343DB20b2',
