@@ -207,6 +207,10 @@ describe('SwapperMinter', async () => {
     expect(await legacyRMRK.balanceOf(swapperMinter.address)).to.equal(
       ethers.utils.parseUnits('0', 10),
     );
+
+    expect(await legacyRMRK.balanceOf('0x000000000000000000000000000000000000dEaD')).to.equal(
+      ethers.utils.parseUnits('120', 10),
+    );
   });
 
   it('cannot swap if paused', async () => {
