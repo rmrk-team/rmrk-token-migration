@@ -7,7 +7,7 @@ import '@typechain/hardhat';
 import 'hardhat-gas-reporter';
 import 'solidity-coverage';
 import 'hardhat-contract-sizer';
-import './tasks/calculateSalt'; // Needs to be commented for first compile
+// import './tasks/calculateSalt'; // Needs to be commented for first compile
 import './tasks/getMigrationForBatch';
 
 dotenv.config();
