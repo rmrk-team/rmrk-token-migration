@@ -27,7 +27,7 @@
         "payable": false
       },
       "contractInputsValues": {
-        "batch": 1
+        "batch": "1"
       }
     },
     {
@@ -46,7 +46,7 @@
         "payable": false
       },
       "contractInputsValues": {
-        "batch": 2
+        "batch": "2"
       }
     },
     {
