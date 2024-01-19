@@ -23,25 +23,6 @@
             "type": "uint256"
           }
         ],
-        "name": "finishBatch",
-        "payable": false
-      },
-      "contractInputsValues": {
-        "batch": "3"
-      }
-    },
-    {
-      "to": "0x45888288D054DBE4E3b0cc2577BE51F38E63F5E2",
-      "value": "0",
-      "data": null,
-      "contractMethod": {
-        "inputs": [
-          {
-            "internalType": "uint256",
-            "name": "batch",
-            "type": "uint256"
-          }
-        ],
         "name": "startMigratingBatch",
         "payable": false
       },
