@@ -31,7 +31,7 @@ export default async function storeMigrationsForBatch(migrator: MoonriverMigrato
         contractInputsValues: {
           batch: `${batch}`,
           tos: JSON.stringify(holders),
-          amounts: JSON.stringify(amounts.map((bn) => bn.toNumber())),
+          amounts: amounts.map((bn) => bn.toBigInt().toString()),
         },
       },
     ],
