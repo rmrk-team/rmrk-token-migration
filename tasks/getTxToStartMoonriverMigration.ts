@@ -3,7 +3,7 @@ import { task } from 'hardhat/config';
 import generateMoonriverMigrationsTx from '../scripts/migrations/generateMoonriverMigrationsTx';
 import { MoonriverMigrator } from '../typechain-types';
 
-const MOONRIVER_MIGRATOR_ADDRESS = '0x923C768AC53B24a188333f3709b71cB343DB20b2'; // Cannot import from uils since it imports hardhat and task cannot do it
+const MOONRIVER_MIGRATOR_ADDRESS = '0x45888288D054DBE4E3b0cc2577BE51F38E63F5E2'; // Cannot import from uils since it imports hardhat and task cannot do it
 
 task(
   'getTxToStartMoonriverMigration',

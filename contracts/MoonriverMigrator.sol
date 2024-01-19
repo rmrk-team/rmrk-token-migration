@@ -7,6 +7,7 @@ import {IMintableBurnableERC20} from "./interfaces/IMintableBurnableERC20.sol";
 
 error BatchNotStarted();
 error BatchNotMigrating();
+error TransferFailed();
 
 contract MoonriverMigrator is Ownable, Pausable {
     enum State {
@@ -96,7 +97,14 @@ contract MoonriverMigrator is Ownable, Pausable {
         if (batchState[batch] != State.Migrating) {
             revert BatchNotMigrating();
         }
-        LEGACY_RMRK.burn(balancePerBatch[batch]);
+        // Legacy RMRK does not allow for burning, so we send to dead.
+        bool success = LEGACY_RMRK.transfer(
+            0x000000000000000000000000000000000000dEaD,
+            balancePerBatch[batch]
+        );
+        if (!success) {
+            revert TransferFailed();
+        }
         batchState[batch] = State.Finished;
         emit BatchFinished(batch, balancePerBatch[batch]);
     }

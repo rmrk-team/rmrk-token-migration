@@ -17,7 +17,7 @@ export default async function generateMoonriverMigrationsTx(migrator: MoonriverM
     },
     transactions: [
       {
-        to: '0x923C768AC53B24a188333f3709b71cB343DB20b2',
+        to: '0x45888288D054DBE4E3b0cc2577BE51F38E63F5E2',
         value: '0',
         data: null,
         contractMethod: {
@@ -28,7 +28,7 @@ export default async function generateMoonriverMigrationsTx(migrator: MoonriverM
         contractInputsValues: { batch: (currentBatch - 1).toString() },
       },
       {
-        to: '0x923C768AC53B24a188333f3709b71cB343DB20b2',
+        to: '0x45888288D054DBE4E3b0cc2577BE51F38E63F5E2',
         value: '0',
         data: null,
         contractMethod: {
@@ -39,7 +39,7 @@ export default async function generateMoonriverMigrationsTx(migrator: MoonriverM
         contractInputsValues: { batch: currentBatch.toString() },
       },
       {
-        to: '0x923C768AC53B24a188333f3709b71cB343DB20b2',
+        to: '0x45888288D054DBE4E3b0cc2577BE51F38E63F5E2',
         value: '0',
         data: null,
         contractMethod: {

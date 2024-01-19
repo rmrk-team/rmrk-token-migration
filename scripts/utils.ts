@@ -79,7 +79,7 @@ async function getSwapperAddress() {
 }
 
 const NEW_RMRK_ADDRESS = '0x524d524B4c9366be706D3A90dcf70076ca037aE3';
-const MOONRIVER_MIGRATOR_ADDRESS = '0x923C768AC53B24a188333f3709b71cB343DB20b2'; // Also update on storeMigrationsForBatch and getTxToStartMoonriverMigration tasks
+const MOONRIVER_MIGRATOR_ADDRESS = '0x45888288D054DBE4E3b0cc2577BE51F38E63F5E2'; // Also update on storeMigrationsForBatch and getTxToStartMoonriverMigration tasks
 const MOONBEAM_MIGRATOR_ADDRESS = '0xf4B6FE71B6aa6f904864B4C95ECDBcc06CBec5d9';
 const ITS_ADDRESS = '0xB5FB4BE02232B1bBA4dC8f81dc24C26980dE9e3C';
 

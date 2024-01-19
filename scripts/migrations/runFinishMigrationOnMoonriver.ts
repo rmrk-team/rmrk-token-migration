@@ -6,7 +6,7 @@ async function main() {
   const migrator = MigratorFactory.attach(MOONRIVER_MIGRATOR_ADDRESS);
   const currentBatch = await migrator.currentBatch();
   const previousBatch = currentBatch.sub(1);
-  console.log(`Current batch: ${previousBatch}`);
+  console.log(`Will finish batch: ${previousBatch}`);
 
   let tx = await migrator.finishBatch(previousBatch);
   await tx.wait();
