@@ -71,7 +71,7 @@ async function getSwapperAddress() {
     return '0xeC15f6C93F6E41847C03a3c748e524465add8b7a';
   if (chainId === 1)
     // Ethereum
-    return '0x767908960690d58F494C94B69521362826AC2cBB';
+    return '0x0FcD44621752d72C9a216d8F4d986a03B8BDB03a';
   else if (chainId === 137)
     // Polygon
     return '0x89AC95db035dBe04Ff2e591C19Cce645b65867BE';
