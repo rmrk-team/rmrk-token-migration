@@ -66,12 +66,15 @@ async function getMultiSigAddress() {
 
 async function getSwapperAddress() {
   const chainId = await ethers.provider.getNetwork().then((network) => network.chainId);
+  if (chainId === 1284)
+    // Moonbeam
+    return '0xeC15f6C93F6E41847C03a3c748e524465add8b7a';
   if (chainId === 1)
     // Ethereum
-    return '0xB75B0654F312d6905a075E6cDdE5501560781518';
+    return '0x767908960690d58F494C94B69521362826AC2cBB';
   else if (chainId === 137)
     // Polygon
-    return '0x45888288D054DBE4E3b0cc2577BE51F38E63F5E2';
+    return '0x89AC95db035dBe04Ff2e591C19Cce645b65867BE';
   else throw new Error('Unexpected network!');
 }
 
