@@ -84,7 +84,7 @@ async function deploySwapperMinter(legacyRMRK: string, newRMRK: string): Promise
 
 async function deployDeployProxy(): Promise<DeployProxy> {
   // The gas estimation for deploying the contract is 143077, taken from gas report on tests.
-  const DEPLOY_PROXY_GAS_NEEDED = BigNumber.from(150000);
+  const DEPLOY_PROXY_GAS_NEEDED = BigNumber.from(200000);
 
   const funder = (await ethers.getSigners())[0];
   const proxyDeployer = new Wallet(process.env.PROXY_DEPLOYER || '', ethers.provider);

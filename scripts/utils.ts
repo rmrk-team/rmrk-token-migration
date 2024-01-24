@@ -5,6 +5,9 @@ async function getLegacyRMRKAddress() {
   if (chainId === 1287 || chainId === 31337)
     // Moonbase Alpha or Hardhat
     return '0x3Ff3B0361B450E70729006918c14DEb6Da410349';
+  if (chainId === 776877)
+    // Modularim
+    return '0x84B1e7256C443C2e6804663890111c811b38965c';
   else if (chainId === 1285)
     // Moonriver
     return '0xffffffFF893264794d9d57E1E0E21E0042aF5A0A';
@@ -19,6 +22,9 @@ async function getLegacyRMRKAddress() {
     return '0x4C6C8805Ba067ee772B2E4b97C91cd5301cDA83b';
   else if (chainId === 84531)
     // Base Goerli
+    return '0x1D23Dc7fAA18BD7CeEA9383E10598d455adbe836';
+  else if (chainId === 84532)
+    // Base Sepolia
     return '0x1D23Dc7fAA18BD7CeEA9383E10598d455adbe836';
   else if (chainId === 1)
     // Ethereum

@@ -40,16 +40,23 @@ const config: HardhatUserConfig = {
         },
       ].concat(randomAccounts),
     },
+    modularium: {
+      url: 'https://fraa-dancebox-3035-rpc.a.dancebox.tanssi.network',
+      chainId: 776877,
+      accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      gasPrice: 1000000000,
+    },
     moonbaseAlpha: {
       url: process.env.MOONBASE_URL || 'https://rpc.testnet.moonbeam.network',
       chainId: 1287,
       accounts: accounts,
-      gasPrice: 1100000000,
+      gasPrice: 1125000000,
     },
     sepolia: {
       url: process.env.SEPOLIA_URL || 'https://rpc.sepolia.dev',
       chainId: 11155111,
       accounts: accounts,
+      gasPrice: 100000000000,
     },
     polygonMumbai: {
       url: process.env.MUMBAI_URL || 'https://rpc-mumbai.maticvigil.com',
@@ -62,6 +69,12 @@ const config: HardhatUserConfig = {
       url: process.env.BASE_GOERLI_URL || 'https://goerli.base.org',
       accounts: accounts,
       gasPrice: 2000000000,
+    },
+    baseSepolia: {
+      chainId: 84532,
+      url: process.env.BASE_SEPOLIA_URL || 'https://sepolia.base.org',
+      accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      gasPrice: 900000000,
     },
     shibuya: {
       chainId: 81,
@@ -121,6 +134,7 @@ const config: HardhatUserConfig = {
       sepolia: process.env.ETHERSCAN_API_KEY || '', // Sepolia Etherscan API Key
       polygonMumbai: process.env.POLYGONSCAN_API_KEY || '', // Polygon Mumbai Etherscan API Key
       baseGoerli: process.env.BASESCAN_API_KEY || '', // Base Goerli Etherscan API Key
+      baseSepolia: process.env.BASESCAN_API_KEY || '', // Base Goerli Etherscan API Key
       shibuya: process.env.SHIBUYA_BLOCKSCOUT_API_KEY || '', // Shibuya blockscout API Key
       zkatana: process.env.ZKATANA_BLOCKSCOUT_API_KEY || '', // ZKatana blockscout API Key
       moonriver: process.env.MOONSCAN_APIKEY || '', // Moonriver Moonscan API Key
@@ -138,6 +152,14 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: 'https://api-goerli.basescan.org/api',
           browserURL: 'https://goerli.basescan.org',
+        },
+      },
+      {
+        network: 'baseSepolia',
+        chainId: 84532,
+        urls: {
+          apiURL: 'https://api-sepolia.basescan.org/api',
+          browserURL: 'https://sepolia.basescan.org',
         },
       },
       {
