@@ -1,0 +1,46 @@
+{
+  "version": "1.0",
+  "chainId": "1284",
+  "createdAt": 1706469749,
+  "meta": {
+    "name": "Transactions Batch",
+    "description": "",
+    "txBuilderVersion": "1.16.1",
+    "createdFromSafeAddress": "0x85Ab410A50A3D85f1a26d9e4eFCaa520a39B9CD6",
+    "createdFromOwnerAddress": "",
+    "checksum": "0x6f40d4629d1ef4bb6104abc25344f0e798e1b240e882e499a13d1046cd8efa23"
+  },
+  "transactions": [
+    {
+      "to": "0xf4B6FE71B6aa6f904864B4C95ECDBcc06CBec5d9",
+      "value": "0",
+      "data": null,
+      "contractMethod": {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "batch",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address[]",
+            "name": "tos",
+            "type": "address[]"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "amounts",
+            "type": "uint256[]"
+          }
+        ],
+        "name": "migrate",
+        "payable": false
+      },
+      "contractInputsValues": {
+        "batch": "12",
+        "tos": "[\"0x7670BCfF990436ac1d158175848AD8D9CB4E1a90\",\"0x664660954f10088Ae7Ac2534e76369939CFb3013\",\"0xda77cEacaF3dd07F72256B561E854Ad08d3B391E\",\"0xeA6CbF30976bc4d27208980938df5D3a3E3cC398\",\"0xAB5e537B6472AC9c50AC4cd3109C76B5e459c537\",\"0x318828380C2F1C0b2fCdE06656C7c1f265726d28\",\"0x23ce6856fC2FcCdC2166F459ce77f3a7175DA6e8\",\"0x49fA62108dE1A881DfB36fFFABa6093BAf7f1622\",\"0xf4eb9478fA9622D0e67e0957577CA543c6089F64\",\"0xDeb2031F11Cbb04F63d010CeC6554b07Cc037A87\",\"0xa655cc0319adB3E9626a86D7C831B19c9630564A\",\"0x48E9798318f0c620B533369Af4Ee0e34C9a49727\",\"0xbd04D940701Ff5FB1DA5415198B10A0E1F373Dd4\",\"0x8158a3b4391266983A007C9ce4E731d13f1f2024\",\"0x41c6527353A1796e9658bD58498f901D41FCA691\",\"0xB5790910e7e082A780127B973881a0e2B4D7d19a\",\"0x73b7C1Fc8Ad7197bAC326Fd87Bfc064Abeff91e2\",\"0xD204875BAD61Fc15A75529B80d855b126Bf13971\",\"0x9f816576E878145a52D76D52aBab010F0c34e513\",\"0xAd75D53a29bd3dbbEce9FCDA5E023966C867B487\"]",
+        "amounts": "[2851156769300,15459905813225,25011890405456,36425000000,2194586000000,2008972000000,3530000000000,2970740905900,507589600000,2000608892366,6934783655400,1145354000000,210065914226,7160000000,30001010242597,23654000000,209701600000,6231610199200,5005473444556,1409891742368]"
+      }
+    }
+  ]
+}
