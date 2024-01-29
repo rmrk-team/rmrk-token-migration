@@ -1,0 +1,46 @@
+{
+  "version": "1.0",
+  "chainId": "1284",
+  "createdAt": 1706516941,
+  "meta": {
+    "name": "Transactions Batch",
+    "description": "",
+    "txBuilderVersion": "1.16.1",
+    "createdFromSafeAddress": "0x85Ab410A50A3D85f1a26d9e4eFCaa520a39B9CD6",
+    "createdFromOwnerAddress": "",
+    "checksum": "0x6f40d4629d1ef4bb6104abc25344f0e798e1b240e882e499a13d1046cd8efa23"
+  },
+  "transactions": [
+    {
+      "to": "0xf4B6FE71B6aa6f904864B4C95ECDBcc06CBec5d9",
+      "value": "0",
+      "data": null,
+      "contractMethod": {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "batch",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address[]",
+            "name": "tos",
+            "type": "address[]"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "amounts",
+            "type": "uint256[]"
+          }
+        ],
+        "name": "migrate",
+        "payable": false
+      },
+      "contractInputsValues": {
+        "batch": "13",
+        "tos": "[\"0x9Ed5DE1a0bcaa1991F825e0ef00f4531B9FB95c0\",\"0x8334EBDf93D4953F924863606C621F60F529bf0A\",\"0x78fC16E8521EEaF584C11858A8C81199dbEe6BAF\",\"0x0e05B5bA80555D0c3AD4a3e779FC3cbcC2A70206\",\"0x3f3527B6cBdF44C34C0bAb0b2FE02B0115936ceA\",\"0x0b1cf4fd0F7095206027A84909D028675535148A\",\"0x1ea0D33A83b97fDeFFD0E59a77db15c96dfb3458\",\"0x05c309b0a30264df86398ceA6D42bAdbaf2138B6\"]",
+        "amounts": "[12000000000,404613805824,7406611074924,10009174000000,20343373772000,24041609459643,198081477200000,50150000000000]"
+      }
+    }
+  ]
+}
