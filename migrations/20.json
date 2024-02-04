@@ -1,0 +1,46 @@
+{
+  "version": "1.0",
+  "chainId": "1284",
+  "createdAt": 1707065416,
+  "meta": {
+    "name": "Transactions Batch",
+    "description": "",
+    "txBuilderVersion": "1.16.1",
+    "createdFromSafeAddress": "0x85Ab410A50A3D85f1a26d9e4eFCaa520a39B9CD6",
+    "createdFromOwnerAddress": "",
+    "checksum": "0x6f40d4629d1ef4bb6104abc25344f0e798e1b240e882e499a13d1046cd8efa23"
+  },
+  "transactions": [
+    {
+      "to": "0xf4B6FE71B6aa6f904864B4C95ECDBcc06CBec5d9",
+      "value": "0",
+      "data": null,
+      "contractMethod": {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "batch",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address[]",
+            "name": "tos",
+            "type": "address[]"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "amounts",
+            "type": "uint256[]"
+          }
+        ],
+        "name": "migrate",
+        "payable": false
+      },
+      "contractInputsValues": {
+        "batch": "20",
+        "tos": "[\"0x92F7F5dC0808a4D280dcB1499095e400731Dc2F2\",\"0x0b5CD09dde0F103d553C786C3d59271a908C5B2C\",\"0x6887825a76f4be12a4107CD07A0372dE0831E815\",\"0x212DB2828bA784A81d39b872cCa7a12597bBC108\",\"0x240B48917bb88861bA173a476219EdA3aC66c2d5\",\"0xF11A62306E52C5a7C147cDaF17f3f108AB69DA57\",\"0x4BF07363EB510fEa7FBEa14Bd2B16B7a5DA85877\",\"0x9258CDA063cD788b10e5c07ab97C126B9A9DbeA5\",\"0x95D005D6de929dD20B0CB052664d68676B3bB62E\",\"0x3E4CEA957335526C19725Ec3D007dD47e7de13Bb\",\"0xD46d253F3d3CD5805F8C45569a695B51a3e0E636\",\"0x23cA1B09dcAbE2621C0c2Cd1cb18533dB458Ea1F\",\"0x824d841A840cfd64364238DFE6b652a30D3A5038\",\"0x55471E36e3aB8D08B241937d51CDdf4279491Ce6\",\"0x3Bc617e2D2e80D534A01f47fe23509De32fa95C3\",\"0x5a4F3196E4341eF4B35bc34A797eD5123d95a289\",\"0x336d03f234EB2D0FE8AFfD8dB754aD40F8c4AbcC\",\"0x7188f0554c915E0535F366A8c2f1b546ddA0F8C0\",\"0x4e61493F7B1e70a82fC67651956C093eCAd8d29A\",\"0x6B2822Eae9a7E43f498f3b83d051aA94A2ef4416\",\"0x7c04c40Eeb8Ab6B645c2739F69c72AA7f10E4AdB\",\"0xb10Abe79A626aD81aEbc2E5AD53EC68E89Ce30c8\"]",
+        "amounts": "[30402667492,23148124000000,464399772200,110000000000,430160000000,1035623624866,1007555000000,3049160000000,4407710421466,110757916058,1366248000000,30113255532,1809854309200,1301604000000,761722000000,773787333100,695441000000,244615435716,1772277000000,528541513072,13165969246031,25004320000000]"
+      }
+    }
+  ]
+}
