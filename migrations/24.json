@@ -1,0 +1,46 @@
+{
+  "version": "1.0",
+  "chainId": "1284",
+  "createdAt": 1707407296,
+  "meta": {
+    "name": "Transactions Batch",
+    "description": "",
+    "txBuilderVersion": "1.16.1",
+    "createdFromSafeAddress": "0x85Ab410A50A3D85f1a26d9e4eFCaa520a39B9CD6",
+    "createdFromOwnerAddress": "",
+    "checksum": "0x6f40d4629d1ef4bb6104abc25344f0e798e1b240e882e499a13d1046cd8efa23"
+  },
+  "transactions": [
+    {
+      "to": "0xf4B6FE71B6aa6f904864B4C95ECDBcc06CBec5d9",
+      "value": "0",
+      "data": null,
+      "contractMethod": {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "batch",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address[]",
+            "name": "tos",
+            "type": "address[]"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "amounts",
+            "type": "uint256[]"
+          }
+        ],
+        "name": "migrate",
+        "payable": false
+      },
+      "contractInputsValues": {
+        "batch": "24",
+        "tos": "[\"0x4869F574046ea0158FC215eBAD2Ef97f43F240f3\",\"0x475f65183956d3E7239c0cFd7B1A619b69c4C948\",\"0x59917F8558A30096068fd06386d282bD61345063\",\"0xE4888B177338ca605Df137EE907e024BAa51EBe4\",\"0xD52cF059De23495f1b827e4975c28932e5917Cb1\",\"0xdBB4F15cA5c6FCC85754DD9C34827D89342a6536\",\"0x818aa87368876D6864e64Aa256cc6A2a43b54207\",\"0xBF6ae1dd96CDc0C02e581FD5d99eB45C486c6CAf\",\"0xB6F29a7C342a4D9650f1d0F9007cd9A5cD28C1C4\",\"0x5A216576B3a219DF1e4FB32974c6E87442216d93\",\"0x068fa0Ea01D314CadD5FEba86C75495e7B255Ac5\",\"0xa77Dc7fe2663c67c5E735921AD553D44Af4A01b7\",\"0x753255Ea66fb5f87023bC020Edc1abc28D528F5b\",\"0xa538E5f1Ac081a8C04D13C25a9D9c6c6A3C08C0E\",\"0xBA0B0b229aD890c067EAb68b8170b3639054717d\",\"0x82546bC21C72B3e1a4af53149bEA891DF6f470F5\",\"0xfBEB53DB1071A89d6eb999C203E3dB17D1a16f60\",\"0x6A5C47C243Cf187F56AA93e3892a3904A9CEdB28\",\"0x7244584D4117546C864844D56339Da7178d2a6Cf\",\"0x4C3A9605B89694f481b72c8449099926BD989440\",\"0x6567abb1cCa951DC348e878e8Fd9F33c0cF9F56D\"]",
+        "amounts": "[4272526147166,572992000000,157899461607254,18207345000000,5875613000000,825662000000,50941300000000,193458405600,20008065860400,96622464366,10000000000,607419960000,246000000000,607419242966,10130000000000,1682666006567,16482519000000,29994320000000,487649000000,3394946312966,1941130425251]"
+      }
+    }
+  ]
+}
