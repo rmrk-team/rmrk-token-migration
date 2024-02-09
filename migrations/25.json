@@ -1,0 +1,46 @@
+{
+  "version": "1.0",
+  "chainId": "1284",
+  "createdAt": 1707469517,
+  "meta": {
+    "name": "Transactions Batch",
+    "description": "",
+    "txBuilderVersion": "1.16.1",
+    "createdFromSafeAddress": "0x85Ab410A50A3D85f1a26d9e4eFCaa520a39B9CD6",
+    "createdFromOwnerAddress": "",
+    "checksum": "0x6f40d4629d1ef4bb6104abc25344f0e798e1b240e882e499a13d1046cd8efa23"
+  },
+  "transactions": [
+    {
+      "to": "0xf4B6FE71B6aa6f904864B4C95ECDBcc06CBec5d9",
+      "value": "0",
+      "data": null,
+      "contractMethod": {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "batch",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address[]",
+            "name": "tos",
+            "type": "address[]"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "amounts",
+            "type": "uint256[]"
+          }
+        ],
+        "name": "migrate",
+        "payable": false
+      },
+      "contractInputsValues": {
+        "batch": "25",
+        "tos": "[\"0x8f156B17C9002cC0Aa229B9cA285345FBDB0Ba7b\",\"0x20106F7f9Ff541160546BcDB16A487e5482EDFc7\",\"0x837CD9D1003b69748003AD2372be59F2C41bfA98\",\"0xe857077B8d53d7eBebA5ca2df57166AE40368C65\",\"0xad8C5750B36EaDff2f78B5672DcdF869D6b4d9bF\",\"0xAf12b9662fE8c95A9E8cA9821FF88Dda43108C4b\",\"0xf32Aea84F565C6F83237E1271fa18cFd8C01877C\",\"0x818aa87368876D6864e64Aa256cc6A2a43b54207\",\"0xF22E23DEfA3cA75103b5264541ee2028463ADF02\",\"0x50D84A38eed106d692840A20a20ABA6df6890d52\",\"0x7166c877efE2400C64BFc4B3a74a6e238CB5a08c\",\"0xBC08CfFEF078724ae1E89Ae7A0d9FfCa8afe512a\",\"0x985F4fa35856ad721E4d13131A0E17a138eAcca9\",\"0x068fa0Ea01D314CadD5FEba86C75495e7B255Ac5\",\"0xd12137CDF28b354E81761200aCE6d67518361132\",\"0x4261Dbebcc6c1a718b9B27bc53d583E674356B2E\",\"0x99B5ed7fC6C935845F0df907f7a882f30c3EaeA4\",\"0xa1C970AF1709B5b16E10FF632a314fE929986035\",\"0xBD92C6d8453A61d4b037C24eE7134407fbeD08c3\"]",
+        "amounts": "[5917171000000,11691232448505,696838615932,67469098614466,1183012685057,85000092301382,631608302966,32728967678492,189225312966,6947460225932,1553044000000,168131115234300,2992274000000,720000000000,3453483958141,860389000000,2112841384051,1829886000000,20136069000000]"
+      }
+    }
+  ]
+}
