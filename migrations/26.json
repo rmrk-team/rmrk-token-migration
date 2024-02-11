@@ -1,0 +1,46 @@
+{
+  "version": "1.0",
+  "chainId": "1284",
+  "createdAt": 1707560889,
+  "meta": {
+    "name": "Transactions Batch",
+    "description": "",
+    "txBuilderVersion": "1.16.1",
+    "createdFromSafeAddress": "0x85Ab410A50A3D85f1a26d9e4eFCaa520a39B9CD6",
+    "createdFromOwnerAddress": "",
+    "checksum": "0x6f40d4629d1ef4bb6104abc25344f0e798e1b240e882e499a13d1046cd8efa23"
+  },
+  "transactions": [
+    {
+      "to": "0xf4B6FE71B6aa6f904864B4C95ECDBcc06CBec5d9",
+      "value": "0",
+      "data": null,
+      "contractMethod": {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "batch",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address[]",
+            "name": "tos",
+            "type": "address[]"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "amounts",
+            "type": "uint256[]"
+          }
+        ],
+        "name": "migrate",
+        "payable": false
+      },
+      "contractInputsValues": {
+        "batch": "26",
+        "tos": "[\"0x068fa0Ea01D314CadD5FEba86C75495e7B255Ac5\",\"0x712af4b68482475694A36e2ED8Cd6dd788811E9F\",\"0x7613D18C485cE27DC2E881C7B69ed764489363BB\",\"0x6D8a4Ce3337C64D3AeB2136910c809B92EC829BF\",\"0xFDB5d10c1c2860dF60B8DD6705Ffb02a31516730\",\"0x6d0C93d6E563a7E9005C969cD382378A08F9558c\",\"0xded781E6aCaC213C3cCd6d03114dfa5AE54129BA\",\"0x41DFcBECA2b617a9c3ddf2d6ab426c7Ee4Df24c2\",\"0x31D88B478D5fd85092c57605E5b724ABA95285E5\",\"0x4D44F20751c4807079aBb2486B9479a69b0E1213\",\"0x818aa87368876D6864e64Aa256cc6A2a43b54207\",\"0x75D744370b401774F5E7b42aa414CF191D1a8dAa\",\"0x7466d553c7f491d1c3c1e38b585F1787c8e0Ff05\",\"0x2C8A26b8700cAD5f3d221bEdFE8F9f09Ba369452\",\"0x81746916bBe810D2fE3265FdbACc36f5D352e6e7\",\"0x36535Ac46963b6Ef4D9794Af1c2Db93A9ff86d94\",\"0xCC4afEB1d25bAcf6721CBAf00c2b9a16eCc82DeB\",\"0xaE4D19A9319e67Ae737dc3A50B58a56f6bD9289b\",\"0x4BF07363EB510fEa7FBEa14Bd2B16B7a5DA85877\",\"0xfAE772E7498B0cDfC4EA929da72333DCC0Dd2517\",\"0x0D35bf4652fe256d0e9281846c5DE9E7482c239f\",\"0x49Bb21634629470b87aa6d4a2D9dA7085Ffe801B\"]",
+        "amounts": "[3000000000000,452948000000,1290814000000,27283945298053,1625677000000,92500931820569,343820000000,844789625932,1346965649112,1843846784,29022802000000,50479291000000,17160000000,653510000000,46948000000,1535918712811,112407679516434,4314887222182,601247344100,4314940909216,402043261235,6004384090752]"
+      }
+    }
+  ]
+}
