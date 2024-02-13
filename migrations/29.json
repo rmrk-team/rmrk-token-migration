@@ -1,0 +1,46 @@
+{
+  "version": "1.0",
+  "chainId": "1284",
+  "createdAt": 1707816078,
+  "meta": {
+    "name": "Transactions Batch",
+    "description": "",
+    "txBuilderVersion": "1.16.1",
+    "createdFromSafeAddress": "0x85Ab410A50A3D85f1a26d9e4eFCaa520a39B9CD6",
+    "createdFromOwnerAddress": "",
+    "checksum": "0x6f40d4629d1ef4bb6104abc25344f0e798e1b240e882e499a13d1046cd8efa23"
+  },
+  "transactions": [
+    {
+      "to": "0xf4B6FE71B6aa6f904864B4C95ECDBcc06CBec5d9",
+      "value": "0",
+      "data": null,
+      "contractMethod": {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "batch",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address[]",
+            "name": "tos",
+            "type": "address[]"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "amounts",
+            "type": "uint256[]"
+          }
+        ],
+        "name": "migrate",
+        "payable": false
+      },
+      "contractInputsValues": {
+        "batch": "29",
+        "tos": "[\"0x93dDda085C677E2F113Bdcc28015509E498EdBf6\",\"0xb3146891799c91324E454E9704406Ba42D413E97\",\"0x99d5176a03286fe192892b867d1BE72448e3b2CD\",\"0x272f9aB3FeD9eb6E44c792D0b78d6124Fb28c2c7\",\"0x567B1230EA638B4299C02ea9FdCAF04b956Ddba4\",\"0x413c3Ccf8580Fc24fC32BCCC7a235C2DeBce3c6b\",\"0x068fa0Ea01D314CadD5FEba86C75495e7B255Ac5\",\"0x0FB70e51f8EB38AF2E9C7Bc21b3C9eD3964E6492\",\"0x7466d553c7f491d1c3c1e38b585F1787c8e0Ff05\",\"0xe0841C905a16cF3459c2E3da9c877A6f8aB4E867\",\"0x9aD292eadA3E8Aee038f93A97A0838BBf3e41049\",\"0x44FB3F95118BF09Ba74E31dc8A125F2934C7b934\",\"0xea39E59da1db19d486df67D4DDbb8981216835da\",\"0x14B1Af227b3063e9870F16A04408B82A31e9b5FB\",\"0x7488aDFD1a8A86504149b5A88c8Ac33eFFaaA9B1\",\"0xB26F9d2E12F0d94E1EBc1FFcAEB3fcD688B892F7\",\"0xb38be7CB72B09af423034cf19E60792587AE606B\",\"0x49A72c252661c9765b25E7Cf3c62F890e0A82b75\",\"0x7d6175ba8Dc60ED09AAe1AC117fb901191E47c64\",\"0xF4A70494FD4F211E2434ACD4fc0C2557B48818d4\"]",
+        "amounts": "[696014302966,3649737234107,999946312966,1915845000000,315064843000,322381507800,6370965513441,6370111491500,2359634000000,760006842733,697889759034,3601538669766,2505097570719,647160000000,207275851537,8794013282161,997160000000,1416775000000,7160000000,1305033737900]"
+      }
+    }
+  ]
+}
