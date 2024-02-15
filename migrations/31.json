@@ -1,0 +1,46 @@
+{
+  "version": "1.0",
+  "chainId": "1284",
+  "createdAt": 1707986674,
+  "meta": {
+    "name": "Transactions Batch",
+    "description": "",
+    "txBuilderVersion": "1.16.1",
+    "createdFromSafeAddress": "0x85Ab410A50A3D85f1a26d9e4eFCaa520a39B9CD6",
+    "createdFromOwnerAddress": "",
+    "checksum": "0x6f40d4629d1ef4bb6104abc25344f0e798e1b240e882e499a13d1046cd8efa23"
+  },
+  "transactions": [
+    {
+      "to": "0xf4B6FE71B6aa6f904864B4C95ECDBcc06CBec5d9",
+      "value": "0",
+      "data": null,
+      "contractMethod": {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "batch",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address[]",
+            "name": "tos",
+            "type": "address[]"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "amounts",
+            "type": "uint256[]"
+          }
+        ],
+        "name": "migrate",
+        "payable": false
+      },
+      "contractInputsValues": {
+        "batch": "31",
+        "tos": "[\"0x598F32d09A13A095B472066C7C77165aff45fe43\",\"0xa3A3C7a2441c20cC85F2028bf9f6f5dA9775DfB5\",\"0x7d810C4231C48620E76d96d6C905700b4E4aa3E2\",\"0x30da916607D503d333Df00E45d1E4B6F9B0ff5e6\",\"0x1bEa8e330C8eccFDcA0F6B1593E800da24026aB7\",\"0x7466d553c7f491d1c3c1e38b585F1787c8e0Ff05\",\"0xD46d253F3d3CD5805F8C45569a695B51a3e0E636\",\"0x5B4D7D304db68500bE128F0dfa51544B79A85572\",\"0x9CD9Ad7C1EF281AC6225dAD165A9FFc17776D3Cf\",\"0x0040E7259085aD58FCcfd19DE1fEb10B6f1b1Fac\",\"0xFd2c9263ED08FcD4097e028989aDBD953394C5ab\",\"0x44460e7b2E9351EDF48BB9C4E68F2796F263464c\",\"0x1e2b8eC34f2B18972bBf9630f868D2A4B5bF3439\",\"0x497A096dcdCC18e13347a84aa7b2f3fbF8A90255\",\"0xd652428D8Ed35fAf0185E96A703A570eb625c76E\",\"0x5368d69C1661B4847aBb2FA0273dBb5558Ec9214\",\"0x4f193b99c9262dDD2Fe74cb951479A83Ab6161e6\",\"0x99d5176a03286fe192892b867d1BE72448e3b2CD\",\"0xF802DB924B0EB2B8eB56488E499d3BB5b435Ca0C\",\"0x74671Db437C0adcF0979d26f8865E1EC729308f0\",\"0xeffD3F559e826778e9da27ed6EE0D23E006249c2\"]",
+        "amounts": "[1275565000000,2088182628503,2077594000000,2917423000000,20301410214131,3751475000000,215977000000,1003404000000,2005354763900,51116007000000,1132745000000,43450000000,458632653238,617950000000,259405000000,14000000000,191182548179,1499946312966,26209385000000,4927337000000,93552526613]"
+      }
+    }
+  ]
+}
