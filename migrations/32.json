@@ -1,0 +1,46 @@
+{
+  "version": "1.0",
+  "chainId": "1284",
+  "createdAt": 1708097556,
+  "meta": {
+    "name": "Transactions Batch",
+    "description": "",
+    "txBuilderVersion": "1.16.1",
+    "createdFromSafeAddress": "0x85Ab410A50A3D85f1a26d9e4eFCaa520a39B9CD6",
+    "createdFromOwnerAddress": "",
+    "checksum": "0x6f40d4629d1ef4bb6104abc25344f0e798e1b240e882e499a13d1046cd8efa23"
+  },
+  "transactions": [
+    {
+      "to": "0xf4B6FE71B6aa6f904864B4C95ECDBcc06CBec5d9",
+      "value": "0",
+      "data": null,
+      "contractMethod": {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "batch",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address[]",
+            "name": "tos",
+            "type": "address[]"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "amounts",
+            "type": "uint256[]"
+          }
+        ],
+        "name": "migrate",
+        "payable": false
+      },
+      "contractInputsValues": {
+        "batch": "32",
+        "tos": "[\"0xF204c7c87ED81A78AaF98c4A908190a5044A3BAA\",\"0xFabAa7a17305dC1ceE5D8b0d89C96278cEb3C37b\",\"0x7d810C4231C48620E76d96d6C905700b4E4aa3E2\",\"0x3602BE464C06C83D921f6795DE3FD508ba3794b1\",\"0x393633B9895C6657F2f489B42Ab4adE90C422fB9\",\"0x831E5bE5Ea7B9f54cd2315cBbfDA642addeFe328\",\"0xE69bB0268AA191b7363C4a45A79843Aaeb0fe60C\",\"0x0173665fdE11F6c4e3292E91Bf6c460D7d66B555\",\"0x55b7912a2228Cf196fae0182f4C07793B028C1ff\",\"0x818aa87368876D6864e64Aa256cc6A2a43b54207\",\"0xCc4136285BC6fF5eA6fBC385713E5c820fe45B31\",\"0xc804553da72DEb2123f6e2D5Fb9dBbB48e4BbC68\",\"0x99d5176a03286fe192892b867d1BE72448e3b2CD\",\"0x45f44ae615910F0A1f1d85Bc8efe94766Eb6dd6b\",\"0xF802DB924B0EB2B8eB56488E499d3BB5b435Ca0C\",\"0x491bd4592351F85BEBc811e12bf3e9B5C9e80AdA\",\"0xC100Daf216C3d38686E480ec48Cda7B719E13F9B\",\"0x94506bE0b70521f243882b817F89CeE4Cca8c017\",\"0x2a7c3f9928052DBa307a0af1168c9B6DeEb572fC\",\"0x186CB235a7749e85daDc4f5D92ED2a2958BD7E38\",\"0x446aA68FFD0C837B47a2Eb7C4C5c1f5cE941e550\",\"0x8f8d8bB404f4dA8A48Ca78f87E237c9644DaD46c\"]",
+        "amounts": "[1554751077345,313222000000,730287000000,501000000000,296662485800,8616818229900,1051945812966,994491000000,3306035432700,4336273000000,17259792625932,8963298000000,1504946312966,2922710000000,3012315940500,1000000000,5625478000000,4878316063966,335365000000,6941608406242,269220909216,16431049121736]"
+      }
+    }
+  ]
+}
