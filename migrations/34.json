@@ -1,0 +1,46 @@
+{
+  "version": "1.0",
+  "chainId": "1284",
+  "createdAt": 1708270063,
+  "meta": {
+    "name": "Transactions Batch",
+    "description": "",
+    "txBuilderVersion": "1.16.1",
+    "createdFromSafeAddress": "0x85Ab410A50A3D85f1a26d9e4eFCaa520a39B9CD6",
+    "createdFromOwnerAddress": "",
+    "checksum": "0x6f40d4629d1ef4bb6104abc25344f0e798e1b240e882e499a13d1046cd8efa23"
+  },
+  "transactions": [
+    {
+      "to": "0xf4B6FE71B6aa6f904864B4C95ECDBcc06CBec5d9",
+      "value": "0",
+      "data": null,
+      "contractMethod": {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "batch",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address[]",
+            "name": "tos",
+            "type": "address[]"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "amounts",
+            "type": "uint256[]"
+          }
+        ],
+        "name": "migrate",
+        "payable": false
+      },
+      "contractInputsValues": {
+        "batch": "34",
+        "tos": "[\"0xAD1De96692F230d2c155B45EC1Ed8799af752389\",\"0x2B9165d0569D0240B75e73675019Bb8638404b90\",\"0xf265C822388C13b0DCe6DB5AD3E40ec7e443BA6C\",\"0x55045C4723f7047A8091C584E533fBe78E7be1D1\",\"0x8922923059388a4488Fa3b7C418BD059723bD37F\",\"0x2d0f5d7Fc9Fa26964e7930B817f3c721Ea1313cc\",\"0x90c1C6d3AC5ec9BfdDF29A24b984060c03e72446\",\"0xf1FA3A0c2fa33fc5B031701955Ccc653374e10a0\",\"0x549eFe222B598F733901326C9F4f7353868d3886\",\"0xded781E6aCaC213C3cCd6d03114dfa5AE54129BA\",\"0x146D35a6485DbAFF357fB48B3BbA31fCF9E9c787\",\"0xE46AE5Fd307a8F7080A2806F5a545c0F4e1A7434\",\"0x548eB3c2eD719C07aCA70C56febc81f678D249bE\",\"0x1AEd9d13A7edB5634DB935d0031A0d278cf9e69f\",\"0x9680fCef42A368D7761285A33c5d754A81937aCd\"]",
+        "amounts": "[100000000000,1937688199,27030846096,3698775000000,31461097988,5883772000000,77700000000,305884000000,49977721706700,305795000000,3322151000000,501551000000,55526863815555,3270000000000,17859046312966]"
+      }
+    }
+  ]
+}
