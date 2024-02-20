@@ -1,0 +1,46 @@
+{
+  "version": "1.0",
+  "chainId": "1284",
+  "createdAt": 1708422759,
+  "meta": {
+    "name": "Transactions Batch",
+    "description": "",
+    "txBuilderVersion": "1.16.1",
+    "createdFromSafeAddress": "0x85Ab410A50A3D85f1a26d9e4eFCaa520a39B9CD6",
+    "createdFromOwnerAddress": "",
+    "checksum": "0x6f40d4629d1ef4bb6104abc25344f0e798e1b240e882e499a13d1046cd8efa23"
+  },
+  "transactions": [
+    {
+      "to": "0xf4B6FE71B6aa6f904864B4C95ECDBcc06CBec5d9",
+      "value": "0",
+      "data": null,
+      "contractMethod": {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "batch",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address[]",
+            "name": "tos",
+            "type": "address[]"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "amounts",
+            "type": "uint256[]"
+          }
+        ],
+        "name": "migrate",
+        "payable": false
+      },
+      "contractInputsValues": {
+        "batch": "36",
+        "tos": "[\"0x7C76974B1e6Ec74f5901CF7E1217E3feb987aD78\",\"0xD3322DD16F71e46060294429f8C1f6E43a2e4EFe\",\"0xAD1De96692F230d2c155B45EC1Ed8799af752389\",\"0xBb0F90C817b2f8cE5b40b60b3AeF88D6Fd653Fd4\",\"0x1E5d101315840a4050DA74CCE16678D2ca65d060\",\"0x26674D44c3a4c145482Dd360069a8e5Fee2Ec74C\",\"0x7d810C4231C48620E76d96d6C905700b4E4aa3E2\",\"0x2bFa5F7Ae4C470efc08e1300FDF21A9C99066F17\",\"0x054E9D8d1a8fb5C54b5d3Db9B166d973498FA6dd\",\"0x0803619D40DD363ad107B4B0E11F1704f221262a\",\"0xbf48B04a6fa92AD1cB83A3CCBd1bEd38aFE1a1fB\",\"0x22dBe0e326Ce6C68065adeC443FeD89D1c2EA1CB\",\"0x22f8b91B75c999B212E3d9fA8114De77D95daD1E\",\"0x1a02dD390477729C2381004377665425c6003675\",\"0xdE848f5949206a9e66e1800e2C5a69D2601FbC22\"]",
+        "amounts": "[1173534653,3882387210616,26903365600000,759914762567,32866977143797,448725576378,626763000000,2648832798114,1143699000000,69441479700,681178000000,3810709258400,1164726000000,162251322900,1004015247128]"
+      }
+    }
+  ]
+}
