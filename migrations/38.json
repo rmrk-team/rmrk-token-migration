@@ -1,0 +1,46 @@
+{
+  "version": "1.0",
+  "chainId": "1284",
+  "createdAt": 1708614277,
+  "meta": {
+    "name": "Transactions Batch",
+    "description": "",
+    "txBuilderVersion": "1.16.1",
+    "createdFromSafeAddress": "0x85Ab410A50A3D85f1a26d9e4eFCaa520a39B9CD6",
+    "createdFromOwnerAddress": "",
+    "checksum": "0x6f40d4629d1ef4bb6104abc25344f0e798e1b240e882e499a13d1046cd8efa23"
+  },
+  "transactions": [
+    {
+      "to": "0xf4B6FE71B6aa6f904864B4C95ECDBcc06CBec5d9",
+      "value": "0",
+      "data": null,
+      "contractMethod": {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "batch",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address[]",
+            "name": "tos",
+            "type": "address[]"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "amounts",
+            "type": "uint256[]"
+          }
+        ],
+        "name": "migrate",
+        "payable": false
+      },
+      "contractInputsValues": {
+        "batch": "38",
+        "tos": "[\"0x54d4BcBbd44e7E6B90c338d8da8f7D6E94Eac4d2\",\"0x668795942e68443AF5836e2cD2D752476e6797ae\",\"0xded781E6aCaC213C3cCd6d03114dfa5AE54129BA\",\"0xE083277b3e886C195BaE1Ae035FF7b1270e3972A\",\"0x9F73CAEA5B4730b9F409CE1c07902d8f6337D1A7\",\"0x31e9FA6Db7B88404BCDA3B80Ae815dA39775d95C\",\"0x36B6d9485D20883D885920Cbb04bc16f57852DF0\",\"0xC48308910DaAeF1DA77Ea92Ccf7f904BFdF54164\",\"0x9F3353134C72bd9bcB4454362c82838eB911de78\",\"0x7BF7CeE586FB1a53a20d1E52681fb322F3A7ebDf\",\"0x033f29B41D74E548967B9eA9bAa004DA704161fb\",\"0xD2881Cf9513B9Ad8Ab985440014E793b85060496\",\"0x055901FC3d90cFA2DDdd81D4faaae87Ab0EE2A9C\",\"0xBf03197306e365809022cd48cC4aFb1F9Df01De9\",\"0xA0f7F9F79f619BD86849747Be69Fb7a257fF01C0\",\"0xC398F6d8D77B373125641Bf6a4e044F43166f676\"]",
+        "amounts": "[2203970382300,1968980000000,548110000000,3508078378732,12236292000000,1068230302966,12944889600000,511556851617,329778302966,160059731468400,11815021061500,20996946691386,62487142531864,3024968800000,2122195615932,64258688414200]"
+      }
+    }
+  ]
+}
