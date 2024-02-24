@@ -1,0 +1,64 @@
+{
+  "version": "1.0",
+  "chainId": "1285",
+  "createdAt": 1705593615045,
+  "meta": {
+    "name": "Transactions Batch",
+    "description": "",
+    "txBuilderVersion": "1.16.1",
+    "createdFromSafeAddress": "0x7e8421b873429eE58A06055E89CD0DBeF51784F0",
+    "createdFromOwnerAddress": "",
+    "checksum": "0x3a3c118fb680d563c19d228f75db71b9dcece958855ef39f4a18c34241b324fd"
+  },
+  "transactions": [
+    {
+      "to": "0x45888288D054DBE4E3b0cc2577BE51F38E63F5E2",
+      "value": "0",
+      "data": null,
+      "contractMethod": {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "batch",
+            "type": "uint256"
+          }
+        ],
+        "name": "finishBatch",
+        "payable": false
+      },
+      "contractInputsValues": {
+        "batch": "39"
+      }
+    },
+    {
+      "to": "0x45888288D054DBE4E3b0cc2577BE51F38E63F5E2",
+      "value": "0",
+      "data": null,
+      "contractMethod": {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "batch",
+            "type": "uint256"
+          }
+        ],
+        "name": "startMigratingBatch",
+        "payable": false
+      },
+      "contractInputsValues": {
+        "batch": "40"
+      }
+    },
+    {
+      "to": "0x45888288D054DBE4E3b0cc2577BE51F38E63F5E2",
+      "value": "0",
+      "data": null,
+      "contractMethod": {
+        "inputs": [],
+        "name": "startNextBatch",
+        "payable": false
+      },
+      "contractInputsValues": null
+    }
+  ]
+}
