@@ -1,0 +1,46 @@
+{
+  "version": "1.0",
+  "chainId": "1284",
+  "createdAt": 1708874951,
+  "meta": {
+    "name": "Transactions Batch",
+    "description": "",
+    "txBuilderVersion": "1.16.1",
+    "createdFromSafeAddress": "0x85Ab410A50A3D85f1a26d9e4eFCaa520a39B9CD6",
+    "createdFromOwnerAddress": "",
+    "checksum": "0x6f40d4629d1ef4bb6104abc25344f0e798e1b240e882e499a13d1046cd8efa23"
+  },
+  "transactions": [
+    {
+      "to": "0xf4B6FE71B6aa6f904864B4C95ECDBcc06CBec5d9",
+      "value": "0",
+      "data": null,
+      "contractMethod": {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "batch",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address[]",
+            "name": "tos",
+            "type": "address[]"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "amounts",
+            "type": "uint256[]"
+          }
+        ],
+        "name": "migrate",
+        "payable": false
+      },
+      "contractInputsValues": {
+        "batch": "41",
+        "tos": "[\"0x11d4Bf8A435B7Ea029867CFBD710c814fEaE8DE6\",\"0x3a6FeD79c07aC9dd2bb533B6365C579116848E90\",\"0xA0f7F9F79f619BD86849747Be69Fb7a257fF01C0\",\"0x1Bb98D52256D614Da73b574307CEF939a1Fd775d\",\"0x770780bC3d3cA021E2aA00ad377663d92aBF346A\",\"0x240B48917bb88861bA173a476219EdA3aC66c2d5\",\"0x38239461884ec1d547Fd4D5EB0e0c91F4d894638\",\"0x65B8AddE63f2BC1fa4c90d74478B079A376Ac55f\",\"0x333ca6AA844942625C5dd80dE46F4Fe3c4833Fba\",\"0x85D10d3c539bC4bbE13fd1631Fa09D14e742Eb71\",\"0xF49171f47B3D082F637CD5E82559895F28F631d5\",\"0xA746fc0d33079bd20E9C3AD0b4635A2722Fcc130\",\"0xe18890541DBE4e0aCb4cbdBbA307112506984041\",\"0xA12C29cCa4ec9DD97dC0657c0c79669D0EaDCB44\",\"0xc171ce1e3141848FFD08009f2dC8117e2E53A01e\",\"0x0FB70e51f8EB38AF2E9C7Bc21b3C9eD3964E6492\",\"0x5f3E1bf780cA86a7fFA3428ce571d4a6D531575D\",\"0x328Bc23bF9348d90f4bfc11A8ce214B38FbfABeb\",\"0xc99b9d4bBB924E3DEC23DB4A65cADD250845e8Db\",\"0xAC7Df7fdD549838fE0CDAeCd1a36335C168D810f\",\"0x259b5769D4088549Ea198f36c212c2E502530B10\",\"0x3E66a1e729B8d5a4AB645b9fE81291f736803A08\",\"0xA64E694e83951E65094B5555bd921105EecBbA26\",\"0x4ee1eB6F8fE33ac4568940f7fEB44CB7Fdd26563\",\"0x27a5e08fF6F3889De06d9CF36381f2127A4B957f\",\"0x40b0e35692669611630D92d88807129EF0cE1d68\"]",
+        "amounts": "[499090000000,190594987830939,2282803000000,4387269558300,4485429259035,702154000000,8160413143905,6039924143905,2119924143905,4049999595108,2060698000000,19413175112,226595199543,9979200000,146668871016,3625392000000,4009278750180,5890534692587,31429010782486,10088754794878,82650532459500,35564320000000,2058687000000,8331678000000,11939979200000,2814973706256]"
+      }
+    }
+  ]
+}
