@@ -1,0 +1,46 @@
+{
+  "version": "1.0",
+  "chainId": "1284",
+  "createdAt": 1708946685,
+  "meta": {
+    "name": "Transactions Batch",
+    "description": "",
+    "txBuilderVersion": "1.16.1",
+    "createdFromSafeAddress": "0x85Ab410A50A3D85f1a26d9e4eFCaa520a39B9CD6",
+    "createdFromOwnerAddress": "",
+    "checksum": "0x6f40d4629d1ef4bb6104abc25344f0e798e1b240e882e499a13d1046cd8efa23"
+  },
+  "transactions": [
+    {
+      "to": "0xf4B6FE71B6aa6f904864B4C95ECDBcc06CBec5d9",
+      "value": "0",
+      "data": null,
+      "contractMethod": {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "batch",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address[]",
+            "name": "tos",
+            "type": "address[]"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "amounts",
+            "type": "uint256[]"
+          }
+        ],
+        "name": "migrate",
+        "payable": false
+      },
+      "contractInputsValues": {
+        "batch": "42",
+        "tos": "[\"0x7eD4e09d4184D1049205755E0239c963ee5b144f\",\"0x830414EB87480c5C57468d70d3131Bd808566016\",\"0x3e3703197335c851740bE9eD455eC9F3F7fFe37c\",\"0x4518Cec1022776D0f086B3a6a1b2AabcB8a9AcB7\",\"0x0e0a4aa4d1051F76b985633812c475BD4c8c6E23\",\"0xe197B0C825ad9DcE221D8c21C88E6a11E9cDe12B\",\"0xb0a93307a7a5765BCf05ebB98aa2ac0F84a45164\",\"0xEEa5bf31f5560462af37ca5eba656F26b5307A1a\",\"0xB10503651649CEd3ca08B517197339baf84be6F4\",\"0x37F070531Dc43ad3EF8AC150A8069b384430e314\",\"0xbA38Aae358d9b84b54b5FeC8df700A259F4a8947\",\"0x47C1AC73465460E92bc0d7f19a3E1D14d043D049\",\"0x33Aaff116e25a556324bc7Cc4a745148f83d7a33\",\"0x927625F48A2628d2006076a929A5Ad53f5185C2f\",\"0xaC4Bc29c602387287DB7a7f554E9190d4043BDe1\",\"0x64D13D5316d5FDC4A25F178bB073278443c80d55\",\"0xeCFD32588f89D3ea0A198D17A291Ba85F8a7467d\",\"0x9EaE7c16A5f44b24Fca2d598316630A82b90B031\",\"0xC100Daf216C3d38686E480ec48Cda7B719E13F9B\",\"0x76c393B9730f52d2f03037387b772723a24D86E0\"]",
+        "amounts": "[17125995000000,198863000000,54320000000,1153990840574,252705936222,5009934740155,4280323740155,111309000000,1845949298163,11153931160275,4960000000000,62830529530,659824000000,3279670332628,10174989600000,433109200000,499083000000,1852002000000,4492287000000,3923878520300]"
+      }
+    }
+  ]
+}
