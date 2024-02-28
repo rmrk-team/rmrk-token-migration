@@ -1,0 +1,46 @@
+{
+  "version": "1.0",
+  "chainId": "1284",
+  "createdAt": 1709052597,
+  "meta": {
+    "name": "Transactions Batch",
+    "description": "",
+    "txBuilderVersion": "1.16.1",
+    "createdFromSafeAddress": "0x85Ab410A50A3D85f1a26d9e4eFCaa520a39B9CD6",
+    "createdFromOwnerAddress": "",
+    "checksum": "0x6f40d4629d1ef4bb6104abc25344f0e798e1b240e882e499a13d1046cd8efa23"
+  },
+  "transactions": [
+    {
+      "to": "0xf4B6FE71B6aa6f904864B4C95ECDBcc06CBec5d9",
+      "value": "0",
+      "data": null,
+      "contractMethod": {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "batch",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address[]",
+            "name": "tos",
+            "type": "address[]"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "amounts",
+            "type": "uint256[]"
+          }
+        ],
+        "name": "migrate",
+        "payable": false
+      },
+      "contractInputsValues": {
+        "batch": "43",
+        "tos": "[\"0x37d9C33cFb42C1D4A7a9d3a2296aCc255402bE08\",\"0x304A888c11db74EeD2aBEd6de0467BcA107985f1\",\"0x127563d0B37872e4956BF9B033e3cc03c6bF7E45\",\"0xAcdFB9542aA5D5AA0E844c81F5775BEaC734BDBD\",\"0x6edBE0BEdf09a7BEeB535e499a6feE1832c7e6D2\",\"0xb11aFdbB5D0258fC48c19F3386aDe1409710B732\",\"0x5Ed5D7ED4C6f60934c424466B38A2b2278d1c0B2\",\"0xBC32aC36547A4dBd7c9F322643936A9AE0336c23\",\"0x5368d69C1661B4847aBb2FA0273dBb5558Ec9214\",\"0x48c7e0db3DAd3FE4Eb0513b86fe5C38ebB4E0F91\",\"0xb39FBbF1140dB51BDA5BFDc975C6B7684142Eaa2\",\"0x52B59bECEEba4737164883dEE32de83ba7D0D269\",\"0x371dF36da9E739702a5c3c060789c4000D7f8958\",\"0xe363De95EdC6D57E93037Ef44557a62a663b1B27\",\"0x4bC995DAb41b6b7D12873418B5bE5e1787cCE51d\",\"0x787bCb9e3dFDd15AA86043F3515c894456e57C78\",\"0x294Ed58D1b56a949f278f705339fe006A4a3f8a9\",\"0xBF44162160De5A72D16264592B182e2fE30Cf07A\",\"0x85D10d3c539bC4bbE13fd1631Fa09D14e742Eb71\",\"0xA746fc0d33079bd20E9C3AD0b4635A2722Fcc130\",\"0x495C7EeFcEF66C62ea967e32eF17dd060525c3a0\",\"0x9DC6d51044FE2b9cB708A2e522CA21A62D35513e\",\"0x02B09762befe757051AB7273367bDe499CE5633e\",\"0x07B6d06015E56570385a15C166e9201b6668cd5C\",\"0x3c3FfE5a2E32a575F1d9cf83B8B8727A607489d2\",\"0xF03f642d8C1A1C385665DD7C881c66E3a37c3FA2\",\"0x6Fac85e4c0aFbCeFE726dF4B5A31f56C59D45202\"]",
+        "amounts": "[716803150770,277659000000,2999934133905,20000000000,1853883000000,4409240901106,1002384613110,2371171246235,990000000000,100000000000,1500000000000,1082029000000,877685393880,4060223200000,1240226000000,1044331199717,20529979100000,7019862480781,10000000000,10000000000,2948653723100,623272027562,2338062106700,638656000000,784448374783,351630000000,2309184834900]"
+      }
+    }
+  ]
+}
