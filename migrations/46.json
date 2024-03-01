@@ -1,0 +1,46 @@
+{
+  "version": "1.0",
+  "chainId": "1284",
+  "createdAt": 1709291418,
+  "meta": {
+    "name": "Transactions Batch",
+    "description": "",
+    "txBuilderVersion": "1.16.1",
+    "createdFromSafeAddress": "0x85Ab410A50A3D85f1a26d9e4eFCaa520a39B9CD6",
+    "createdFromOwnerAddress": "",
+    "checksum": "0x6f40d4629d1ef4bb6104abc25344f0e798e1b240e882e499a13d1046cd8efa23"
+  },
+  "transactions": [
+    {
+      "to": "0xf4B6FE71B6aa6f904864B4C95ECDBcc06CBec5d9",
+      "value": "0",
+      "data": null,
+      "contractMethod": {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "batch",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address[]",
+            "name": "tos",
+            "type": "address[]"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "amounts",
+            "type": "uint256[]"
+          }
+        ],
+        "name": "migrate",
+        "payable": false
+      },
+      "contractInputsValues": {
+        "batch": "46",
+        "tos": "[\"0x1CD8de3A1fF83aEb725eED1B5F246bC76F4244a3\",\"0xD6F856cdB7b6d04C125d64C3f322a122418fe385\",\"0x893332895DdB7A8731B094E70c5Af53B27126edb\",\"0x955818AddA6ea8b9536c797b3aBD2c4DB20Ca075\",\"0xA5F887E7f65783ebeFC500ee7Ab57592af5A2595\",\"0x14263d736b3f83f3A149A4d4EA169E5115368A8b\",\"0x33089d7b1AB51aE383950E1C62B45336f35Bd0f6\",\"0x42552611870C48f3a9c7b7f94Fa5714E8891ad4F\",\"0x818aa87368876D6864e64Aa256cc6A2a43b54207\",\"0xbF65e454a80ee95431E85b1186a788BE728d1684\",\"0x11DA9004D7490879dcA244f21F2EcC40102a8808\",\"0x324566f5fc41F93b40053cc1267A9B3503675B67\",\"0x8db590F1016804E975BCED5e78564788296c863C\",\"0x37d9C33cFb42C1D4A7a9d3a2296aCc255402bE08\",\"0x92c820A6009DC979D1054Ff4Ae44EC4f542825c5\",\"0xB042e3B60e19384b84DEF1cF4B343acBe556c709\",\"0x8334EBDf93D4953F924863606C621F60F529bf0A\",\"0x07dDa25526A3AE8563E2f06D53685496B8Ce19d2\",\"0xBd1AA1146b3bEbECCEbB1322544f9EF5eeB3cfED\",\"0x7DC8dc26B9a833A7A1dadCF321037f3b6b58aCb6\",\"0x12550Ac111fefe630E242EB90EAbD9752B2b915E\",\"0xAE9BC0Fbac4c7241b1a249A69Cd799A56315a2B0\"]",
+        "amounts": "[964400000000,4008213512200,10169074854235,7984000000000,9779582169605,1413673000000,2514144079742,2591288183166,9657706000000,20000000000,3022287200300,21939218000000,2168183000000,607626188275,2396460000000,8409826769837,1059942834561,1116596133905,386985000000,7704694919900,3628128943381,586389600000]"
+      }
+    }
+  ]
+}
