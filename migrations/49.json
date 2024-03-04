@@ -1,0 +1,46 @@
+{
+  "version": "1.0",
+  "chainId": "1284",
+  "createdAt": 1709559404,
+  "meta": {
+    "name": "Transactions Batch",
+    "description": "",
+    "txBuilderVersion": "1.16.1",
+    "createdFromSafeAddress": "0x85Ab410A50A3D85f1a26d9e4eFCaa520a39B9CD6",
+    "createdFromOwnerAddress": "",
+    "checksum": "0x6f40d4629d1ef4bb6104abc25344f0e798e1b240e882e499a13d1046cd8efa23"
+  },
+  "transactions": [
+    {
+      "to": "0xf4B6FE71B6aa6f904864B4C95ECDBcc06CBec5d9",
+      "value": "0",
+      "data": null,
+      "contractMethod": {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "batch",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address[]",
+            "name": "tos",
+            "type": "address[]"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "amounts",
+            "type": "uint256[]"
+          }
+        ],
+        "name": "migrate",
+        "payable": false
+      },
+      "contractInputsValues": {
+        "batch": "49",
+        "tos": "[\"0x8f05543260321208764496577d521e0DbBaEf6B4\",\"0xD4E248e2fA05284283867BaB3AB5a36cA0F52891\",\"0xEb4F3983E82Fc975d87132aEE780E893eB8FEc08\",\"0x7176eD88Ce46301B31b556f6e76129791fB26DB3\",\"0x6ecDdE1Ae350cBFC8Be0202e5B5bB08Ef6CC1128\",\"0x9ed3E7e106AAcCf8dd1C3D0AF7C0B98C669d56cD\",\"0x8A073E128737dD3217e5c0F14EA7CC1fbEC1c1f6\",\"0x87AbF3e4AA48d3F4691eb286DB9feF88D1bC87ba\",\"0x05b7fB29Ea9bf31B31BbC3e40d026F462f28c88a\",\"0x14337E5c3619854DC31dB1C21150AAC0125837e9\",\"0x17B76f6cDAD223fcd22cBe54DF5BB474F3269506\",\"0xA223BD1cc944c0F1efD20dbACdEA013C8fBB936B\",\"0x3a8219D2637c86254f7f076f1d3D52868dA281Cb\",\"0x0eBf8FcDD826f134a386fAdee3d817D0994AA011\",\"0x86cE54ac9783d96c4A7E2c58A6da3a173E03dCA5\",\"0x8B474E615BE7a0650673d315BDe030fcA0Ec091D\",\"0x4068c898626D93bB8D30970D27bC8C67414E3D60\",\"0xe6a6cDf26A81Bb0632BB3e4202cbC19f500CEFc8\",\"0x6510aEb0BC1Cf2DfdFA63aa9Fa6B87dBE8A0b2e1\",\"0x5da53876a2b37b49ee42C34522c9fCED42047658\",\"0x356cFAb9Be5aF2455a098Fda12559eC3b29fBD16\",\"0x6f2e089A043BF4B466c13dD4fA275680A293caCe\",\"0xC212838a1E2938D8987F2992AA25ff61c3fDA510\",\"0x466d3f13dcD1c67f9Fc39C2f8A31E353ACE64C2d\",\"0x9b01A3E3e16C7aE8b7Af677e16F871a9a2d241C4\",\"0x834d2767Cc4a8a0b0fA5a4cd0C50d8E08D32c76E\"]",
+        "amounts": "[1060323000000,2165746000000,8250041576415,239677300000,21323556920500,2667202100000,3881766268600,5040594000000,3642929740155,10206578933905,4169589600000,11943851000000,1005659000000,6076860990876,10044059164910,87160000000,10401975661878,4679671212200,2776987830939,13774163026186,2496000000000,746502727122,1070328939500,6844022000000,998000000000,1021479200000]"
+      }
+    }
+  ]
+}
