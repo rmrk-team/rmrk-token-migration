@@ -1,0 +1,46 @@
+{
+  "version": "1.0",
+  "chainId": "1284",
+  "createdAt": 1710151891,
+  "meta": {
+    "name": "Transactions Batch",
+    "description": "",
+    "txBuilderVersion": "1.16.1",
+    "createdFromSafeAddress": "0x85Ab410A50A3D85f1a26d9e4eFCaa520a39B9CD6",
+    "createdFromOwnerAddress": "",
+    "checksum": "0x6f40d4629d1ef4bb6104abc25344f0e798e1b240e882e499a13d1046cd8efa23"
+  },
+  "transactions": [
+    {
+      "to": "0xf4B6FE71B6aa6f904864B4C95ECDBcc06CBec5d9",
+      "value": "0",
+      "data": null,
+      "contractMethod": {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "batch",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address[]",
+            "name": "tos",
+            "type": "address[]"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "amounts",
+            "type": "uint256[]"
+          }
+        ],
+        "name": "migrate",
+        "payable": false
+      },
+      "contractInputsValues": {
+        "batch": "51",
+        "tos": "[\"0x02dA13669afd2a53b6dC3dF322742AA6b583e283\",\"0x83860eBB36B192e5b1F4Ea104694285B216cEC2b\",\"0xe4775ec96b072f77D613b6A9442dBba98237bc5b\",\"0xB755343fE5EE6B9bEDfE2d08dE551Df5bFe1b7b9\",\"0x35af2fB0f47a3E7C65A118ae40B9fafC2162d3AF\",\"0xc31e6a6681b4703eF8ab90b0c19bb89CbbB342AA\",\"0x3120C945D807271bc5909438c32991171E05A4Cf\",\"0xbb9a8B0707Cfc6B0775447FDFbe8cfe772Cc4EB5\",\"0xd82989955335BE1632769c871f2EE7390e9C26E6\",\"0x4f561558829291393F2914095dBCB6cEA40DaA60\",\"0x4dEF22F25F52caE26bD118fCD6F7Be397A2b9415\",\"0xd67c8462562fE1e75F05319385A25C52e73CbA30\",\"0x11B97520fceaED22e0c90E65532c293230452d77\",\"0x55880f3B94B84218cEFAf7007856A4d7dcdC04B4\",\"0xF5d8F53a36C4BbeF078e352ef38cc06132320d3C\",\"0x56B1A290CC3566c0473A6635B8868B3D922231F0\",\"0xe7583437fb3914C004a93b52536359254F8aECD6\",\"0x30CCd45b81B45BFa7F8F33EDEf0F9274d609E92D\",\"0x5c8b3AADAF550F74Fd857Dbf152b831F110b79c6\",\"0xBE6e36c685281BDE619CC9626F9d83Fe4aB4a848\"]",
+        "amounts": "[3304013125305,7101034143905,2596808594577,10074713000000,7713275133905,413306133905,246928470000,274880000000,139570110900,129327088199,1406472215660,43049814340370,1902215179905,296980363800,9920000000,955314000000,38821643300,100149916899090,3911947900000,2174727671000]"
+      }
+    }
+  ]
+}
