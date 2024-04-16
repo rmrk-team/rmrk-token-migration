@@ -1,0 +1,46 @@
+{
+  "version": "1.0",
+  "chainId": "1284",
+  "createdAt": 1713253629,
+  "meta": {
+    "name": "Transactions Batch",
+    "description": "",
+    "txBuilderVersion": "1.16.1",
+    "createdFromSafeAddress": "0x85Ab410A50A3D85f1a26d9e4eFCaa520a39B9CD6",
+    "createdFromOwnerAddress": "",
+    "checksum": "0x6f40d4629d1ef4bb6104abc25344f0e798e1b240e882e499a13d1046cd8efa23"
+  },
+  "transactions": [
+    {
+      "to": "0xf4B6FE71B6aa6f904864B4C95ECDBcc06CBec5d9",
+      "value": "0",
+      "data": null,
+      "contractMethod": {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "batch",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address[]",
+            "name": "tos",
+            "type": "address[]"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "amounts",
+            "type": "uint256[]"
+          }
+        ],
+        "name": "migrate",
+        "payable": false
+      },
+      "contractInputsValues": {
+        "batch": "57",
+        "tos": "[\"0xb8190A8AFff6ac21Ccc6150e7B1Fd1E8BB199B55\",\"0x0F56bF9fFd9e2a536C9C0b0FB3885588fb780b5f\",\"0x3bE87953B9bAe442830061A3e1190036D455aff7\",\"0x57f5eE2E44046CAd28B6646394e8603b7A2329E5\",\"0x212DB2828bA784A81d39b872cCa7a12597bBC108\",\"0xAB5e537B6472AC9c50AC4cd3109C76B5e459c537\",\"0x7B3Ae46E86a69E353A36BFa07F9e892B5153917d\",\"0xd1ba709e2a437aa2B8cF719Cfb8e2A812536c735\",\"0xFd487E1D8179c8E8609b5C5E73a2A19AbAF58608\",\"0xDdfd2627fAE4D379332f0e96f802Fc6901A2B920\",\"0x16B6f205d9FAd0B57D42C7C09eE29E37Df4Cb7F7\",\"0xd893236589C18a7066254C2cDd7Be9c896587278\",\"0x1A112f4c968ee75E4386Df631E3DD05Ced757419\",\"0x105648629DE38eA2567DCB4D517A52755F61E204\",\"0x613f2F6ef6f175a7F60217F3cb1C168Ca922bC2D\",\"0x4BF07363EB510fEa7FBEa14Bd2B16B7a5DA85877\",\"0x7CE8CF76dCa654D3770a829a11b13D71670c5826\",\"0x834509DeF3bB12a2f8193b4a20D9BE467351114D\",\"0x0847610d3cb4Ad4d89E28e4887b77f58b639b477\",\"0xEf513F0C97F1E52335b0F1fE8788Df316847988e\",\"0x20b05Cb820520d7d20Cea4D79Dbe4cce8fb17291\",\"0x638A8216714Ff29F9A918D63B8BBD36EeBCC13A6\",\"0xCb2e75486Fc311D68Df9e9b17205e62637ECCcd3\",\"0x2f87304822bF66c899103724079d4846Ff462eB3\",\"0x5A5aDba788B40E18f4dcB3A6192b8Ef2E85fD1e1\",\"0xfa046eCa2451B4d45b5Ab98fA9410c395fD2E8Bc\"]",
+        "amounts": "[547763000000,6446949902605,181672000000,5078632712100,482421000000,762885000000,2249755000000,596977784361,5304694174200,4420000000000,9934133905,3269975600000,1072400720900,5295565330600,69989600000,407160000000,399192000000,340225000000,146722280822000,469897726722,10963282000000,22649678650410,7115576000000,16753910396300,692915914500,1987830939]"
+      }
+    }
+  ]
+}
