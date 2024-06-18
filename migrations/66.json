@@ -1,0 +1,46 @@
+{
+  "version": "1.0",
+  "chainId": "1284",
+  "createdAt": 1718697675,
+  "meta": {
+    "name": "Transactions Batch",
+    "description": "",
+    "txBuilderVersion": "1.16.1",
+    "createdFromSafeAddress": "0x85Ab410A50A3D85f1a26d9e4eFCaa520a39B9CD6",
+    "createdFromOwnerAddress": "",
+    "checksum": "0x6f40d4629d1ef4bb6104abc25344f0e798e1b240e882e499a13d1046cd8efa23"
+  },
+  "transactions": [
+    {
+      "to": "0xf4B6FE71B6aa6f904864B4C95ECDBcc06CBec5d9",
+      "value": "0",
+      "data": null,
+      "contractMethod": {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "batch",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address[]",
+            "name": "tos",
+            "type": "address[]"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "amounts",
+            "type": "uint256[]"
+          }
+        ],
+        "name": "migrate",
+        "payable": false
+      },
+      "contractInputsValues": {
+        "batch": "66",
+        "tos": "[\"0x32Bd3F9A29f8C87a2D0C0c0D60708B71499d5999\",\"0x7E884E885AC2Ec3241FeF4B560f7d1Aaedcc0E50\",\"0x3ad7eFeF28E7013fa38DC2Eb873d2E8eb10Cb99a\",\"0x2F2a05BdAE55c6485F651323F43B233363188a77\",\"0x2C837eFf157E5589AF2bCD088f4BE1Ea3c06cB84\",\"0x3226cfB2822fAe2522552b8c894168427Ab62565\",\"0xA90a4341B380C7551F244F7d56AD6EeE8cbF81E8\",\"0xDC152E9304b8cA849128470E8a1C98C065F00eBb\",\"0x616b8B3acbe28b0E1402DA6AeA1B5a904b1f8d30\",\"0xB3D62a1C73a5A873442469B1aE842F467594becD\",\"0xdC6832014C9D1959d12C86b202C65b36E2C957bB\",\"0xF0bA4F846bECE496E01Ef9f066960f26b7ECED31\",\"0x3bE87953B9bAe442830061A3e1190036D455aff7\",\"0xfd2b44c7cb62019BB1B6141DFf38d9e1D593c0aC\",\"0xB9A55278a430D9fCfB868344a3dd93fEEa043d1e\",\"0x4ed18F6cC60891e8ad438A03162BF9ECeC51eE13\",\"0x2762d434E8dAd46f3b9811e1bAF2cAB974975ac2\",\"0x212de3f0c5A00fbd3b55622D16862E3194018395\",\"0x8f8d8bB404f4dA8A48Ca78f87E237c9644DaD46c\",\"0xeDdfD4F4Ae5255944D1bdCaE40cf73bc1057eE5C\",\"0xAd75D53a29bd3dbbEce9FCDA5E023966C867B487\",\"0x87D7631EFF5A4E4D82fc4dEc0676b66E5Cd7aF7D\",\"0xFB8b7A51C8bA579F1dCed2aAEC73cB9D62583865\"]",
+        "amounts": "[859041000000,2022229850651,492979200000,45682666104,619931000000,767027482012,157147476517,530000000000,3046108476300,23140000000,16500000000,2264970000000,267372000000,17378143905,3428868821596,1591827898400,149899802431715,346934133905,29158093143905,3560944185300,4516753164763,9096430000000,12135197000000]"
+      }
+    }
+  ]
+}
