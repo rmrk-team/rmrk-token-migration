@@ -1,0 +1,46 @@
+{
+  "version": "1.0",
+  "chainId": "1284",
+  "createdAt": 1726033450,
+  "meta": {
+    "name": "Transactions Batch",
+    "description": "",
+    "txBuilderVersion": "1.16.1",
+    "createdFromSafeAddress": "0x85Ab410A50A3D85f1a26d9e4eFCaa520a39B9CD6",
+    "createdFromOwnerAddress": "",
+    "checksum": "0x6f40d4629d1ef4bb6104abc25344f0e798e1b240e882e499a13d1046cd8efa23"
+  },
+  "transactions": [
+    {
+      "to": "0xf4B6FE71B6aa6f904864B4C95ECDBcc06CBec5d9",
+      "value": "0",
+      "data": null,
+      "contractMethod": {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "batch",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address[]",
+            "name": "tos",
+            "type": "address[]"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "amounts",
+            "type": "uint256[]"
+          }
+        ],
+        "name": "migrate",
+        "payable": false
+      },
+      "contractInputsValues": {
+        "batch": "79",
+        "tos": "[\"0x5C59c07856f8a6993bE5985fcB982AC12632d7C5\",\"0x82aE8a68610bEdF382a3501B34f3d83c4B1cF1Ee\",\"0xC808668a63406a7e7b707cb871D220e3932a77Cf\",\"0xc170bE8C2C3cfBc0f2EFf23a83Fb9e0D6300d6B7\",\"0x5c0Bf58CEa4096f7e39a61A7c9E57Bd55552968e\",\"0x50d26989647010EDd57FBb21b254A19320bAbf89\",\"0x1d3E813b0BF84E38919433Bbc002a82F3D087F20\",\"0x82fd3FAfcFFe377252A8507b21f43C9A105d83BF\",\"0xdc2EA1c606F7cCe8Bb6056e7b1B64FB8086eB79D\",\"0x324f2791eA36376570775b933cC8ADDA38fc28F2\",\"0x82D427a368DD385486eAaB4D924769D531784467\",\"0x196aaD16196C11DE45e9772b7d9CEfCc69DDa515\",\"0x82C92a3Aaf1740C5794D6701c5DBCc4Ab4C3F639\",\"0xe4F49547A9a78C739d5C664bC19D0C52DBCde1a3\",\"0x5b7c5460b6355350fA0457B9A4c13eA59c2F05BD\",\"0x114aFfa01D22be29FC037461F4D0b349F3aBD1b3\",\"0x0f6dfb28cA8Bf3CDE3C4963DDD3C0820d3C5eAa3\",\"0xe58A0E13b8Fb12dA5198475e81d5D7FB4f8A71D0\",\"0x467384cE93581CDE515E9AB0309707A3FcaeE206\",\"0x4f75192df2dA78dF11F58ba5706d1Ca7B18D8C64\",\"0x06ED19E0998f7Be5B0b6F4C6191307E6E423E53E\",\"0xDc1F0C07202629bE59E1f5396E7D78803423650e\",\"0x542AFc944Bc765925CdEAcdEC5f18A1fB0CA2794\"]",
+        "amounts": "[2276431133905,36112768084095,531000000000,3228333308505,2831939600000,10162967133905,327395133905,7354780630810,6224400000000,441979200000,2420706421715,2770000000000,1142019133905,919814133905,830172000000,681885143105,74980957148005,1596461277810,29996771277810,4285200000000,1110013715200,1308304575505,844474133905]"
+      }
+    }
+  ]
+}
