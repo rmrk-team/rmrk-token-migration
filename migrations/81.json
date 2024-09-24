@@ -1,0 +1,46 @@
+{
+  "version": "1.0",
+  "chainId": "1284",
+  "createdAt": 1727195056,
+  "meta": {
+    "name": "Transactions Batch",
+    "description": "",
+    "txBuilderVersion": "1.16.1",
+    "createdFromSafeAddress": "0x85Ab410A50A3D85f1a26d9e4eFCaa520a39B9CD6",
+    "createdFromOwnerAddress": "",
+    "checksum": "0x6f40d4629d1ef4bb6104abc25344f0e798e1b240e882e499a13d1046cd8efa23"
+  },
+  "transactions": [
+    {
+      "to": "0xf4B6FE71B6aa6f904864B4C95ECDBcc06CBec5d9",
+      "value": "0",
+      "data": null,
+      "contractMethod": {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "batch",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address[]",
+            "name": "tos",
+            "type": "address[]"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "amounts",
+            "type": "uint256[]"
+          }
+        ],
+        "name": "migrate",
+        "payable": false
+      },
+      "contractInputsValues": {
+        "batch": "81",
+        "tos": "[\"0x356cFAb9Be5aF2455a098Fda12559eC3b29fBD16\",\"0x36D132D1B40D35118D2D2332c3BC5f2a8dA5F1B9\",\"0x447eE09087Dc45AEf0dFe3CDd1b640Cc417d2e59\",\"0xcC125b478965f580343578091A86276c32727381\",\"0x2735b137C2E87bA5663fCDcf4E4C5beaFdAe1B6c\",\"0xE22d1249F0D3FD3F989f38C3966Bccc5C8F7F8DC\",\"0xeDEfcE1a0Ea926657376EbC47b1B8C3A60305823\",\"0x20cBB2Fb9c1C4fA35aBC7E6174D9F79508448d19\",\"0xf2546A73f588a5529dd9bDbc68A7433bC1fb7690\",\"0x030106A9cF064F1cF67bE0DC8b3B90790cb259e3\",\"0xC6E3e3AEA31326E781b406F4b4690593f922b373\",\"0xad0f58d0C256aD99115138f895bb7bC9101371C6\"]",
+        "amounts": "[7503868277805,236085580300,3112928740155,37274613962700,36417601133905,22596810596265,25850934136485,11167584133905,1499000000000,11072950133905,4596408133905,2925370133905]"
+      }
+    }
+  ]
+}
