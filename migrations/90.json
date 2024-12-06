@@ -1,0 +1,46 @@
+{
+  "version": "1.0",
+  "chainId": "1284",
+  "createdAt": 1733509308,
+  "meta": {
+    "name": "Transactions Batch",
+    "description": "",
+    "txBuilderVersion": "1.16.1",
+    "createdFromSafeAddress": "0x85Ab410A50A3D85f1a26d9e4eFCaa520a39B9CD6",
+    "createdFromOwnerAddress": "",
+    "checksum": "0x6f40d4629d1ef4bb6104abc25344f0e798e1b240e882e499a13d1046cd8efa23"
+  },
+  "transactions": [
+    {
+      "to": "0xf4B6FE71B6aa6f904864B4C95ECDBcc06CBec5d9",
+      "value": "0",
+      "data": null,
+      "contractMethod": {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "batch",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address[]",
+            "name": "tos",
+            "type": "address[]"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "amounts",
+            "type": "uint256[]"
+          }
+        ],
+        "name": "migrate",
+        "payable": false
+      },
+      "contractInputsValues": {
+        "batch": "90",
+        "tos": "[\"0x9bCA36C05554152977f48D92E39C960a11BA4BA2\",\"0x543cA4048a6d3B691E85f4a33031fe48d09975F2\",\"0xbfF057a501953086A04Ff60658efcFeA102A7C6A\",\"0x06e0Fe46a6590d32377EB0D9A8AD6f9D9adFd74C\",\"0xabbB8EE1cc938312A4d5700D04c8c23A9E9664f5\",\"0x6332c7832C9b33588c5620aD676CacE7f5cfE905\",\"0xa91143D6A76D992D58A4AAc1Fda3cB7A00F18d94\",\"0xAd75D53a29bd3dbbEce9FCDA5E023966C867B487\",\"0xC2d6Af0242400a005731f59C8830EF52A911fD0e\",\"0x5D6311506173F9218544648a55c8A2EA4e02012b\",\"0x97b900620644f0c463162FEe6021ecCFc9514Fba\",\"0xB41E7a163AAf2fe3558c517D2297be52B0B0b159\",\"0xD66C237c542427B184A716D4Bb8F9f265f268d55\",\"0xf4a5A043295feFE5c56De660A4e98Eda9e5E3156\",\"0x65Da383B816e1306f66df116C1A633454018fFe7\"]",
+        "amounts": "[583700000000,4029308563700,7435034049788,27821570769097,262606151048,65757250365524,9667431619,5026101575524,2026866050400,190731915224,1227000000000,2106189600000,999808141048,2125352749400,455004664100]"
+      }
+    }
+  ]
+}
