@@ -1,0 +1,46 @@
+{
+  "version": "1.0",
+  "chainId": "1284",
+  "createdAt": 1734540137,
+  "meta": {
+    "name": "Transactions Batch",
+    "description": "",
+    "txBuilderVersion": "1.16.1",
+    "createdFromSafeAddress": "0x85Ab410A50A3D85f1a26d9e4eFCaa520a39B9CD6",
+    "createdFromOwnerAddress": "",
+    "checksum": "0x6f40d4629d1ef4bb6104abc25344f0e798e1b240e882e499a13d1046cd8efa23"
+  },
+  "transactions": [
+    {
+      "to": "0xf4B6FE71B6aa6f904864B4C95ECDBcc06CBec5d9",
+      "value": "0",
+      "data": null,
+      "contractMethod": {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "batch",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address[]",
+            "name": "tos",
+            "type": "address[]"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "amounts",
+            "type": "uint256[]"
+          }
+        ],
+        "name": "migrate",
+        "payable": false
+      },
+      "contractInputsValues": {
+        "batch": "91",
+        "tos": "[\"0x28F8B04F1972B5f9eE426cd066f2c83372A292b2\",\"0x35C280074642dE8530ae7636673235CF11a61918\",\"0x57B84dF3ff381678B5f85DE7F0B4dC7D7cC7F347\",\"0x3Fe8b09DCe8087ea1298D3D81F786Ed336Af04b6\",\"0x9bEa497351FF399c5Ca61A5be2c1fc61Bf1f3926\",\"0xE7483E7C7D04Fda9f3f3f502D31Dedc555Cf91A1\",\"0x16b46261a2652C1D37BF480763C19370B693002E\",\"0x4df41DBa80dBef3766D275A7E7C6F8CaeD7EF05a\",\"0xB5462e14432E27A63CDA06Cf7a0595Bfed600AA1\",\"0xF6ED6c2A10fD46481c9cDA692Faf80826f38E971\",\"0xed32dA4B236f0E394Af5dB56271be321E4b6D5d1\",\"0xda2f63081c91644e48a994BA6F8667f19e96978A\",\"0x29cb41145F531386c7b05Cfcce70744C64A89d01\",\"0x4949DaDe1670966A49532694090E983bfAd32BE4\",\"0xcb7B7Ca187bFfD030DDbaf99C01E018e36Be18eB\",\"0x2c916315d1C51C19b9Ea8dAEfaa680632a2Ca138\",\"0x16e778Fe64D4d1227E382bED4E040F599B1DA715\",\"0x76a61133994a6A3636E7cEa67BAf0e665a977c9A\",\"0xeec62D13B7aB33d354d7346bf277F156B47D570E\",\"0xe252950695F10395aDd5EF3D5592CD8B2b8c2FB3\"]",
+        "amounts": "[2476029565524,34570011765765,469117000000,2780160565524,49269368643200,49056039018819,5185285565524,1059075565524,1079327856924,682119800000,7005335000000,75174141608324,150000000000,862998522816864,862998522816864,792778521715,17985875376924,999311631016,119291565524,6738399000000]"
+      }
+    }
+  ]
+}
