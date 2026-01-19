@@ -97,3 +97,17 @@ https://multisig.moonbeam.network/apps/open?safe=mbeam:0x85Ab410A50A3D85f1a26d9e
 Using Multisig on Moonbeam, import the file from Step 3 and execute it. This calls:
 
 `MoonbeamMigrator(0xf4B6FE71B6aa6f904864B4C95ECDBcc06CBec5d9).migrate(currentBatch, holders, amounts)`
+
+### Post-migration
+
+After announcing https://rmrk.app/migration, the process changes somewhat.
+
+First, run migration start
+
+```sh
+yarn hardhat getTxToStartMoonriverMigration --network moonriver
+```
+
+Then, mint this resulting JSON via Moonriver multisig: 
+
+https://multisig.moonbeam.network/home?safe=mriver:0x7e8421b873429eE58A06055E89CD0DBeF51784F0
