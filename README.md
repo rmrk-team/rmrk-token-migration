@@ -111,3 +111,21 @@ yarn hardhat getTxToStartMoonriverMigration --network moonriver
 Then, mint this resulting JSON via Moonriver multisig: 
 
 https://multisig.moonbeam.network/home?safe=mriver:0x7e8421b873429eE58A06055E89CD0DBeF51784F0
+
+Then, run the migration generator.
+
+```sh
+yarn hardhat getMigrationForBatch {CURRENT_BATCH_NUMBER} --network moonriver
+```
+
+You will get another JSON file. This one can no longer be run from within Safe
+because we're on Base now and there's no "migrate" function or contract.
+Instead, generate a Safe Transaction Builder batch send file from the migration
+data:
+
+```sh
+yarn ts-node scripts/runGenerateBatchSend.ts {CURRENT_BATCH_NUMBER}
+```
+
+This writes `migration-send/{CURRENT_BATCH_NUMBER}.json`. Import it into Safe on
+Base and execute. Amounts are already reduced by 5% and scaled to 18 decimals.
