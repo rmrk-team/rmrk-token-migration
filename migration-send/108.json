@@ -1,0 +1,90 @@
+{
+  "version": "1.0",
+  "chainId": "8453",
+  "createdAt": 1769485265,
+  "meta": {
+    "name": "RMRK Batch Send 108",
+    "description": "Batch 108 transfers after a 5% fee",
+    "txBuilderVersion": "1.16.1",
+    "createdFromSafeAddress": "0xA01984b6e00586CA61269eb966E588466c112F5b",
+    "createdFromOwnerAddress": "",
+    "checksum": "0x6f40d4629d1ef4bb6104abc25344f0e798e1b240e882e499a13d1046cd8efa23"
+  },
+  "transactions": [
+    {
+      "to": "0x524d524B4c9366be706D3A90dcf70076ca037aE3",
+      "value": "0",
+      "data": null,
+      "contractMethod": {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "to",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "value",
+            "type": "uint256"
+          }
+        ],
+        "name": "transfer",
+        "payable": false
+      },
+      "contractInputsValues": {
+        "to": "0x7A0fA5f4bA52660337fc25B7fc070F6D8d2b9645",
+        "value": "2438586859995910000000"
+      }
+    },
+    {
+      "to": "0x524d524B4c9366be706D3A90dcf70076ca037aE3",
+      "value": "0",
+      "data": null,
+      "contractMethod": {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "to",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "value",
+            "type": "uint256"
+          }
+        ],
+        "name": "transfer",
+        "payable": false
+      },
+      "contractInputsValues": {
+        "to": "0x6d0C93d6E563a7E9005C969cD382378A08F9558c",
+        "value": "18406674541111570000000"
+      }
+    },
+    {
+      "to": "0x524d524B4c9366be706D3A90dcf70076ca037aE3",
+      "value": "0",
+      "data": null,
+      "contractMethod": {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "to",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "value",
+            "type": "uint256"
+          }
+        ],
+        "name": "transfer",
+        "payable": false
+      },
+      "contractInputsValues": {
+        "to": "0xaD1EC0b93783982AAe5Ef276608f36947aE9b151",
+        "value": "2756219005934710000000"
+      }
+    }
+  ]
+}
