@@ -1,0 +1,14 @@
+{
+  "version": "1.0",
+  "chainId": "8453",
+  "createdAt": 1775645495,
+  "meta": {
+    "name": "RMRK Batch Send 110",
+    "description": "Batch 110 transfers after a 5% fee",
+    "txBuilderVersion": "1.16.1",
+    "createdFromSafeAddress": "0xA01984b6e00586CA61269eb966E588466c112F5b",
+    "createdFromOwnerAddress": "",
+    "checksum": "0x6f40d4629d1ef4bb6104abc25344f0e798e1b240e882e499a13d1046cd8efa23"
+  },
+  "transactions": []
+}

@@ -1,0 +1,40 @@
+{
+  "version": "1.0",
+  "chainId": "8453",
+  "createdAt": 1773843486,
+  "meta": {
+    "name": "RMRK Batch Send 109",
+    "description": "Batch 109 transfers after a 5% fee",
+    "txBuilderVersion": "1.16.1",
+    "createdFromSafeAddress": "0xA01984b6e00586CA61269eb966E588466c112F5b",
+    "createdFromOwnerAddress": "",
+    "checksum": "0x6f40d4629d1ef4bb6104abc25344f0e798e1b240e882e499a13d1046cd8efa23"
+  },
+  "transactions": [
+    {
+      "to": "0x524d524B4c9366be706D3A90dcf70076ca037aE3",
+      "value": "0",
+      "data": null,
+      "contractMethod": {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "to",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "value",
+            "type": "uint256"
+          }
+        ],
+        "name": "transfer",
+        "payable": false
+      },
+      "contractInputsValues": {
+        "to": "0x94F2Af1FA83006d22181771486B2468C14549409",
+        "value": "150541095556590000000"
+      }
+    }
+  ]
+}
