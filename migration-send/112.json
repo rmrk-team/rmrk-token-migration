@@ -1,0 +1,115 @@
+{
+  "version": "1.0",
+  "chainId": "8453",
+  "createdAt": 1785452252,
+  "meta": {
+    "name": "RMRK Batch Send 112",
+    "description": "Batch 112 transfers after a 5% fee",
+    "txBuilderVersion": "1.16.1",
+    "createdFromSafeAddress": "0xA01984b6e00586CA61269eb966E588466c112F5b",
+    "createdFromOwnerAddress": "",
+    "checksum": "0x6f40d4629d1ef4bb6104abc25344f0e798e1b240e882e499a13d1046cd8efa23"
+  },
+  "transactions": [
+    {
+      "to": "0x524d524B4c9366be706D3A90dcf70076ca037aE3",
+      "value": "0",
+      "data": null,
+      "contractMethod": {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "to",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "value",
+            "type": "uint256"
+          }
+        ],
+        "name": "transfer",
+        "payable": false
+      },
+      "contractInputsValues": {
+        "to": "0xaB616179bEEbEd8f215b9e44Cb1d0283334779A4",
+        "value": "719203675000000000000"
+      }
+    },
+    {
+      "to": "0x524d524B4c9366be706D3A90dcf70076ca037aE3",
+      "value": "0",
+      "data": null,
+      "contractMethod": {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "to",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "value",
+            "type": "uint256"
+          }
+        ],
+        "name": "transfer",
+        "payable": false
+      },
+      "contractInputsValues": {
+        "to": "0x5429d6F8d9f6f31102A50C50d3B3B42D748fC1Ec",
+        "value": "873678842202000000000"
+      }
+    },
+    {
+      "to": "0x524d524B4c9366be706D3A90dcf70076ca037aE3",
+      "value": "0",
+      "data": null,
+      "contractMethod": {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "to",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "value",
+            "type": "uint256"
+          }
+        ],
+        "name": "transfer",
+        "payable": false
+      },
+      "contractInputsValues": {
+        "to": "0x9CA17E836E59C1D158636B62661C5D98AfEF077C",
+        "value": "540927764954000000000"
+      }
+    },
+    {
+      "to": "0x524d524B4c9366be706D3A90dcf70076ca037aE3",
+      "value": "0",
+      "data": null,
+      "contractMethod": {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "to",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "value",
+            "type": "uint256"
+          }
+        ],
+        "name": "transfer",
+        "payable": false
+      },
+      "contractInputsValues": {
+        "to": "0xF8e8F225dc2A0DAae3c153ae4Bd4306b02F006aF",
+        "value": "1297048882942325000000"
+      }
+    }
+  ]
+}
